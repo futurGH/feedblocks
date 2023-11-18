@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+
+    "skipLibCheck": true,
+    "noEmit": true,
+    "incremental": true,
+    "newLine": "lf",
+
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+
+    "jsx": "react-jsx",
+
+    "noUnusedParameters": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "strict": true
+  },
+  "include": ["src"],
+
+}
