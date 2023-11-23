@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { writable } from "svelte/store";
-	import { SvelteFlow, Controls, Background, BackgroundVariant, MiniMap } from "@xyflow/svelte";
+	import {
+		SvelteFlow,
+		Controls,
+		Background,
+		BackgroundVariant,
+		MiniMap,
+		type SnapGrid,
+	} from "@xyflow/svelte";
 
 	// 👇 this is important! You need to import the styles for Svelte Flow to work
 	import "@xyflow/svelte/dist/style.css";
@@ -32,23 +39,22 @@
 		},
 	]);
 
-	const snapGrid = [25, 25];
+	const snapGrid = [25, 25] satisfies SnapGrid;
 </script>
 
 <!--
 👇 By default, the Svelte Flow container has a height of 100%.
 This means that the parent container needs a height to render the flow.
 -->
-<div style:height="500px">
-	<SvelteFlow
-		{nodes}
-		{edges}
-		{snapGrid}
-		fitView
-		on:nodeclick={(event) => console.log("on node click", event.detail.node)}
-	>
-		<Controls />
-		<Background variant={BackgroundVariant.Dots} />
-		<MiniMap />
-	</SvelteFlow>
-</div>
+<SvelteFlow
+	{nodes}
+	{edges}
+	{snapGrid}
+	fitView
+	class="bg-header-amber"
+	on:nodeclick={(event) => console.log("on node click", "bg-heading-yellow", event.detail.node)}
+>
+	<Controls />
+	<Background variant={BackgroundVariant.Dots} />
+	<MiniMap />
+</SvelteFlow>

@@ -15,6 +15,11 @@
 		"noUnusedParameters": true,
 		"noImplicitOverride": true,
 		"exactOptionalPropertyTypes": true,
-		"strict": true
+		"strict": true,
+
+		"paths": {
+			"$lib": ["./src/lib"],
+			"$lib/*": ["./src/lib/*"]
+		}
 	}
 }
