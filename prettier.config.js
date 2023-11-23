@@ -4,4 +4,13 @@ export default {
 	tabWidth: 4,
 	printWidth: 100,
 	useTabs: true,
+	plugins: ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+	overrides: [
+		{
+			files: "**/*.svelte",
+			options: {
+				parser: "svelte",
+			},
+		},
+	],
 };

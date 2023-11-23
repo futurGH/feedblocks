@@ -13,6 +13,7 @@
 		"globals": "^13.23.0",
 		"postcss": "^8.4.31",
 		"prettier": "^3.1.0",
+		"prettier-plugin-svelte": "^3.1.2",
 		"prettier-plugin-tailwindcss": "^0.5.7",
 		"tailwindcss": "^3.3.5",
 		"typescript": "^5.2.2",
@@ -20,6 +21,7 @@
 	},
 	"dependencies": {
 		"@sveltejs/kit": "^1.27.6",
+		"@xyflow/svelte": "^0.0.27",
 		"clsx": "^2.0.0",
 		"svelte": "^4.2.7",
 		"tailwind-merge": "^2.0.0"
