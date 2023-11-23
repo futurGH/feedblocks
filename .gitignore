@@ -20,5 +20,7 @@ dist/
 *.sln
 *.sw?
 
+.svelte-kit
+
 .env
 .env.*

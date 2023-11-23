@@ -1,11 +1,9 @@
 import tsEslint from "@typescript-eslint/eslint-plugin";
 import parser from "@typescript-eslint/parser";
-import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 
 const plugins = {
 	"@typescript-eslint": tsEslint,
-	"react-hooks": reactHooks,
 };
 
 const rules = tsEslint.configs["strict-type-checked"].rules;

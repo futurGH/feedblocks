@@ -1,6 +1,6 @@
 /** @type {import("tailwindcss").Config} */
 module.exports = {
-	content: ["./**/*.{ts,tsx,html}"],
+	content: ["./src/**/*.{html,svelte,js,ts}"],
 	theme: {},
 	future: { hoverOnlyWhenSupported: true },
 	plugins: [],

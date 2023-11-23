@@ -1,25 +1,20 @@
 {
+  "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
-    "lib": ["esnext", "dom"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
-
     "skipLibCheck": true,
-    "noEmit": true,
     "incremental": true,
+    "sourceMap": true,
     "newLine": "lf",
 
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
 
-    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
 
     "noUnusedParameters": true,
     "noImplicitOverride": true,
     "exactOptionalPropertyTypes": true,
     "strict": true
-  },
-  "include": ["src"],
-
+  }
 }
