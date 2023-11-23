@@ -15,7 +15,7 @@
 	--header-bg-sky: theme("colors.sky.400")33;
 	--header-bg-emerald: theme("colors.emerald.400")33;
 	--header-bg-indigo: theme("colors.indigo.400")33;
-	--header-bg-rose: theme("colors.red.400")33;
+	--header-bg-rose: theme("colors.rose.400")33;
 	--header-bg-fuchsia: theme("colors.fuchsia.400")33;
 }
 :root.dark {
@@ -25,6 +25,6 @@
 	--header-bg-sky: theme("colors.sky.400")4d;
 	--header-bg-emerald: theme("colors.emerald.400")4d;
 	--header-bg-indigo: theme("colors.indigo.400")4d;
-	--header-bg-rose: theme("colors.red.400")4d;
+	--header-bg-rose: theme("colors.rose.400")4d;
 	--header-bg-fuchsia: theme("colors.fuchsia.400")4d;
 }
