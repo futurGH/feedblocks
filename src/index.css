@@ -35,3 +35,10 @@
 .dark .svelte-flow {
 	--background-color: theme("colors.zinc.900");
 }
+
+.svelte-flow .svelte-flow__background-pattern.dots {
+	--background-pattern-color: theme("colors.zinc.400");
+}
+.dark .svelte-flow .svelte-flow__background-pattern.dots {
+	--background-pattern-color: theme("colors.zinc.600");
+}

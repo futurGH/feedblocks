@@ -8,6 +8,15 @@ module.exports = {
 		fontFamily: {
 			sans: ["'General Sans'", ...defaultTheme.fontFamily.sans],
 		},
+		fontMetrics: {
+			sans: {
+				capHeight: 718,
+				ascent: 1010,
+				descent: -240,
+				lineGap: 100,
+				unitsPerEm: 1000,
+			}
+		},
 		extend: {
 			fontSize: {
 				"label": "0.8125rem",
@@ -28,5 +37,5 @@ module.exports = {
 		}
 	},
 	future: { hoverOnlyWhenSupported: true },
-	plugins: [],
+	plugins: [require("tailwindcss-capsize")],
 };

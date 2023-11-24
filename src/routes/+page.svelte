@@ -21,10 +21,6 @@
 	const edges = writable([]);
 </script>
 
-<!--
-👇 By default, the Svelte Flow container has a height of 100%.
-This means that the parent container needs a height to render the flow.
--->
 <SvelteFlow {nodeTypes} {nodes} {edges} fitView proOptions={{ hideAttribution: true }}>
 	<Controls />
 	<Background variant={BackgroundVariant.Dots} />
