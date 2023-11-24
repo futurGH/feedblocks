@@ -13,6 +13,9 @@ module.exports = {
 				"label": "0.8125rem",
 				"title": "0.875rem",
 			},
+			fontWeight: {
+				"semibold": 550,
+			},
 			backgroundImage: {
 				"header-slate": "linear-gradient(var(--header-bg-slate),var(--header-bg-slate)), var(--node-header-background-gradient)",
 				"header-amber": "linear-gradient(var(--header-bg-amber),var(--header-bg-amber)), var(--node-header-background-gradient)",

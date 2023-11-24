@@ -28,3 +28,10 @@
 	--header-bg-rose: theme("colors.rose.400")4d;
 	--header-bg-fuchsia: theme("colors.fuchsia.400")4d;
 }
+
+.svelte-flow {
+	--background-color: theme("colors.slate.50");
+}
+.dark .svelte-flow {
+	--background-color: theme("colors.zinc.900");
+}
