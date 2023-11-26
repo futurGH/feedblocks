@@ -9,16 +9,52 @@
 
 <script lang="ts">
 	import { cn } from "$lib/util";
-	import { Position, Handle } from "@xyflow/svelte";
+	import {
+		Position,
+		Handle,
+		type NodeProps,
+		useNodes,
+		useEdges,
+		type Connection,
+	} from "@xyflow/svelte";
+	import { nodeCategories, nodeTypeToCategory } from "$lib/flow/components/nodes/index";
+
+	type $$Props = NodeProps & {
+		title: string;
+		color: string;
+		inputs: Array<{ name: string; type: ConnectorType }>;
+		outputs: Array<{ name: string; type: ConnectorType }>;
+	};
+
+	export let id: $$Props["id"];
 
 	export let title: string;
-	export let headerColor: string;
+	export let color: string;
 
 	export let inputs: Array<{ name: string; type: ConnectorType }> = [];
 	export let outputs: Array<{ name: string; type: ConnectorType }> = [];
 	$: hasConnectors = inputs.length > 0 || outputs.length > 0;
 
-	const handleShape = (type: ConnectorType) => {
+	const nodes = useNodes();
+	const edges = useEdges();
+
+	let inputConnectionColorMapping: Record<string, string> = {};
+	edges.subscribe((edges) => {
+		inputConnectionColorMapping = edges.reduce<Record<string, string>>((acc, edge) => {
+			if (edge.target !== id || !edge.targetHandle) return acc;
+
+			const source = $nodes.find((node) => node.id === edge.source);
+			if (!source?.type) return acc;
+
+			const connectingNodeCategory = nodeTypeToCategory[source.type];
+			if (!connectingNodeCategory) return acc;
+
+			acc[edge.targetHandle] = nodeCategories[connectingNodeCategory].color;
+			return acc;
+		}, {});
+	});
+
+	function getHandleShape(type: ConnectorType) {
 		switch (type) {
 			case ConnectorType.List:
 				return "square-handle";
@@ -28,7 +64,17 @@
 			default:
 				return "circle-handle";
 		}
-	};
+	}
+
+	function onHandleConnect({ detail: { connection } }: CustomEvent<{ connection: Connection }>) {
+		const edge = $edges.find(
+			(edge) =>
+				edge.sourceHandle === connection.sourceHandle &&
+				edge.targetHandle === connection.targetHandle
+		);
+		if (edge) edge.style = `--edge-stroke: var(--edge-${color})`;
+		$edges = $edges;
+	}
 </script>
 
 <div
@@ -37,27 +83,34 @@
 	<div
 		class={cn(
 			"flex w-full items-center justify-center rounded-t-2xl border-b border-b-zinc-300 py-2.5 dark:border-b-zinc-700",
-			headerColor
+			`bg-header-${color}`
 		)}
 	>
-		<span class="text-title font-semibold text-zinc-900/75">{title}</span>
+		<span class="font-semibold text-zinc-900/75 text-title">{title}</span>
 	</div>
 	<div class={cn("flex flex-col", hasConnectors ? "py-2" : "py-3")}>
 		{#if hasConnectors}
 			<div class="flex justify-between self-stretch py-2">
 				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
 					{#each inputs as { name, type }}
+						{@const handleId = id + "-" + name}
 						<div class="relative pl-4">
 							<Handle
+								id={id + "-" + name}
 								type="target"
-								class={cn("mt-0.5", handleShape(type))}
+								class={cn(
+									`mt-0.5 !border-none`,
+									getHandleShape(type),
+									inputConnectionColorMapping[handleId] &&
+										`!bg-${inputConnectionColorMapping[handleId]}-edge`
+								)}
 								position={Position.Left}
-								on:connect
+								on:connect={onHandleConnect}
 								on:connectstart
 								on:connectend
 							/>
 							<span
-								class="capsize font-sans text-label font-medium text-zinc-900/75 dark:text-zinc-100/80"
+								class="font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
 								>{name}</span
 							>
 						</div>
@@ -65,16 +118,21 @@
 				</div>
 				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
 					{#each outputs as { name, type }}
-						<div class="relative flex pr-4">
+						{@const handleId = id + "-" + name}
+						<div class="relative pr-4">
 							<span
-								class="capsize flex-grow text-right font-sans text-label font-medium text-zinc-900/75 dark:text-zinc-100/80"
+								class="flex-grow text-right font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
 								>{name}</span
 							>
 							<Handle
+								id={handleId}
 								type="source"
-								class={cn("mt-0.5", handleShape(type))}
+								class={cn(
+									`mt-0.5 !bg-${color}-edge !border-none`,
+									getHandleShape(type)
+								)}
 								position={Position.Right}
-								on:connect
+								on:connect={onHandleConnect}
 								on:connectstart
 								on:connectend
 							/>
@@ -87,13 +145,6 @@
 </div>
 
 <style lang="postcss">
-	:global(.svelte-flow .svelte-flow__handle) {
-		@apply border-none bg-zinc-700;
-	}
-	:global(.dark .svelte-flow .svelte-flow__handle) {
-		@apply bg-zinc-500;
-	}
-
 	:global(.svelte-flow .svelte-flow__handle.circle-handle) {
 		@apply h-3 w-3 rounded-full;
 	}

@@ -4,6 +4,10 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
 	darkMode: "class",
 	content: ["./src/**/*.{html,svelte,js,ts}"],
+	safelist: [
+		{ pattern: /bg-header-.+/},
+		{ pattern: /!?bg-.+-edge/},
+	],
 	theme: {
 		fontFamily: {
 			sans: ["'General Sans'", ...defaultTheme.fontFamily.sans],
@@ -33,6 +37,15 @@ module.exports = {
 				"header-indigo": "linear-gradient(var(--header-bg-indigo),var(--header-bg-indigo)), var(--node-header-background-gradient)",
 				"header-rose": "linear-gradient(var(--header-bg-rose),var(--header-bg-rose)), var(--node-header-background-gradient)",
 				"header-fuchsia": "linear-gradient(var(--header-bg-fuchsia),var(--header-bg-fuchsia)), var(--node-header-background-gradient)",
+			},
+			colors: {
+				"slate-edge": "var(--edge-slate)",
+				"amber-edge": "var(--edge-amber)",
+				"sky-edge": "var(--edge-sky)",
+				"emerald-edge": "var(--edge-emerald)",
+				"indigo-edge": "var(--edge-indigo)",
+				"rose-edge": "var(--edge-rose)",
+				"fuchsia-edge": "var(--edge-fuchsia)",
 			}
 		}
 	},

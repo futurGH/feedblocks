@@ -7,7 +7,7 @@
 
 <BaseNode
 	title="multiply"
-	headerColor="bg-header-rose"
+	color="rose"
 	inputs={[
 		{
 			type: ConnectorType.Data,
@@ -24,6 +24,7 @@
 			name: "output",
 		},
 	]}
+	{...$$props}
 	on:connect
 	on:connectstart
 	on:connectend

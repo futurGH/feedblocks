@@ -10,6 +10,7 @@
 :root {
 	--node-header-background-color: theme("colors.zinc.100");
 	--node-header-background-gradient: linear-gradient(var(--node-header-background-color), var(--node-header-background-color));
+
 	--header-bg-slate: theme("colors.slate.400")33;
 	--header-bg-amber: theme("colors.amber.400")33;
 	--header-bg-sky: theme("colors.sky.400")33;
@@ -17,6 +18,14 @@
 	--header-bg-indigo: theme("colors.indigo.400")33;
 	--header-bg-rose: theme("colors.rose.400")33;
 	--header-bg-fuchsia: theme("colors.fuchsia.400")33;
+
+	--edge-slate: #C4CBD7;
+	--edge-amber: #F7D98C;
+	--edge-sky: #9ABCCB;
+	--edge-emerald: #94E3C7;
+	--edge-indigo: #BBC0F7;
+	--edge-rose: #F6B2B3;
+	--edge-fuchsia: #EEB6F7;
 }
 :root.dark {
 	--node-header-background-color: theme("colors.zinc.800");
@@ -27,13 +36,27 @@
 	--header-bg-indigo: theme("colors.indigo.400")4d;
 	--header-bg-rose: theme("colors.rose.400")4d;
 	--header-bg-fuchsia: theme("colors.fuchsia.400")4d;
+
+	--edge-slate: #5E6571;
+	--edge-amber: #917327;
+	--edge-sky: #307291;
+	--edge-emerald: #2E7D62;
+	--edge-indigo: #545A91;
+	--edge-rose: #8F4C4E;
+	--edge-fuchsia: #875091;
 }
 
 .svelte-flow {
 	--background-color: theme("colors.slate.50");
+	--edge-stroke: theme("colors.zinc.700");
+	--edge-stroke-width: 0.1875rem;
+	--connectionline-stroke: theme("colors.zinc.600");
+	--connectionline-stroke-width: 0.125rem;
 }
 .dark .svelte-flow {
 	--background-color: theme("colors.zinc.900");
+	--edge-stroke: theme("colors.zinc.500");
+	--connectionline-stroke: theme("colors.zinc.500");
 }
 
 .svelte-flow .svelte-flow__background-pattern.dots {
