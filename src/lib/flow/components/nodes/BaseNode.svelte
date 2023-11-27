@@ -42,20 +42,33 @@
 	const nodes = useNodes();
 	const edges = useEdges();
 
+	let isHandleConnectable: Record<string, boolean>;
+
 	let inputConnectionColorMapping: Record<string, string> = {};
 	edges.subscribe((edges) => {
-		inputConnectionColorMapping = edges.reduce<Record<string, string>>((acc, edge) => {
-			if (edge.target !== id || !edge.targetHandle) return acc;
-
-			const source = $nodes.find((node) => node.id === edge.source);
-			if (!source?.type) return acc;
-
-			const connectingNodeCategory = nodeTypeToCategory[source.type];
-			if (!connectingNodeCategory) return acc;
-
-			acc[edge.targetHandle] = nodeCategories[connectingNodeCategory].color;
+		isHandleConnectable = inputs.reduce<Record<string, boolean>>((acc, { name }) => {
+			acc[`${title}-${id}-${name}`] = true;
 			return acc;
 		}, {});
+		inputConnectionColorMapping = {};
+
+		for (const edge of edges) {
+			if (edge.target !== id || !edge.targetHandle) continue;
+
+			if (isHandleConnectable[edge.targetHandle]) {
+				isHandleConnectable[edge.targetHandle] = false;
+			}
+
+			const source = $nodes.find((node) => node.id === edge.source);
+			if (!source?.type) continue;
+
+			const connectingNodeCategory = nodeTypeToCategory[source.type];
+			if (!connectingNodeCategory) continue;
+
+			inputConnectionColorMapping[edge.targetHandle] =
+				nodeCategories[connectingNodeCategory].color;
+			isHandleConnectable[edge.targetHandle] = false;
+		}
 	});
 
 	function getHandleShape(connectorType: ConnectorType) {
@@ -96,11 +109,11 @@
 		{#if hasConnectors}
 			<div class="flex justify-between self-stretch py-2">
 				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
-					{#each inputs as { name, type }}
-						{@const handleId = id + "-" + name}
+					{#each inputs as { name, connectorType }}
+						{@const handleId = `${title}-${id}-${name}`}
 						<div class="relative pl-4">
 							<Handle
-								id={id + "-" + name}
+								id={handleId}
 								type="target"
 								class={cn(
 									`mt-0.5 !border-none`,
@@ -109,6 +122,7 @@
 										`!bg-${inputConnectionColorMapping[handleId]}-edge`
 								)}
 								position={Position.Left}
+								isConnectable={isHandleConnectable[handleId]}
 								on:connect={onHandleConnect}
 								on:connectstart
 								on:connectend
@@ -121,8 +135,8 @@
 					{/each}
 				</div>
 				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
-					{#each outputs as { name, type }}
-						{@const handleId = id + "-" + name}
+					{#each outputs as { name, connectorType }}
+						{@const handleId = `${title}-${id}-${name}`}
 						<div class="relative pr-4">
 							<span
 								class="flex-grow text-right font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
@@ -133,7 +147,7 @@
 								type="source"
 								class={cn(
 									`mt-0.5 !bg-${color}-edge !border-none`,
-									getHandleShape(type)
+									getHandleShape(connectorType)
 								)}
 								position={Position.Right}
 								on:connect={onHandleConnect}
