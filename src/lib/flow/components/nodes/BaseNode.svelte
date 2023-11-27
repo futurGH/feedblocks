@@ -1,23 +1,28 @@
 <script context="module" lang="ts">
+	import type { Node, Edge } from "@xyflow/svelte";
+	import { nodeCategories, nodeTypeToCategory } from "$lib/flow/components/nodes";
+
 	export const ConnectorType = {
 		Data: "data",
 		List: "list",
 		Condition: "condition",
 	};
+
 	export type ConnectorType = (typeof ConnectorType)[keyof typeof ConnectorType];
+
+	export function getEdgeColor(edge: Edge<unknown>, nodes: Array<Node>) {
+		if (!edge.sourceHandle || !edge.source) return null;
+		const source = nodes.find((node) => node.id === edge.source);
+		if (!source?.type) return null;
+		const sourceNodeCategory = nodeTypeToCategory[source.type];
+		if (!sourceNodeCategory) return null;
+		return nodeCategories[sourceNodeCategory]?.color || null;
+	}
 </script>
 
 <script lang="ts">
 	import { cn } from "$lib/util";
-	import {
-		Position,
-		Handle,
-		type NodeProps,
-		useNodes,
-		useEdges,
-		type Connection,
-	} from "@xyflow/svelte";
-	import { nodeCategories, nodeTypeToCategory } from "$lib/flow/components/nodes/index";
+	import { Position, Handle, type NodeProps, useNodes, useEdges } from "@xyflow/svelte";
 
 	type $$Props = NodeProps & {
 		title: string;
@@ -42,15 +47,15 @@
 	const nodes = useNodes();
 	const edges = useEdges();
 
-	let isHandleConnectable: Record<string, boolean>;
+	let isHandleConnectable: Record<string, boolean> = {};
+	let edgeTargetHandleToEdgeColor: Record<string, string> = {};
 
-	let inputConnectionColorMapping: Record<string, string> = {};
 	edges.subscribe((edges) => {
 		isHandleConnectable = inputs.reduce<Record<string, boolean>>((acc, { name }) => {
 			acc[`${title}-${id}-${name}`] = true;
 			return acc;
 		}, {});
-		inputConnectionColorMapping = {};
+		edgeTargetHandleToEdgeColor = {};
 
 		for (const edge of edges) {
 			if (edge.target !== id || !edge.targetHandle) continue;
@@ -59,14 +64,12 @@
 				isHandleConnectable[edge.targetHandle] = false;
 			}
 
-			const source = $nodes.find((node) => node.id === edge.source);
-			if (!source?.type) continue;
+			const edgeColor = getEdgeColor(edge, $nodes);
 
-			const connectingNodeCategory = nodeTypeToCategory[source.type];
-			if (!connectingNodeCategory) continue;
-
-			inputConnectionColorMapping[edge.targetHandle] =
-				nodeCategories[connectingNodeCategory].color;
+			if (edgeColor) {
+				edgeTargetHandleToEdgeColor[edge.targetHandle] = edgeColor;
+				edge.style = `--edge-stroke: var(--edge-${edgeColor})`;
+			}
 			isHandleConnectable[edge.targetHandle] = false;
 		}
 	});
@@ -81,16 +84,6 @@
 			default:
 				return "circle-handle";
 		}
-	}
-
-	function onHandleConnect({ detail: { connection } }: CustomEvent<{ connection: Connection }>) {
-		const edge = $edges.find(
-			(edge) =>
-				edge.sourceHandle === connection.sourceHandle &&
-				edge.targetHandle === connection.targetHandle
-		);
-		if (edge) edge.style = `--edge-stroke: var(--edge-${color})`;
-		$edges = $edges;
 	}
 </script>
 
@@ -118,12 +111,12 @@
 								class={cn(
 									`mt-0.5 !border-none`,
 									getHandleShape(connectorType),
-									inputConnectionColorMapping[handleId] &&
-										`!bg-${inputConnectionColorMapping[handleId]}-edge`
+									edgeTargetHandleToEdgeColor[handleId] &&
+										`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
 								)}
 								position={Position.Left}
 								isConnectable={isHandleConnectable[handleId]}
-								on:connect={onHandleConnect}
+								on:connect
 								on:connectstart
 								on:connectend
 							/>
@@ -150,7 +143,7 @@
 									getHandleShape(connectorType)
 								)}
 								position={Position.Right}
-								on:connect={onHandleConnect}
+								on:connect
 								on:connectstart
 								on:connectend
 							/>
