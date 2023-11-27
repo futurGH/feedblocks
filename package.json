@@ -4,6 +4,7 @@
 	"type": "module",
 	"license": "GPL-3.0",
 	"devDependencies": {
+		"@melt-ui/svelte": "^0.63.0",
 		"@sveltejs/adapter-cloudflare": "^2.3.3",
 		"@types/eslint": "^8.44.3",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -24,6 +25,7 @@
 		"@sveltejs/kit": "^1.27.6",
 		"@xyflow/svelte": "^0.0.27",
 		"clsx": "^2.0.0",
+		"lucide-svelte": "^0.293.0",
 		"svelte": "^4.2.7",
 		"tailwind-merge": "^2.0.0"
 	}

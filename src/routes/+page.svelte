@@ -39,13 +39,13 @@
 		},
 		{
 			id: "4",
-			type: "multiply",
+			type: "sort",
 			position: { x: 0, y: 500 },
 			data: {},
 		},
 		{
 			id: "5",
-			type: "multiply",
+			type: "sort",
 			position: { x: 0, y: 0 },
 			data: {},
 		},

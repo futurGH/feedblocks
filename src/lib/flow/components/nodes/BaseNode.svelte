@@ -25,6 +25,10 @@
 		inputs: Array<{ name: string; type: ConnectorType }>;
 		outputs: Array<{ name: string; type: ConnectorType }>;
 	};
+	type $$Slots = {
+		default: never;
+		additional: {};
+	};
 
 	export let id: $$Props["id"];
 
@@ -139,6 +143,11 @@
 						</div>
 					{/each}
 				</div>
+			</div>
+		{/if}
+		{#if $$slots.additional}
+			<div class="flex flex-col items-center justify-center gap-4 py-2">
+				<slot name="additional" />
 			</div>
 		{/if}
 	</div>
