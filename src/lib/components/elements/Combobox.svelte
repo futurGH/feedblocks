@@ -31,14 +31,12 @@
 	});
 
 	onMount(() => {
-		// This is necessary for the list to scale proportional to the input when in svelte-flow
+		// This is necessary for the list to scale proportionately to the input when in svelte-flow
 		if (inFlow) {
 			portal.set(comboboxDiv.closest<HTMLElement>(".svelte-flow__node"));
 		}
 		return () => closeMenu();
 	});
-
-	$: console.log($touchedInput, $inputValue, $open);
 
 	$: if (!$open) $inputValue = $selected?.label ?? "";
 	$: filteredOptions = $touchedInput
@@ -60,7 +58,7 @@
 		<input
 			{...$input}
 			use:input
-			class="flex h-8 w-44 min-w-fit max-w-full items-center justify-between gap-x-1 rounded-lg border border-zinc-300 bg-zinc-100 px-3 py-1.5 dark:border-zinc-700 dark:bg-zinc-900"
+			class="flex h-8 w-44 min-w-fit max-w-full items-center justify-between gap-x-1 rounded-lg bg-zinc-100 px-3 py-1.5 ring-1 ring-zinc-300 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:bg-zinc-900 dark:ring-zinc-700 focus:dark:ring-zinc-600"
 			{placeholder}
 		/>
 		<div class="pointer-events-none absolute right-2 top-1/2 z-10 -translate-y-1/2">
