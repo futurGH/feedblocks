@@ -1,5 +1,22 @@
-<script lang="ts">
+<script context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	export const inputs = [
+		{
+			connectorType: ConnectorType.Data,
+			name: "posts",
+			type: "posts",
+		},
+	];
+	export const outputs = [
+		{
+			connectorType: ConnectorType.Data,
+			name: "output",
+			type: "posts",
+		},
+	];
+</script>
+
+<script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
 	import { type Writable, writable } from "svelte/store";
 	import Combobox, { type ComboboxItem } from "$lib/components/elements/Combobox.svelte";
@@ -43,18 +60,8 @@
 <BaseNode
 	title="sort"
 	color="fuchsia"
-	inputs={[
-		{
-			type: ConnectorType.Data,
-			name: "posts",
-		},
-	]}
-	outputs={[
-		{
-			type: ConnectorType.Data,
-			name: "output",
-		},
-	]}
+	{inputs}
+	{outputs}
 	{...$$props}
 	on:connect
 	on:connectstart

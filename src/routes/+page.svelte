@@ -12,9 +12,20 @@
 	import "@xyflow/svelte/dist/style.css";
 	import { writable } from "svelte/store";
 	import { nodeCategories } from "$lib/flow/components/nodes";
+	import type { ComponentType } from "svelte";
 
+	// This is ugly but it's a one-time thing so hopefully not too bad?
 	const nodeTypes = Object.values(nodeCategories).reduce((acc, category) => {
-		Object.assign(acc, category.nodes);
+		Object.assign(
+			acc,
+			Object.entries(category.nodes).reduce<Record<string, ComponentType>>(
+				(acc, [id, node]) => {
+					acc[id] = node.default;
+					return acc;
+				},
+				{}
+			)
+		);
 		return acc;
 	}, {});
 

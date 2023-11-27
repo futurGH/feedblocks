@@ -1,4 +1,4 @@
-import MultiplyNode from "$lib/flow/components/nodes/utility/MultiplyNode.svelte";
+import * as MultiplyNode from "$lib/flow/components/nodes/utility/MultiplyNode.svelte";
 
 export const utilityNodes = {
 	multiply: MultiplyNode,

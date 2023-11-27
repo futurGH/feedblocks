@@ -22,8 +22,8 @@
 	type $$Props = NodeProps & {
 		title: string;
 		color: string;
-		inputs: Array<{ name: string; type: ConnectorType }>;
-		outputs: Array<{ name: string; type: ConnectorType }>;
+		inputs: Array<{ name: string; connectorType: ConnectorType }>;
+		outputs: Array<{ name: string; connectorType: ConnectorType }>;
 	};
 	type $$Slots = {
 		default: never;
@@ -35,8 +35,8 @@
 	export let title: string;
 	export let color: string;
 
-	export let inputs: Array<{ name: string; type: ConnectorType }> = [];
-	export let outputs: Array<{ name: string; type: ConnectorType }> = [];
+	export let inputs: Array<{ name: string; connectorType: ConnectorType }> = [];
+	export let outputs: Array<{ name: string; connectorType: ConnectorType }> = [];
 	$: hasConnectors = inputs.length > 0 || outputs.length > 0;
 
 	const nodes = useNodes();
@@ -58,8 +58,8 @@
 		}, {});
 	});
 
-	function getHandleShape(type: ConnectorType) {
-		switch (type) {
+	function getHandleShape(connectorType: ConnectorType) {
+		switch (connectorType) {
 			case ConnectorType.List:
 				return "square-handle";
 			case ConnectorType.Condition:
@@ -104,7 +104,7 @@
 								type="target"
 								class={cn(
 									`mt-0.5 !border-none`,
-									getHandleShape(type),
+									getHandleShape(connectorType),
 									inputConnectionColorMapping[handleId] &&
 										`!bg-${inputConnectionColorMapping[handleId]}-edge`
 								)}
