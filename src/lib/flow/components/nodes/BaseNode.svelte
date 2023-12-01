@@ -10,6 +10,7 @@
 
 	export type ConnectorType = (typeof ConnectorType)[keyof typeof ConnectorType];
 
+	// Returns the colour an edge should be based on the colour of its source node
 	export function getEdgeColor(edge: Edge<unknown>, nodes: Array<Node>) {
 		if (!edge.sourceHandle || !edge.source) return null;
 		const source = nodes.find((node) => node.id === edge.source);
@@ -51,6 +52,7 @@
 	let edgeTargetHandleToEdgeColor: Record<string, string> = {};
 
 	edges.subscribe((edges) => {
+		// Start with the assumption that all handles can be connected to
 		isHandleConnectable = inputs.reduce<Record<string, boolean>>((acc, { name }) => {
 			acc[`${title}-${id}-${name}`] = true;
 			return acc;
@@ -60,17 +62,16 @@
 		for (const edge of edges) {
 			if (edge.target !== id || !edge.targetHandle) continue;
 
+			// If an edge exists whose target is a handle owned by this node, it should no longer be connectable
 			if (isHandleConnectable[edge.targetHandle]) {
 				isHandleConnectable[edge.targetHandle] = false;
 			}
 
 			const edgeColor = getEdgeColor(edge, $nodes);
-
 			if (edgeColor) {
 				edgeTargetHandleToEdgeColor[edge.targetHandle] = edgeColor;
 				edge.style = `--edge-stroke: var(--edge-${edgeColor})`;
 			}
-			isHandleConnectable[edge.targetHandle] = false;
 		}
 	});
 
