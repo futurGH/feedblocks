@@ -44,7 +44,7 @@
 		},
 		{
 			id: "3",
-			type: "multiply",
+			type: "compare",
 			position: { x: -400, y: 200 },
 			data: {},
 		},

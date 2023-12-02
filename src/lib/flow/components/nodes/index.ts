@@ -1,7 +1,7 @@
 import { utilityNodes } from "$lib/flow/components/nodes/utility";
 import { filterNodes } from "$lib/flow/components/nodes/filter";
 
-export { utilityNodes, MultiplyNode } from "./utility";
+export { utilityNodes, MultiplyNode, CompareNode } from "./utility";
 export { filterNodes, SortNode } from "./filter";
 
 export const nodeCategories = {
