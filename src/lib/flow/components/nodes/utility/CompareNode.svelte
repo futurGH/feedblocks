@@ -32,6 +32,9 @@
 	const options = ["a > b", "a < b", "a = b", "a ≥ b", "a ≤ b"];
 
 	let selected: Writable<SelectOption<string>> = writable({ value: options[0] });
+
+	// TODO: add error when input types don't match up
+	// waiting on https://github.com/xyflow/xyflow/pull/3688
 </script>
 
 <BaseNode

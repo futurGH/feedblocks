@@ -24,6 +24,7 @@
 <script lang="ts">
 	import { cn } from "$lib/util";
 	import { Position, Handle, type NodeProps, useNodes, useEdges } from "@xyflow/svelte";
+	import { AlertCircleIcon } from "lucide-svelte";
 
 	type $$Props = NodeProps & {
 		title: string;
@@ -34,6 +35,7 @@
 	type $$Slots = {
 		default: never;
 		additional: {};
+		error: {};
 	};
 
 	export let id: $$Props["id"];
@@ -159,6 +161,12 @@
 			</div>
 		{/if}
 	</div>
+	{#if $$slots.error}
+		<div class="flex flex-row items-center justify-center gap-x-1 pb-2 text-red-800">
+			<AlertCircleIcon class="h-2.5 w-2.5" />
+			<slot name="error" />
+		</div>
+	{/if}
 </div>
 
 <style lang="postcss">
