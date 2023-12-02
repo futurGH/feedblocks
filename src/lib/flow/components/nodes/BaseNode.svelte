@@ -110,7 +110,7 @@
 								id={handleId}
 								type="target"
 								class={cn(
-									`mt-0.5 !border-none`,
+									"input-handle mt-0.5 !border-none",
 									getHandleShape(connectorType),
 									edgeTargetHandleToEdgeColor[handleId] &&
 										`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
@@ -140,7 +140,7 @@
 								id={handleId}
 								type="source"
 								class={cn(
-									`mt-0.5 !bg-${color}-edge !border-none`,
+									`mt-0.5 !bg-${color}-edge output-handle !border-none`,
 									getHandleShape(connectorType)
 								)}
 								position={Position.Right}
@@ -169,6 +169,12 @@
 		@apply h-2.5 w-2.5 rounded-none;
 	}
 	:global(.svelte-flow .svelte-flow__handle.diamond-handle) {
-		@apply h-2.5 w-2.5 origin-center -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-none;
+		@apply h-2.5 w-2.5 origin-center -translate-y-1/2 rotate-45 rounded-none;
+	}
+	:global(.svelte-flow .svelte-flow__handle.diamond-handle.input-handle) {
+		@apply -translate-x-1/2;
+	}
+	:global(.svelte-flow .svelte-flow__handle.diamond-handle.output-handle) {
+		@apply translate-x-1/2;
 	}
 </style>
