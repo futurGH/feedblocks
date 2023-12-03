@@ -1,14 +1,14 @@
-import { utilityNodes } from "$lib/flow/components/nodes/utility";
-import { filterNodes } from "$lib/flow/components/nodes/filter";
+import { operatorNodes } from "./operators";
+import { filterNodes } from "./filter";
 
-export { utilityNodes, MultiplyNode, CompareNode } from "./utility";
+export { operatorNodes, MultiplyNode, CompareNode } from "./operators";
 export { filterNodes, SortNode } from "./filter";
 
 export const nodeCategories = {
-	utility: {
-		name: "Utility",
+	operators: {
+		name: "Operators",
 		color: "rose",
-		nodes: utilityNodes,
+		nodes: operatorNodes,
 	},
 	filter: {
 		name: "Filter",
@@ -17,8 +17,8 @@ export const nodeCategories = {
 	},
 };
 export const nodeTypeToCategory = {
-	...Object.keys(utilityNodes).reduce<Record<string, "utility">>((acc, key) => {
-		acc[key] = "utility";
+	...Object.keys(operatorNodes).reduce<Record<string, "operators">>((acc, key) => {
+		acc[key] = "operators";
 		return acc;
 	}, {}),
 	...Object.keys(filterNodes).reduce<Record<string, "filter">>((acc, key) => {

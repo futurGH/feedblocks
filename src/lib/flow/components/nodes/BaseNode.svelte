@@ -72,7 +72,7 @@
 			const edgeColor = getEdgeColor(edge, $nodes);
 			if (edgeColor) {
 				edgeTargetHandleToEdgeColor[edge.targetHandle] = edgeColor;
-				edge.style = `--edge-stroke: var(--edge-${edgeColor})`;
+				edge.style = `--edge-stroke: var(--edge-${edgeColor});`;
 			}
 		}
 	});
@@ -112,7 +112,7 @@
 								id={handleId}
 								type="target"
 								class={cn(
-									"input-handle mt-0.5 !border-none",
+									"mt-0.5 !border-none",
 									getHandleShape(connectorType),
 									edgeTargetHandleToEdgeColor[handleId] &&
 										`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
@@ -142,7 +142,7 @@
 								id={handleId}
 								type="source"
 								class={cn(
-									`mt-0.5 !bg-${color}-edge output-handle !border-none`,
+									`!bg-${color}-edge mt-0.5 !border-none`,
 									getHandleShape(connectorType)
 								)}
 								position={Position.Right}
@@ -177,12 +177,8 @@
 		@apply h-2.5 w-2.5 rounded-none;
 	}
 	:global(.svelte-flow .svelte-flow__handle.diamond-handle) {
-		@apply h-2.5 w-2.5 origin-center -translate-y-1/2 rotate-45 rounded-none;
-	}
-	:global(.svelte-flow .svelte-flow__handle.diamond-handle.input-handle) {
-		@apply -translate-x-1/2;
-	}
-	:global(.svelte-flow .svelte-flow__handle.diamond-handle.output-handle) {
-		@apply translate-x-1/2;
+		@apply h-2.5 w-2.5 origin-center rounded-none;
+		-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+		clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 	}
 </style>
