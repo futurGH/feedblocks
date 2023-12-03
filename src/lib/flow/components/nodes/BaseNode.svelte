@@ -25,17 +25,19 @@
 	import { cn } from "$lib/util";
 	import { Position, Handle, type NodeProps, useNodes, useEdges } from "@xyflow/svelte";
 	import { AlertCircleIcon } from "lucide-svelte";
+	import type { InputOutput } from "$lib/flow/types";
 
 	type $$Props = NodeProps & {
 		title: string;
 		color: string;
-		inputs: Array<{ name: string; connectorType: ConnectorType }>;
-		outputs: Array<{ name: string; connectorType: ConnectorType }>;
+		inputs: Array<InputOutput>;
+		outputs: Array<InputOutput>;
 	};
 	type $$Slots = {
 		default: never;
 		additional: {};
 		error: {};
+		controls: {};
 	};
 
 	export let id: $$Props["id"];
@@ -43,8 +45,8 @@
 	export let title: string;
 	export let color: string;
 
-	export let inputs: Array<{ name: string; connectorType: ConnectorType }> = [];
-	export let outputs: Array<{ name: string; connectorType: ConnectorType }> = [];
+	export let inputs: Array<InputOutput> = [];
+	export let outputs: Array<InputOutput> = [];
 	$: hasConnectors = inputs.length > 0 || outputs.length > 0;
 
 	const nodes = useNodes();
@@ -167,6 +169,7 @@
 			<slot name="error" />
 		</div>
 	{/if}
+	<slot name="controls" />
 </div>
 
 <style lang="postcss">

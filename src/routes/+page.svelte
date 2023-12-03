@@ -38,7 +38,7 @@
 		},
 		{
 			id: "2",
-			type: "multiply",
+			type: "add",
 			position: { x: 350, y: 300 },
 			data: {},
 		},
