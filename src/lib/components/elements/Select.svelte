@@ -20,7 +20,7 @@
 		states: { open },
 		helpers: { closeMenu },
 		options: { portal },
-	} = createSelect<string, false>({
+	} = createSelect({
 		forceVisible: true,
 		loop: true,
 		positioning: {
