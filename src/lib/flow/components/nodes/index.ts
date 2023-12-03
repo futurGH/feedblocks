@@ -2,19 +2,7 @@ import { dataNodes } from "./data";
 import { operatorNodes } from "./operators";
 import { filterNodes } from "./filter";
 
-export { dataNodes, TextNode, NumberNode } from "./data";
-export {
-	operatorNodes,
-	AndNode,
-	OrNode,
-	NotNode,
-	AddNode,
-	SubtractNode,
-	MultiplyNode,
-	DivideNode,
-	CompareNode,
-} from "./operators";
-export { filterNodes, SortNode } from "./filter";
+export { dataNodes, operatorNodes, filterNodes };
 
 export const nodeCategories = {
 	data: {
