@@ -56,7 +56,7 @@
 		},
 		{
 			id: "5",
-			type: "datetime",
+			type: "list",
 			position: { x: 0, y: 0 },
 			data: {},
 		},

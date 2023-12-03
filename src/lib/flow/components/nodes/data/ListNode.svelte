@@ -5,7 +5,7 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "string",
+			type: "list",
 		},
 	];
 </script>
@@ -13,15 +13,17 @@
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
 	import Input from "$lib/components/elements/Input.svelte";
+	import InputCountControls from "$lib/flow/components/InputCountControls.svelte";
 
 	type $$Props = NodeProps;
 
 	export let id: $$Props["id"];
-	let text: string;
+
+	let items: Array<string> = ["", ""];
 </script>
 
 <BaseNode
-	title="text"
+	title="list"
 	color="sky"
 	showHandleNames={false}
 	{inputs}
@@ -31,13 +33,17 @@
 	on:connectstart
 	on:connectend
 >
-	<Input
-		slot="additional"
-		id={`${id}-input`}
-		class="w-36"
-		type="text"
-		label="Text"
-		hideLabel
-		bind:value={text}
-	/>
+	<div slot="additional" class="flex flex-col items-center gap-y-3">
+		{#each items as _, i (i)}
+			<Input
+				id={`${id}-${i}-input`}
+				class="w-36"
+				type="text"
+				label={`Text field ${i}`}
+				hideLabel
+				bind:value={items[i]}
+			/>
+		{/each}
+	</div>
+	<InputCountControls slot="controls" bind:inputs={items} newInput={() => ""} />
 </BaseNode>
