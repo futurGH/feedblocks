@@ -56,7 +56,7 @@
 		},
 		{
 			id: "5",
-			type: "list",
+			type: "userlist",
 			position: { x: 0, y: 0 },
 			data: {},
 		},

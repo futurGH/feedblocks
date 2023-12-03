@@ -5,7 +5,7 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "list",
+			type: "array",
 		},
 	];
 </script>
