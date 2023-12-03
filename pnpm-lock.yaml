@@ -25,9 +25,12 @@ dependencies:
     version: 2.0.0
 
 devDependencies:
+  '@internationalized/date':
+    specifier: ^3.5.0
+    version: 3.5.0
   '@melt-ui/svelte':
-    specifier: ^0.63.0
-    version: 0.63.0(svelte@4.2.7)
+    specifier: ^0.63.1
+    version: 0.63.1(svelte@4.2.7)
   '@sveltejs/adapter-cloudflare':
     specifier: ^2.3.3
     version: 2.3.3(@sveltejs/kit@1.27.6)
@@ -593,8 +596,8 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@melt-ui/svelte@0.63.0(svelte@4.2.7):
-    resolution: {integrity: sha512-lAQgrglE4NrWyxcS99Px8iWYN09riU7Zt/AxV09FkFeejo7c3PhGFiCqr3cmQQi4JgdTB+Ek52E6hKgVHKZ/2w==}
+  /@melt-ui/svelte@0.63.1(svelte@4.2.7):
+    resolution: {integrity: sha512-WzuI4uePPsHMlk1aq95UAgb32gXYRjBSi8DmXApWuM9CpJgcvUt2YcQ5+BPSOyrDOWVvPJd9gL7QA0NPDSCtNw==}
     peerDependencies:
       svelte: '>=3 <5'
     dependencies:
