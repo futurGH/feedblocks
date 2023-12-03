@@ -2,21 +2,21 @@
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [
 		{
-			connectorType: ConnectorType.Data,
+			connectorType: ConnectorType.Condition,
 			name: "a",
-			type: "number",
+			type: "boolean",
 		},
 		{
-			connectorType: ConnectorType.Data,
+			connectorType: ConnectorType.Condition,
 			name: "b",
-			type: "number",
+			type: "boolean",
 		},
 	];
 	export const outputs = [
 		{
-			connectorType: ConnectorType.Data,
+			connectorType: ConnectorType.Condition,
 			name: "output",
-			type: "number",
+			type: "boolean",
 		},
 	];
 </script>
@@ -31,7 +31,7 @@
 </script>
 
 <BaseNode
-	title="multiply"
+	title="or"
 	color="rose"
 	inputs={_inputs}
 	{outputs}

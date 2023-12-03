@@ -2,9 +2,10 @@
 	import type { InputOutput } from "$lib/flow/types";
 	import { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	import { PlusIcon, MinusIcon } from "lucide-svelte";
-	import { alphabet } from "$lib/util";
 
 	export let inputs: Array<InputOutput>;
+
+	const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 	const buttonStyle =
 		"flex h-5 w-5 items-center justify-center rounded-full border border-zinc-300 bg-zinc-100 transition-transform hover:scale-125 dark:border-zinc-600 dark:bg-zinc-900";

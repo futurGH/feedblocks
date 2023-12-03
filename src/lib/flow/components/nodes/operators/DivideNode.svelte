@@ -23,22 +23,17 @@
 
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
-	import InputCountControls from "$lib/flow/components/InputCountControls.svelte";
 
 	type $$Props = NodeProps;
-
-	let _inputs = inputs;
 </script>
 
 <BaseNode
-	title="multiply"
+	title="divide"
 	color="rose"
-	inputs={_inputs}
+	{inputs}
 	{outputs}
 	{...$$props}
 	on:connect
 	on:connectstart
 	on:connectend
->
-	<InputCountControls slot="controls" bind:inputs={_inputs} />
-</BaseNode>
+/>

@@ -1,7 +1,17 @@
 import { operatorNodes } from "./operators";
 import { filterNodes } from "./filter";
 
-export { operatorNodes, AddNode, MultiplyNode, CompareNode } from "./operators";
+export {
+	operatorNodes,
+	AndNode,
+	OrNode,
+	NotNode,
+	AddNode,
+	SubtractNode,
+	MultiplyNode,
+	DivideNode,
+	CompareNode,
+} from "./operators";
 export { filterNodes, SortNode } from "./filter";
 
 export const nodeCategories = {
