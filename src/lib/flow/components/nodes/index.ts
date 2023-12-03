@@ -1,6 +1,8 @@
+import { dataNodes } from "./data";
 import { operatorNodes } from "./operators";
 import { filterNodes } from "./filter";
 
+export { dataNodes, TextNode, NumberNode } from "./data";
 export {
 	operatorNodes,
 	AndNode,
@@ -15,6 +17,11 @@ export {
 export { filterNodes, SortNode } from "./filter";
 
 export const nodeCategories = {
+	data: {
+		name: "Data",
+		color: "sky",
+		nodes: dataNodes,
+	},
 	operators: {
 		name: "Operators",
 		color: "rose",
@@ -27,6 +34,10 @@ export const nodeCategories = {
 	},
 };
 export const nodeTypeToCategory = {
+	...Object.keys(dataNodes).reduce<Record<string, "data">>((acc, key) => {
+		acc[key] = "data";
+		return acc;
+	}, {}),
 	...Object.keys(operatorNodes).reduce<Record<string, "operators">>((acc, key) => {
 		acc[key] = "operators";
 		return acc;

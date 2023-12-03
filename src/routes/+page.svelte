@@ -56,7 +56,7 @@
 		},
 		{
 			id: "5",
-			type: "sort",
+			type: "number",
 			position: { x: 0, y: 0 },
 			data: {},
 		},
@@ -71,6 +71,7 @@
 	fitView
 	connectionLineType={ConnectionLineType.SmoothStep}
 	defaultEdgeOptions={{ type: "smoothstep" }}
+	deleteKey="Delete"
 	proOptions={{ hideAttribution: true }}
 >
 	<Controls />
