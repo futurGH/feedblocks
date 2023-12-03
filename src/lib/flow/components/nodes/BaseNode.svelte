@@ -32,6 +32,7 @@
 		color: string;
 		inputs: Array<InputOutput>;
 		outputs: Array<InputOutput>;
+		showHandleNames: boolean;
 	};
 	type $$Slots = {
 		default: never;
@@ -41,6 +42,8 @@
 	};
 
 	export let id: $$Props["id"];
+
+	export let showHandleNames = true;
 
 	export let title: string;
 	export let color: string;
@@ -103,8 +106,10 @@
 	>
 		<span class="font-semibold text-zinc-900/75 text-title">{title}</span>
 	</div>
-	<div class={cn("flex flex-col", hasConnectors ? "py-2" : "py-3")}>
-		{#if hasConnectors}
+	<div
+		class={cn("flex flex-col", hasConnectors ? "py-2" : "py-3", !showHandleNames && "relative")}
+	>
+		{#if hasConnectors && showHandleNames}
 			<div class="flex justify-between self-stretch py-2">
 				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
 					{#each inputs as { name, connectorType }}
@@ -127,8 +132,8 @@
 							/>
 							<span
 								class="font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
-								>{name}</span
-							>
+								>{name}
+							</span>
 						</div>
 					{/each}
 				</div>
@@ -156,6 +161,19 @@
 					{/each}
 				</div>
 			</div>
+		{:else if hasConnectors && !showHandleNames}
+			{#each outputs as { name, connectorType }}
+				{@const handleId = `${title}-${id}-${name}`}
+				<Handle
+					id={handleId}
+					type="source"
+					class={cn(`!bg-${color}-edge !border-none`, getHandleShape(connectorType))}
+					position={Position.Right}
+					on:connect
+					on:connectstart
+					on:connectend
+				/>
+			{/each}
 		{/if}
 		{#if $$slots.additional}
 			<div class="flex flex-col items-center justify-center gap-4 py-2">
@@ -180,7 +198,7 @@
 		@apply h-2.5 w-2.5 rounded-none;
 	}
 	:global(.svelte-flow .svelte-flow__handle.diamond-handle) {
-		@apply h-2.5 w-2.5 origin-center rounded-none;
+		@apply h-3.5 w-3.5 origin-center rounded-none;
 		-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 		clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 	}
