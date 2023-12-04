@@ -12,7 +12,7 @@
 	export let label: string;
 	export let hideLabel: boolean = false;
 	export let inFlow: boolean = false;
-	export let width: string;
+	export let width: string = "";
 
 	let selectDiv: HTMLDivElement;
 

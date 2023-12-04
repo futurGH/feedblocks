@@ -104,7 +104,7 @@
 			`bg-header-${color}`
 		)}
 	>
-		<span class="font-semibold text-zinc-900/75 text-title">{title}</span>
+		<span class="font-semibold text-zinc-900/75 text-title dark:text-zinc-50/75">{title}</span>
 	</div>
 	<div
 		class={cn("flex flex-col", hasConnectors ? "py-2" : "py-3", !showHandleNames && "relative")}

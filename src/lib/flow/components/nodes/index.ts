@@ -1,9 +1,10 @@
 import { dataNodes } from "./data";
 import { listNodes } from "./lists";
+import { utilityNodes } from "./utility";
 import { operatorNodes } from "./operators";
 import { filterNodes } from "./filter";
 
-export { dataNodes, listNodes, operatorNodes, filterNodes };
+export { dataNodes, listNodes, utilityNodes, operatorNodes, filterNodes };
 
 export const nodeCategories = {
 	data: {
@@ -15,6 +16,11 @@ export const nodeCategories = {
 		name: "Lists",
 		color: "emerald",
 		nodes: listNodes,
+	},
+	utility: {
+		name: "Utility",
+		color: "indigo",
+		nodes: utilityNodes,
 	},
 	operators: {
 		name: "Operators",
@@ -34,6 +40,10 @@ export const nodeTypeToCategory = {
 	}, {}),
 	...Object.keys(listNodes).reduce<Record<string, "lists">>((acc, key) => {
 		acc[key] = "lists";
+		return acc;
+	}, {}),
+	...Object.keys(utilityNodes).reduce<Record<string, "utility">>((acc, key) => {
+		acc[key] = "utility";
 		return acc;
 	}, {}),
 	...Object.keys(operatorNodes).reduce<Record<string, "operators">>((acc, key) => {
