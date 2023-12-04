@@ -17,7 +17,7 @@
 	type $$Props = NodeProps;
 
 	export let id: $$Props["id"];
-	let text: string;
+	let value: string;
 </script>
 
 <BaseNode
@@ -38,6 +38,6 @@
 		type="text"
 		label="Text"
 		hideLabel
-		bind:value={text}
+		bind:value
 	/>
 </BaseNode>

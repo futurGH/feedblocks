@@ -13,11 +13,12 @@
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
 	import Input from "$lib/components/elements/Input.svelte";
+	import { writable, type Writable } from "svelte/store";
 
 	type $$Props = NodeProps;
 
 	export let id: $$Props["id"];
-	let uri: string;
+	let uri: Writable<string> = writable();
 </script>
 
 <BaseNode

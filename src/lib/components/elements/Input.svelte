@@ -3,7 +3,11 @@
 	import { createLabel } from "@melt-ui/svelte";
 	import { cn } from "$lib/util";
 
-	type $$Props = HTMLInputAttributes & { label: string; hideLabel?: boolean };
+	type $$Props = Omit<HTMLInputAttributes, "value"> & {
+		value: string;
+		label: string;
+		hideLabel?: boolean;
+	};
 	type $$Slots = {
 		default: never;
 		before: {};
@@ -11,6 +15,7 @@
 	};
 
 	let className: string | null | undefined = null;
+	export let value: string;
 	export let label: string;
 	export let hideLabel = false;
 	export { className as class };
@@ -45,6 +50,7 @@
 				"block rounded-lg border-0 bg-zinc-100 px-3 py-1.5 ring-1 ring-zinc-300 placeholder:text-zinc-900/50 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:bg-zinc-900 dark:ring-zinc-700 placeholder:dark:text-zinc-100/60 focus:dark:ring-zinc-600",
 				className
 			)}
+			bind:value
 			{...$$restProps}
 		/>
 		{#if $$slots.after}

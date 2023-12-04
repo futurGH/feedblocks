@@ -18,8 +18,8 @@
 
 	export let id: $$Props["id"];
 
-	let min: number;
-	let max: number;
+	let min: string;
+	let max: string;
 </script>
 
 <BaseNode

@@ -23,7 +23,7 @@
 
 	const units = ["seconds", "minutes", "hours", "days", "weeks", "months", "years"];
 
-	let quantity: number;
+	let quantity: string;
 	let unit: Writable<SelectOption<string>> = writable({ value: units[0] });
 </script>
 
