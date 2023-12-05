@@ -32,31 +32,32 @@
 	const nodes = writable<Array<Node>>([
 		{
 			id: "1",
-			type: "multiply",
+			type: "userListPosts",
 			position: { x: 0, y: 300 },
 			data: {},
 		},
 		{
 			id: "2",
-			type: "add",
+			type: "hashtagPosts",
 			position: { x: 350, y: 300 },
 			data: {},
 		},
 		{
 			id: "3",
-			type: "compare",
+			type: "userPosts",
 			position: { x: -400, y: 200 },
 			data: {},
 		},
 		{
 			id: "4",
-			type: "sort",
+			type: "feedPosts",
 			position: { x: 0, y: 500 },
 			data: {},
 		},
 		{
 			id: "5",
-			type: "regex",
+			type: "feedOutput",
+			deletable: false,
 			position: { x: 0, y: 0 },
 			data: {},
 		},

@@ -1,14 +1,17 @@
 <script lang="ts" generics="T = InputOutput">
-	import type { InputOutput } from "$lib/flow/types";
 	import { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	import { PlusIcon, MinusIcon } from "lucide-svelte";
 
 	type $$Props<T> = {
 		inputs: Array<T>;
 		newInput?: (inputs: Array<T>) => T;
+		min?: number;
+		max?: number;
 	};
 	export let inputs: Array<T>;
 	export let newInput: ((inputs: Array<T>) => T) | undefined = undefined;
+	export let min = 2;
+	export let max = 10;
 
 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
@@ -30,12 +33,12 @@
 </script>
 
 <div class="absolute bottom-0 left-1/2 flex -translate-x-1/2 translate-y-1/2 flex-row gap-1">
-	{#if inputs.length < 10}
+	{#if inputs.length < max}
 		<button class={buttonStyle} on:click={addInput}>
 			<PlusIcon strokeWidth={2} class={iconStyle} />
 		</button>
 	{/if}
-	{#if inputs.length > 2}
+	{#if inputs.length > min}
 		<button
 			class={buttonStyle}
 			on:click={() => {

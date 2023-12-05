@@ -3,9 +3,9 @@
 	export const inputs = [];
 	export const outputs = [
 		{
-			connectorType: ConnectorType.List,
+			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "list",
+			type: "posts",
 		},
 	];
 </script>
@@ -13,17 +13,16 @@
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
 	import Input from "$lib/components/elements/Input.svelte";
-	import { writable, type Writable } from "svelte/store";
 
 	type $$Props = NodeProps;
 
 	export let id: $$Props["id"];
-	let uri = "";
+	let uri: string;
 </script>
 
 <BaseNode
-	title="mod list"
-	color="emerald"
+	title="user posts"
+	color="slate"
 	showHandleNames={false}
 	{inputs}
 	{outputs}
@@ -35,11 +34,13 @@
 	<Input
 		slot="additional"
 		id={`${id}-input`}
-		class="w-36"
+		class="w-36 pl-7"
 		type="text"
-		label="Moderation list"
-		placeholder="list url"
+		label="User handle"
+		placeholder="user.bsky.social"
 		hideLabel
 		bind:value={uri}
-	/>
+	>
+		<span slot="before">@</span>
+	</Input>
 </BaseNode>
