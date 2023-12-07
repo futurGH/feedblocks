@@ -10,6 +10,7 @@
 :root {
 	--node-header-background-color: theme("colors.zinc.100");
 	--node-header-background-gradient: linear-gradient(var(--node-header-background-color), var(--node-header-background-color));
+	--handle-background-color: theme("colors.zinc.700");
 
 	--header-bg-slate: theme("colors.slate.400")33;
 	--header-bg-amber: theme("colors.amber.400")33;
@@ -29,6 +30,8 @@
 }
 :root.dark {
 	--node-header-background-color: theme("colors.zinc.800");
+	--handle-background-color: theme("colors.zinc.500");
+
 	--header-bg-slate: theme("colors.slate.400")4d;
 	--header-bg-amber: theme("colors.amber.400")4d;
 	--header-bg-sky: theme("colors.sky.400")4d;

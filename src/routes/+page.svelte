@@ -1,81 +1,8 @@
 <script lang="ts">
-	import {
-		SvelteFlow,
-		Controls,
-		Background,
-		BackgroundVariant,
-		MiniMap,
-		type Node,
-		type Edge,
-		ConnectionLineType,
-	} from "@xyflow/svelte";
-	import "@xyflow/svelte/dist/style.css";
-	import { writable } from "svelte/store";
-	import { nodeCategories } from "$lib/flow/components/nodes";
-	import type { ComponentType } from "svelte";
-
-	// This is ugly but it's a one-time thing so hopefully not too bad?
-	const nodeTypes = Object.values(nodeCategories).reduce((acc, category) => {
-		Object.assign(
-			acc,
-			Object.entries(category.nodes).reduce<Record<string, ComponentType>>(
-				(acc, [id, node]) => {
-					acc[id] = node.default;
-					return acc;
-				},
-				{}
-			)
-		);
-		return acc;
-	}, {});
-
-	const nodes = writable<Array<Node>>([
-		{
-			id: "1",
-			type: "userListPosts",
-			position: { x: 0, y: 300 },
-			data: {},
-		},
-		{
-			id: "2",
-			type: "hashtagPosts",
-			position: { x: 350, y: 300 },
-			data: {},
-		},
-		{
-			id: "3",
-			type: "userPosts",
-			position: { x: -400, y: 200 },
-			data: {},
-		},
-		{
-			id: "4",
-			type: "feedPosts",
-			position: { x: 0, y: 500 },
-			data: {},
-		},
-		{
-			id: "5",
-			type: "feedOutput",
-			deletable: false,
-			position: { x: 0, y: 0 },
-			data: {},
-		},
-	]);
-	const edges = writable<Array<Edge>>([]);
+	import { SvelteFlowProvider } from "@xyflow/svelte";
+	import Flow from "$lib/flow/Flow.svelte";
 </script>
 
-<SvelteFlow
-	{nodeTypes}
-	{nodes}
-	{edges}
-	fitView
-	connectionLineType={ConnectionLineType.SmoothStep}
-	defaultEdgeOptions={{ type: "smoothstep" }}
-	deleteKey="Delete"
-	proOptions={{ hideAttribution: true }}
->
-	<Controls />
-	<Background variant={BackgroundVariant.Dots} />
-	<MiniMap />
-</SvelteFlow>
+<SvelteFlowProvider>
+	<Flow />
+</SvelteFlowProvider>

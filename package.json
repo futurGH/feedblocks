@@ -23,6 +23,7 @@
 		"vite": "^5.0.0"
 	},
 	"dependencies": {
+		"@paralleldrive/cuid2": "^2.2.2",
 		"@sveltejs/kit": "^1.27.6",
 		"@xyflow/svelte": "^0.0.27",
 		"clsx": "^2.0.0",

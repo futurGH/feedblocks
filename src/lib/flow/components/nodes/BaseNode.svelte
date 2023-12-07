@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import type { Node, Edge } from "@xyflow/svelte";
 	import { nodeCategories, nodeTypeToCategory } from "$lib/flow/components/nodes";
+	import WrappedHandle from "$lib/flow/components/WrappedHandle.svelte";
 
 	export const ConnectorType = {
 		Data: "data",
@@ -19,20 +20,35 @@
 		if (!sourceNodeCategory) return null;
 		return nodeCategories[sourceNodeCategory]?.color || null;
 	}
+
+	export function getHandleShape(connectorType: ConnectorType) {
+		switch (connectorType) {
+			case ConnectorType.List:
+				return "square-handle";
+			case ConnectorType.Condition:
+				return "diamond-handle";
+			case ConnectorType.Data:
+			default:
+				return "circle-handle";
+		}
+	}
 </script>
 
 <script lang="ts">
 	import { cn } from "$lib/util";
-	import { Position, Handle, type NodeProps, useNodes, useEdges } from "@xyflow/svelte";
+	import { Position, type NodeProps, useNodes, useEdges } from "@xyflow/svelte";
 	import { AlertCircleIcon } from "lucide-svelte";
 	import type { InputOutput } from "$lib/flow/types";
+	import { writable, type Writable } from "svelte/store";
+	import { makeHandleId } from "$lib/util";
 
 	type $$Props = NodeProps & {
 		title: string;
 		color: string;
 		inputs: Array<InputOutput>;
 		outputs: Array<InputOutput>;
-		showHandleNames: boolean;
+		showHandleNames?: boolean;
+		inFlow?: boolean;
 	};
 	type $$Slots = {
 		default: never;
@@ -43,17 +59,27 @@
 
 	export let id: $$Props["id"];
 
-	export let showHandleNames = true;
-
 	export let title: string;
 	export let color: string;
+
+	export let showHandleNames = true;
+	export let inFlow = true;
 
 	export let inputs: Array<InputOutput> = [];
 	export let outputs: Array<InputOutput> = [];
 	$: hasConnectors = inputs.length > 0 || outputs.length > 0;
 
-	const nodes = useNodes();
-	const edges = useEdges();
+	let nodes: Writable<Array<Node>>;
+	let edges: Writable<Array<Edge>>;
+	try {
+		nodes = useNodes();
+		edges = useEdges();
+	} catch (e) {
+		// We're being rendered outside of a flow
+		nodes = writable<Array<Node>>([]);
+		edges = writable<Array<Edge>>([]);
+		inFlow = false;
+	}
 
 	let isHandleConnectable: Record<string, boolean> = {};
 	let edgeTargetHandleToEdgeColor: Record<string, string> = {};
@@ -61,7 +87,7 @@
 	edges.subscribe((edges) => {
 		// Start with the assumption that all handles can be connected to
 		isHandleConnectable = inputs.reduce<Record<string, boolean>>((acc, { name }) => {
-			acc[`${title}-${id}-${name}`] = true;
+			acc[makeHandleId({ title, id, name })] = true;
 			return acc;
 		}, {});
 		edgeTargetHandleToEdgeColor = {};
@@ -81,22 +107,14 @@
 			}
 		}
 	});
-
-	function getHandleShape(connectorType: ConnectorType) {
-		switch (connectorType) {
-			case ConnectorType.List:
-				return "square-handle";
-			case ConnectorType.Condition:
-				return "diamond-handle";
-			case ConnectorType.Data:
-			default:
-				return "circle-handle";
-		}
-	}
 </script>
 
 <div
-	class="flex w-52 flex-col rounded-2xl border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900"
+	class={cn(
+		"relative flex flex-col rounded-2xl bg-zinc-100 ring-1 ring-zinc-300 dark:bg-zinc-900 dark:ring-zinc-700",
+		$$props.selected && "ring-2 ring-zinc-400 dark:ring-zinc-600",
+		inFlow ? "w-52" : "w-full"
+	)}
 >
 	<div
 		class={cn(
@@ -113,9 +131,9 @@
 			<div class="flex justify-between self-stretch py-2">
 				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
 					{#each inputs as { name, connectorType }}
-						{@const handleId = `${title}-${id}-${name}`}
+						{@const handleId = makeHandleId({ title, id, name })}
 						<div class="relative pl-4">
-							<Handle
+							<WrappedHandle
 								id={handleId}
 								type="target"
 								class={cn(
@@ -139,13 +157,13 @@
 				</div>
 				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
 					{#each outputs as { name, connectorType }}
-						{@const handleId = `${title}-${id}-${name}`}
+						{@const handleId = makeHandleId({ title, id, name })}
 						<div class="relative pr-4">
 							<span
 								class="flex-grow text-right font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
 								>{name}</span
 							>
-							<Handle
+							<WrappedHandle
 								id={handleId}
 								type="source"
 								class={cn(
@@ -163,8 +181,8 @@
 			</div>
 		{:else if hasConnectors && !showHandleNames}
 			{#each outputs as { name, connectorType }}
-				{@const handleId = `${title}-${id}-${name}`}
-				<Handle
+				{@const handleId = makeHandleId({ title, id, name })}
+				<WrappedHandle
 					id={handleId}
 					type="source"
 					class={cn(`!bg-${color}-edge !border-none`, getHandleShape(connectorType))}
@@ -191,13 +209,13 @@
 </div>
 
 <style lang="postcss">
-	:global(.svelte-flow .svelte-flow__handle.circle-handle) {
+	:global(.svelte-flow__handle.circle-handle) {
 		@apply h-3 w-3 rounded-full;
 	}
-	:global(.svelte-flow .svelte-flow__handle.square-handle) {
+	:global(.svelte-flow__handle.square-handle) {
 		@apply h-2.5 w-2.5 rounded-none;
 	}
-	:global(.svelte-flow .svelte-flow__handle.diamond-handle) {
+	:global(.svelte-flow__handle.diamond-handle) {
 		@apply h-3.5 w-3.5 origin-center rounded-none;
 		-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 		clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
