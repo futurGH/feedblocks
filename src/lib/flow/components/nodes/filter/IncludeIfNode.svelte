@@ -19,6 +19,7 @@
 			type: "posts",
 		},
 	];
+	export const title = "include if";
 </script>
 
 <script lang="ts">
@@ -30,7 +31,7 @@
 </script>
 
 <BaseNode
-	title="include if"
+	{title}
 	color="fuchsia"
 	{inputs}
 	{outputs}

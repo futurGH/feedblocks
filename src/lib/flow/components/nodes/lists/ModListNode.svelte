@@ -8,6 +8,7 @@
 			type: "list",
 		},
 	];
+	export const title = "mod list";
 </script>
 
 <script lang="ts">
@@ -22,7 +23,7 @@
 </script>
 
 <BaseNode
-	title="mod list"
+	{title}
 	color="emerald"
 	showHandleNames={false}
 	{inputs}

@@ -19,6 +19,7 @@
 			type: "boolean",
 		},
 	];
+	export const title = "compare";
 </script>
 
 <script lang="ts">
@@ -38,7 +39,7 @@
 </script>
 
 <BaseNode
-	title="compare"
+	{title}
 	color="rose"
 	{inputs}
 	{outputs}

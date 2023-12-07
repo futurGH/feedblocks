@@ -8,6 +8,7 @@
 			type: "array",
 		},
 	];
+	export const title = "list";
 </script>
 
 <script lang="ts">
@@ -23,7 +24,7 @@
 </script>
 
 <BaseNode
-	title="list"
+	{title}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

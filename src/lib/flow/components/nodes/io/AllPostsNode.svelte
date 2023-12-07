@@ -9,6 +9,7 @@
 			type: "posts",
 		},
 	];
+	export const title = "all posts";
 </script>
 
 <script lang="ts">
@@ -18,7 +19,7 @@
 </script>
 
 <BodylessNode
-	title="all posts"
+	{title}
 	color="slate"
 	handleType="source"
 	handle={outputs[0]}

@@ -14,6 +14,7 @@
 			type: "boolean",
 		},
 	];
+	export const title = "match regex";
 </script>
 
 <script lang="ts">
@@ -31,7 +32,7 @@
 </script>
 
 <BaseNode
-	title="match regex"
+	{title}
 	color="indigo"
 	{inputs}
 	{outputs}

@@ -14,6 +14,7 @@
 			type: "boolean",
 		},
 	];
+	export const title = "not";
 </script>
 
 <script lang="ts">
@@ -23,7 +24,7 @@
 </script>
 
 <BaseNode
-	title="or"
+	{title}
 	color="rose"
 	{inputs}
 	{outputs}

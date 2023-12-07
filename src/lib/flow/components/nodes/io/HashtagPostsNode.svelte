@@ -8,6 +8,7 @@
 			type: "posts",
 		},
 	];
+	export const title = "hashtag posts";
 </script>
 
 <script lang="ts">
@@ -23,7 +24,7 @@
 </script>
 
 <BaseNode
-	title="hashtag posts"
+	{title}
 	color="slate"
 	showHandleNames={false}
 	{inputs}

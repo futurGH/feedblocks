@@ -14,6 +14,7 @@
 			type: "boolean",
 		},
 	];
+	export const title = "post is type";
 </script>
 
 <script lang="ts">
@@ -27,14 +28,14 @@
 		{ label: "post", value: "post" },
 		{ label: "reply", value: "reply" },
 		{ label: "repost", value: "repost" },
-		{ label: "quote", value: "quote" }
+		{ label: "quote", value: "quote" },
 	];
 
 	let selected: Writable<ComboboxItem> = writable(postTypes[0]);
 </script>
 
 <BaseNode
-	title="post is type"
+	{title}
 	color="indigo"
 	{inputs}
 	{outputs}

@@ -8,6 +8,7 @@
 			type: "period",
 		},
 	];
+	export const title = "period";
 </script>
 
 <script lang="ts">
@@ -28,7 +29,7 @@
 </script>
 
 <BaseNode
-	title="period"
+	{title}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

@@ -19,6 +19,7 @@
 			type: "boolean",
 		},
 	];
+	export const title = "text contains";
 </script>
 
 <script lang="ts">
@@ -28,7 +29,7 @@
 </script>
 
 <BaseNode
-	title="text contains"
+	{title}
 	color="indigo"
 	{inputs}
 	{outputs}

@@ -27,7 +27,7 @@
 	)}
 >
 	<button
-		class="fixed -right-2 bottom-4 z-0 translate-x-full rounded-r-full"
+		class="absolute -right-2 top-4 z-0 translate-x-full rounded-r-full"
 		aria-label={open ? "close sidebar" : "expand sidebar"}
 		on:click={() => (open = !open)}
 	>
@@ -53,7 +53,7 @@
 							<li
 								class="w-full cursor-grab"
 								tabindex="0"
-								aria-roledescription="draggable node"
+								aria-roledescription={`draggable ${node.name} node`}
 								draggable="true"
 								on:dragstart={(e) => onDragStart(e, id)}
 								on:dragend={onDragEnd}

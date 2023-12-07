@@ -19,6 +19,7 @@
 			type: "posts",
 		},
 	];
+	export const title = "combine";
 </script>
 
 <script lang="ts">
@@ -65,7 +66,7 @@
 </script>
 
 <BaseNode
-	title="combine"
+	{title}
 	color="fuchsia"
 	{inputs}
 	{outputs}

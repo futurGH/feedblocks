@@ -8,6 +8,7 @@
 			type: "number",
 		},
 	];
+	export const title = "random";
 </script>
 
 <script lang="ts">
@@ -23,7 +24,7 @@
 </script>
 
 <BaseNode
-	title="random"
+	{title}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

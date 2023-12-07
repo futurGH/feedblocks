@@ -9,6 +9,7 @@
 		},
 	];
 	export const outputs = [];
+	export const title = "feed output";
 </script>
 
 <script lang="ts">
@@ -18,7 +19,7 @@
 </script>
 
 <BodylessNode
-	title="feed output"
+	{title}
 	color="slate"
 	handleType="target"
 	handle={inputs[0]}

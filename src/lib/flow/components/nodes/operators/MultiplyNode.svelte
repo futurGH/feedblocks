@@ -19,6 +19,7 @@
 			type: "number",
 		},
 	];
+	export const title = "multiply";
 </script>
 
 <script lang="ts">
@@ -31,7 +32,7 @@
 </script>
 
 <BaseNode
-	title="multiply"
+	{title}
 	color="rose"
 	inputs={_inputs}
 	{outputs}

@@ -19,6 +19,7 @@
 			type: "number",
 		},
 	];
+	export const title = "divide";
 </script>
 
 <script lang="ts">
@@ -28,7 +29,7 @@
 </script>
 
 <BaseNode
-	title="divide"
+	{title}
 	color="rose"
 	{inputs}
 	{outputs}

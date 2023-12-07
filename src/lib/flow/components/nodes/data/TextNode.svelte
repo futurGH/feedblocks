@@ -8,6 +8,7 @@
 			type: "string",
 		},
 	];
+	export const title = "text";
 </script>
 
 <script lang="ts">
@@ -21,7 +22,7 @@
 </script>
 
 <BaseNode
-	title="text"
+	{title}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

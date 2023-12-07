@@ -19,18 +19,17 @@
 			type: "posts",
 		},
 	];
+	export const title = "exclude if";
 </script>
 
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
-	import { type Writable, writable } from "svelte/store";
-	import Combobox, { type ComboboxItem } from "$lib/components/elements/Combobox.svelte";
 
 	type $$Props = NodeProps;
 </script>
 
 <BaseNode
-	title="exclude if"
+	{title}
 	color="fuchsia"
 	{inputs}
 	{outputs}

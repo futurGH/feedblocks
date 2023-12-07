@@ -14,6 +14,7 @@
 			type: "boolean",
 		},
 	];
+	export const title = "exists";
 </script>
 
 <script lang="ts">
@@ -23,7 +24,7 @@
 </script>
 
 <BaseNode
-	title="join text"
+	{title}
 	color="indigo"
 	{inputs}
 	{outputs}

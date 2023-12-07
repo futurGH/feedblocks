@@ -8,6 +8,7 @@
 			type: "posts",
 		},
 	];
+	export const title = "user list posts";
 </script>
 
 <script lang="ts">
@@ -21,7 +22,7 @@
 </script>
 
 <BaseNode
-	title="user list posts"
+	{title}
 	color="slate"
 	showHandleNames={false}
 	{inputs}

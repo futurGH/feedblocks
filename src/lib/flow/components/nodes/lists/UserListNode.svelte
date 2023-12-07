@@ -8,6 +8,7 @@
 			type: "list",
 		},
 	];
+	export const title = "user list";
 </script>
 
 <script lang="ts">
@@ -21,7 +22,7 @@
 </script>
 
 <BaseNode
-	title="user list"
+	{title}
 	color="emerald"
 	showHandleNames={false}
 	{inputs}

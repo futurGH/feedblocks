@@ -14,6 +14,7 @@
 			type: "boolean",
 		},
 	];
+	export const title = "embed is type";
 </script>
 
 <script lang="ts">
@@ -34,7 +35,7 @@
 </script>
 
 <BaseNode
-	title="embed is type"
+	{title}
 	color="indigo"
 	{inputs}
 	{outputs}

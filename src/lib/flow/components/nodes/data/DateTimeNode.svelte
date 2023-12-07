@@ -8,6 +8,7 @@
 			type: "datetime",
 		},
 	];
+	export const title = "date and time";
 </script>
 
 <script lang="ts">
@@ -22,7 +23,7 @@
 </script>
 
 <BaseNode
-	title="date and time"
+	{title}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

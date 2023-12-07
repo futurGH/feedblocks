@@ -19,6 +19,7 @@
 			type: "string",
 		},
 	];
+	export const title = "join text";
 </script>
 
 <script lang="ts">
@@ -28,7 +29,7 @@
 </script>
 
 <BaseNode
-	title="join text"
+	{title}
 	color="indigo"
 	{inputs}
 	{outputs}

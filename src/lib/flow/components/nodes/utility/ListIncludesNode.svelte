@@ -19,6 +19,7 @@
 			type: "boolean",
 		},
 	];
+	export const title = "list includes";
 </script>
 
 <script lang="ts">
@@ -28,7 +29,7 @@
 </script>
 
 <BaseNode
-	title="join text"
+	{title}
 	color="indigo"
 	{inputs}
 	{outputs}

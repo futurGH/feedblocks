@@ -14,6 +14,7 @@
 			type: "posts",
 		},
 	];
+	export const title = "sort";
 </script>
 
 <script lang="ts">
@@ -58,7 +59,7 @@
 </script>
 
 <BaseNode
-	title="sort"
+	{title}
 	color="fuchsia"
 	{inputs}
 	{outputs}

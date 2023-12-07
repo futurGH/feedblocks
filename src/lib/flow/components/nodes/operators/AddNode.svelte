@@ -19,6 +19,7 @@
 			type: "number",
 		},
 	];
+	export const title = "add";
 </script>
 
 <script lang="ts">
@@ -31,7 +32,7 @@
 </script>
 
 <BaseNode
-	title="add"
+	{title}
 	color="rose"
 	inputs={_inputs}
 	{outputs}
