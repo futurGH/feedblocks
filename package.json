@@ -31,6 +31,7 @@
 		"@sveltejs/kit": "^1.27.6",
 		"@xyflow/svelte": "^0.0.27",
 		"clsx": "^2.0.0",
+		"dragdroptouch-bug-fixed": "^1.0.8",
 		"lucide-svelte": "^0.293.0",
 		"svelte": "^4.2.7",
 		"tailwind-merge": "^2.0.0"

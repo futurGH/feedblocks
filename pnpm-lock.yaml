@@ -17,6 +17,9 @@ dependencies:
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
+  dragdroptouch-bug-fixed:
+    specifier: ^1.0.8
+    version: 1.0.8
   lucide-svelte:
     specifier: ^0.293.0
     version: 0.293.0(svelte@4.2.7)
@@ -1511,6 +1514,10 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dragdroptouch-bug-fixed@1.0.8:
+    resolution: {integrity: sha512-moNgBeWMeUk4zhV3B+a4TZUPmHVJz+cvjWEXENLEU3toVnm3lpS+ZkSwVbBxArDUQ8HSm1qA0UmKWWy1y7nvng==}
+    dev: false
 
   /electron-to-chromium@1.4.588:
     resolution: {integrity: sha512-soytjxwbgcCu7nh5Pf4S2/4wa6UIu+A3p03U2yVr53qGxi1/VTR3ENI+p50v+UxqqZAfl48j3z55ud7VHIOr9w==}

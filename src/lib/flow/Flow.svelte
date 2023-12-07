@@ -12,7 +12,7 @@
 	import Sidebar from "$lib/flow/components/Sidebar.svelte";
 	import { writable } from "svelte/store";
 	import { nodeCategories } from "$lib/flow/components/nodes";
-	import type { ComponentType } from "svelte";
+	import { type ComponentType, onMount } from "svelte";
 	import { createId } from "@paralleldrive/cuid2";
 
 	// This is ugly but it's a one-time thing so hopefully not too bad?
@@ -73,6 +73,8 @@
 		});
 		$nodes = $nodes;
 	};
+
+	onMount(async () => await import("dragdroptouch-bug-fixed"));
 </script>
 
 <main class="h-screen w-screen">
