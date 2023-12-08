@@ -5,11 +5,13 @@
 			connectorType: ConnectorType.Data,
 			name: "posts",
 			type: "posts",
+			description: "The posts to filter",
 		},
 		{
 			connectorType: ConnectorType.Condition,
 			name: "condition",
 			type: "boolean",
+			description: "The condition to check",
 		},
 	];
 	export const outputs = [
@@ -17,21 +19,22 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "posts",
+			description: "The posts that match the condition",
 		},
 	];
 	export const title = "include if";
+	export const description = "Outputs posts that match the condition";
 </script>
 
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
-	import { type Writable, writable } from "svelte/store";
-	import Combobox, { type ComboboxItem } from "$lib/components/elements/Combobox.svelte";
 
 	type $$Props = NodeProps;
 </script>
 
 <BaseNode
 	{title}
+	{description}
 	color="fuchsia"
 	{inputs}
 	{outputs}

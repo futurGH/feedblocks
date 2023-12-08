@@ -6,9 +6,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "date",
+			description: "The date entered",
 		},
 	];
 	export const title = "date";
+	export const description = "Outputs a provided date";
 </script>
 
 <script lang="ts">
@@ -24,6 +26,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

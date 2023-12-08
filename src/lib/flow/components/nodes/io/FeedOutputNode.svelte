@@ -6,10 +6,12 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "posts",
+			description: "The posts that this feed should output",
 		},
 	];
 	export const outputs = [];
 	export const title = "feed output";
+	export const description = "The output of this feed";
 </script>
 
 <script lang="ts">
@@ -20,6 +22,7 @@
 
 <BodylessNode
 	{title}
+	{description}
 	color="slate"
 	handleType="target"
 	handle={inputs[0]}

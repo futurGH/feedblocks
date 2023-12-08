@@ -6,9 +6,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "period",
+			description: "The period of time between the two dates entered",
 		},
 	];
 	export const title = "period";
+	export const description = "Outputs the period of time between two provided dates";
 </script>
 
 <script lang="ts">
@@ -30,6 +32,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

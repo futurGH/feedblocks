@@ -41,9 +41,11 @@
 	import type { InputOutput } from "$lib/flow/types";
 	import { writable, type Writable } from "svelte/store";
 	import { makeHandleId } from "$lib/util";
+	import { createId } from "@paralleldrive/cuid2";
 
-	type $$Props = NodeProps & {
+	type $$Props = Partial<NodeProps> & {
 		title: string;
+		description: string;
 		color: string;
 		inputs: Array<InputOutput>;
 		outputs: Array<InputOutput>;
@@ -57,9 +59,11 @@
 		controls: {};
 	};
 
-	export let id: $$Props["id"];
+	export let id = createId();
+	export let selected: $$Props["selected"] = undefined;
 
 	export let title: string;
+	export let description: string;
 	export let color: string;
 
 	export let showHandleNames = true;

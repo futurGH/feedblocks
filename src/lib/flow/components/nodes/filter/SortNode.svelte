@@ -5,6 +5,7 @@
 			connectorType: ConnectorType.Data,
 			name: "posts",
 			type: "posts",
+			description: "The posts to sort",
 		},
 	];
 	export const outputs = [
@@ -12,9 +13,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "posts",
+			description: "The sorted posts",
 		},
 	];
 	export const title = "sort";
+	export const description = "Sorts a list of posts based on the selected sort method";
 </script>
 
 <script lang="ts">
@@ -60,6 +63,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="fuchsia"
 	{inputs}
 	{outputs}

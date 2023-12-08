@@ -5,11 +5,13 @@
 			connectorType: ConnectorType.Data,
 			name: "a",
 			type: "number",
+			description: "The first number to multiply",
 		},
 		{
 			connectorType: ConnectorType.Data,
 			name: "b",
 			type: "number",
+			description: "The second number to multiply",
 		},
 	];
 	export const outputs = [
@@ -17,9 +19,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "number",
+			description: "The product of the provided numbers",
 		},
 	];
 	export const title = "multiply";
+	export const description = "Multiplies the provided numbers";
 </script>
 
 <script lang="ts">
@@ -33,6 +37,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="rose"
 	inputs={_inputs}
 	{outputs}

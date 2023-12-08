@@ -4,4 +4,5 @@ export type InputOutput = {
 	connectorType: ConnectorType;
 	name: string;
 	type: string;
+	description: string;
 };

@@ -5,11 +5,13 @@
 			connectorType: ConnectorType.Data,
 			name: "a",
 			type: "any",
+			description: "The first value to compare",
 		},
 		{
 			connectorType: ConnectorType.Data,
 			name: "b",
 			type: "any",
+			description: "The second value to compare",
 		},
 	];
 	export const outputs = [
@@ -17,9 +19,11 @@
 			connectorType: ConnectorType.Condition,
 			name: "result",
 			type: "boolean",
+			description: "Whether the two inputs meet the specified condition",
 		},
 	];
 	export const title = "compare";
+	export const description = "Output whether the two inputs meet the specified condition";
 </script>
 
 <script lang="ts">
@@ -40,6 +44,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="rose"
 	{inputs}
 	{outputs}

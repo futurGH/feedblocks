@@ -6,9 +6,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "array",
+			description: "The list entered",
 		},
 	];
 	export const title = "list";
+	export const description = "Outputs a provided list of strings";
 </script>
 
 <script lang="ts">
@@ -25,6 +27,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

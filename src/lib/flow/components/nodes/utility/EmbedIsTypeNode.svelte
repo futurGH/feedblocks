@@ -5,6 +5,7 @@
 			connectorType: ConnectorType.Data,
 			name: "post",
 			type: "post",
+			description: "The post to check for an embed",
 		},
 	];
 	export const outputs = [
@@ -12,9 +13,12 @@
 			connectorType: ConnectorType.Condition,
 			name: "result",
 			type: "boolean",
+			description: "Whether the post has an embed of the specified type",
 		},
 	];
 	export const title = "embed is type";
+	export const description =
+		"Outputs whether the provided post has an embed of the specified type.";
 </script>
 
 <script lang="ts">
@@ -36,6 +40,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="indigo"
 	{inputs}
 	{outputs}

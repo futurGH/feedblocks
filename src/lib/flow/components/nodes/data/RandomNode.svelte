@@ -6,9 +6,12 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "number",
+			description: "A random integer between the minimum and maximum values entered",
 		},
 	];
 	export const title = "random";
+	export const description =
+		"Outputs a random integer between the provided minimum and maximum values.";
 </script>
 
 <script lang="ts">
@@ -25,6 +28,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

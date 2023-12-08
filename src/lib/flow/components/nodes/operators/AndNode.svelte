@@ -5,11 +5,13 @@
 			connectorType: ConnectorType.Condition,
 			name: "a",
 			type: "boolean",
+			description: "The first condition to check",
 		},
 		{
 			connectorType: ConnectorType.Condition,
 			name: "b",
 			type: "boolean",
+			description: "The second condition to check",
 		},
 	];
 	export const outputs = [
@@ -17,9 +19,11 @@
 			connectorType: ConnectorType.Condition,
 			name: "output",
 			type: "boolean",
+			description: "Whether all input conditions are true",
 		},
 	];
 	export const title = "and";
+	export const description = "Outputs whether all input conditions are true";
 </script>
 
 <script lang="ts">
@@ -33,6 +37,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="rose"
 	inputs={_inputs}
 	{outputs}

@@ -13,10 +13,10 @@ export const nodeCategories = {
 		color: "slate",
 		nodes: inputOutputNodes,
 	},
-	data: {
-		name: "Data",
-		color: "sky",
-		nodes: dataNodes,
+	filter: {
+		name: "Filter",
+		color: "fuchsia",
+		nodes: filterNodes,
 	},
 	lists: {
 		name: "Lists",
@@ -28,15 +28,15 @@ export const nodeCategories = {
 		color: "indigo",
 		nodes: utilityNodes,
 	},
+	data: {
+		name: "Data",
+		color: "sky",
+		nodes: dataNodes,
+	},
 	operators: {
 		name: "Operators",
 		color: "rose",
 		nodes: operatorNodes,
-	},
-	filter: {
-		name: "Filter",
-		color: "fuchsia",
-		nodes: filterNodes,
 	},
 };
 export const nodeTypeToCategory = {

@@ -7,9 +7,11 @@
 			connectorType: ConnectorType.Data,
 			name: "all posts",
 			type: "posts",
+			description: "All posts from the Bluesky network",
 		},
 	];
 	export const title = "all posts";
+	export const description = "Outputs all posts from the Bluesky network";
 </script>
 
 <script lang="ts">
@@ -20,6 +22,7 @@
 
 <BodylessNode
 	{title}
+	{description}
 	color="slate"
 	handleType="source"
 	handle={outputs[0]}

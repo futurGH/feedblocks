@@ -5,6 +5,7 @@
 			connectorType: ConnectorType.Data,
 			name: "post",
 			type: "post",
+			description: "The post to check the type of",
 		},
 	];
 	export const outputs = [
@@ -12,9 +13,11 @@
 			connectorType: ConnectorType.Condition,
 			name: "result",
 			type: "boolean",
+			description: "Whether the post is of the specified type",
 		},
 	];
 	export const title = "post is type";
+	export const description = "Outputs whether the provided post is of the specified type";
 </script>
 
 <script lang="ts">
@@ -36,6 +39,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="indigo"
 	{inputs}
 	{outputs}

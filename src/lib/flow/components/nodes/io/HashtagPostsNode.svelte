@@ -6,9 +6,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "posts",
+			description: "Posts that contain any of the provided hashtags",
 		},
 	];
 	export const title = "hashtag posts";
+	export const description = "Outputs all posts containing any of the provided hashtags";
 </script>
 
 <script lang="ts">
@@ -25,6 +27,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="slate"
 	showHandleNames={false}
 	{inputs}

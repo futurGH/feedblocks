@@ -6,9 +6,11 @@
 			connectorType: ConnectorType.List,
 			name: "output",
 			type: "list",
+			description: "The mod list at the specified URL",
 		},
 	];
 	export const title = "mod list";
+	export const description = "Outputs the moderation list at the specified URL";
 </script>
 
 <script lang="ts">
@@ -24,6 +26,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="emerald"
 	showHandleNames={false}
 	{inputs}

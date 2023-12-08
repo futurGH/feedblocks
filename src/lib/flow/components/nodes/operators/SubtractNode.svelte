@@ -5,11 +5,13 @@
 			connectorType: ConnectorType.Data,
 			name: "a",
 			type: "number",
+			description: "The first number to subtract",
 		},
 		{
 			connectorType: ConnectorType.Data,
 			name: "b",
 			type: "number",
+			description: "The second number to subtract",
 		},
 	];
 	export const outputs = [
@@ -20,6 +22,7 @@
 		},
 	];
 	export const title = "subtract";
+	export const description = "Subtracts two numbers";
 </script>
 
 <script lang="ts">
@@ -30,6 +33,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="rose"
 	{inputs}
 	{outputs}

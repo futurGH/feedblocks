@@ -5,11 +5,13 @@
 			connectorType: ConnectorType.Data,
 			name: "a",
 			type: "number",
+			description: "The number to divide",
 		},
 		{
 			connectorType: ConnectorType.Data,
 			name: "b",
 			type: "number",
+			description: "The number to divide by",
 		},
 	];
 	export const outputs = [
@@ -17,9 +19,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "number",
+			description: "The result of the division",
 		},
 	];
 	export const title = "divide";
+	export const description = "Divides two numbers";
 </script>
 
 <script lang="ts">
@@ -30,6 +34,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="rose"
 	{inputs}
 	{outputs}

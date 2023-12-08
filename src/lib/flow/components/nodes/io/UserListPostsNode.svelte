@@ -6,9 +6,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "posts",
+			description: "Posts from all users on the provided list",
 		},
 	];
 	export const title = "user list posts";
+	export const description = "Outputs posts from all users on a provided list";
 </script>
 
 <script lang="ts">
@@ -23,6 +25,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="slate"
 	showHandleNames={false}
 	{inputs}

@@ -5,11 +5,13 @@
 			connectorType: ConnectorType.Data,
 			name: "a",
 			type: "posts",
+			description: "The first list of posts to combine",
 		},
 		{
 			connectorType: ConnectorType.Data,
 			name: "b",
 			type: "posts",
+			description: "The second list of posts to combine",
 		},
 	];
 	export const outputs = [
@@ -17,9 +19,12 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "posts",
+			description: "The combined list of posts",
 		},
 	];
 	export const title = "combine";
+	export const description =
+		"Combines two lists of posts into one list based on the selected sort method.";
 </script>
 
 <script lang="ts">
@@ -67,6 +72,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="fuchsia"
 	{inputs}
 	{outputs}

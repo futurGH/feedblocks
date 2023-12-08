@@ -5,6 +5,7 @@
 			connectorType: ConnectorType.Condition,
 			name: "input",
 			type: "boolean",
+			description: "The condition to invert",
 		},
 	];
 	export const outputs = [
@@ -12,9 +13,11 @@
 			connectorType: ConnectorType.Condition,
 			name: "output",
 			type: "boolean",
+			description: "The inverted condition",
 		},
 	];
 	export const title = "not";
+	export const description = "Inverts the input condition";
 </script>
 
 <script lang="ts">
@@ -25,6 +28,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="rose"
 	{inputs}
 	{outputs}

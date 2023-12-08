@@ -6,9 +6,11 @@
 			connectorType: ConnectorType.List,
 			name: "output",
 			type: "list",
+			description: "The user list at the provided URL",
 		},
 	];
 	export const title = "user list";
+	export const description = "Outputs the user list at the provided URL";
 </script>
 
 <script lang="ts">
@@ -23,6 +25,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="emerald"
 	showHandleNames={false}
 	{inputs}

@@ -6,9 +6,11 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "number",
+			description: "The number entered",
 		},
 	];
 	export const title = "number";
+	export const description = "Outputs a provided number";
 </script>
 
 <script lang="ts">
@@ -23,6 +25,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="sky"
 	showHandleNames={false}
 	{inputs}

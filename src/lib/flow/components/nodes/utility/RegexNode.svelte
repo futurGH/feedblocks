@@ -5,6 +5,7 @@
 			connectorType: ConnectorType.Data,
 			name: "text",
 			type: "string",
+			description: "The text to match",
 		},
 	];
 	export const outputs = [
@@ -12,9 +13,11 @@
 			connectorType: ConnectorType.Condition,
 			name: "result",
 			type: "boolean",
+			description: "Whether the text matches the regex",
 		},
 	];
 	export const title = "match regex";
+	export const description = "Outputs whether the provided text matches the specified regex";
 </script>
 
 <script lang="ts">
@@ -33,6 +36,7 @@
 
 <BaseNode
 	{title}
+	{description}
 	color="indigo"
 	{inputs}
 	{outputs}
