@@ -12,6 +12,7 @@
 	} from "@xyflow/svelte";
 	import type { InputOutput } from "$lib/flow/types";
 	import { type Writable, writable } from "svelte/store";
+	import NodeActions from "$lib/flow/components/NodeActions.svelte";
 
 	type $$Props = NodeProps & {
 		title: string;
@@ -23,9 +24,8 @@
 	};
 
 	export let id: $$Props["id"];
-
+	export let selected: $$Props["selected"] = undefined;
 	export let title: string;
-	export let description: string;
 	export let color: string;
 	export let handleType: $$Props["handleType"];
 	export let handle: $$Props["handle"];
@@ -78,6 +78,9 @@
 		inFlow ? "w-52" : "w-full"
 	)}
 >
+	{#if selected}
+		<NodeActions {...$$props} />
+	{/if}
 	<span class="font-semibold text-zinc-900/75 text-title dark:text-zinc-50/75">{title}</span>
 	<WrappedHandle
 		id={handleId}

@@ -12,20 +12,11 @@
 	import "@xyflow/svelte/dist/style.css";
 	import Sidebar from "$lib/flow/components/Sidebar.svelte";
 	import { writable } from "svelte/store";
-	import { nodeCategories } from "$lib/flow/components/nodes";
+	import { allNodes } from "$lib/flow/components/nodes";
 	import { type ComponentType, onMount } from "svelte";
 	import { createId } from "@paralleldrive/cuid2";
 
 	// This is ugly but it's a one-time thing so hopefully not too bad?
-	const allNodes = Object.values(nodeCategories).reduce<
-		Partial<(typeof nodeCategories)[keyof typeof nodeCategories]["nodes"]>
-	>(
-		(acc, category) => ({
-			...acc,
-			...category.nodes,
-		}),
-		{}
-	);
 	const nodeTypes = Object.entries(allNodes).reduce<Record<string, ComponentType>>(
 		(acc, [id, node]) => ({
 			...acc,

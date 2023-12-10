@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import type { Node, Edge } from "@xyflow/svelte";
+	import type { Node, Edge, NodeProps } from "@xyflow/svelte";
 	import { nodeCategories, nodeTypeToCategory } from "$lib/flow/components/nodes";
 	import WrappedHandle from "$lib/flow/components/WrappedHandle.svelte";
 
@@ -10,6 +10,16 @@
 	};
 
 	export type ConnectorType = (typeof ConnectorType)[keyof typeof ConnectorType];
+
+	export type CustomNodeProps = Partial<NodeProps> & {
+		title: string;
+		description: string;
+		color: string;
+		inputs: Array<InputOutput>;
+		outputs: Array<InputOutput>;
+		showHandleNames?: boolean;
+		inFlow?: boolean;
+	};
 
 	// Returns the colour an edge should be based on the colour of its source node
 	export function getEdgeColor(edge: Edge<unknown>, nodes: Array<Node>) {
@@ -36,22 +46,15 @@
 
 <script lang="ts">
 	import { cn } from "$lib/util";
-	import { Position, type NodeProps, useNodes, useEdges } from "@xyflow/svelte";
+	import { Position, useNodes, useEdges } from "@xyflow/svelte";
 	import { AlertCircleIcon } from "lucide-svelte";
 	import type { InputOutput } from "$lib/flow/types";
 	import { writable, type Writable } from "svelte/store";
 	import { makeHandleId } from "$lib/util";
 	import { createId } from "@paralleldrive/cuid2";
+	import NodeActions from "$lib/flow/components/NodeActions.svelte";
 
-	type $$Props = Partial<NodeProps> & {
-		title: string;
-		description: string;
-		color: string;
-		inputs: Array<InputOutput>;
-		outputs: Array<InputOutput>;
-		showHandleNames?: boolean;
-		inFlow?: boolean;
-	};
+	type $$Props = CustomNodeProps;
 	type $$Slots = {
 		default: never;
 		additional: {};
@@ -63,7 +66,6 @@
 	export let selected: $$Props["selected"] = undefined;
 
 	export let title: string;
-	export let description: string;
 	export let color: string;
 
 	export let showHandleNames = true;
@@ -121,13 +123,7 @@
 	)}
 >
 	{#if selected}
-		<div
-			class="absolute -top-2 left-1/2 flex h-6 -translate-x-1/2 -translate-y-full flex-row overflow-clip rounded-lg bg-zinc-100 ring-1 ring-zinc-300 dark:bg-zinc-900 dark:ring-zinc-700"
-		>
-			<button class="h-6 w-6">t</button>
-			<button class="h-6 w-6 border-x border-x-zinc-300 dark:border-x-zinc-700">t</button>
-			<button class="h-6 w-6">t</button>
-		</div>
+		<NodeActions {...$$props} />
 	{/if}
 	<div
 		class={cn(

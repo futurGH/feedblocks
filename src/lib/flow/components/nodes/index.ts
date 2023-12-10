@@ -65,3 +65,12 @@ export const nodeTypeToCategory = {
 		return acc;
 	}, {}),
 };
+
+export const allNodes = {
+	...inputOutputNodes,
+	...filterNodes,
+	...listNodes,
+	...utilityNodes,
+	...dataNodes,
+	...operatorNodes,
+};

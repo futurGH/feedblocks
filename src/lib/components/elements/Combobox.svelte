@@ -31,7 +31,7 @@
 	});
 
 	onMount(() => {
-		// This is necessary for the list to scale proportionately to the input when in svelte-flow
+		// This is necessary for the list to scale proportionately to the input when in a flow
 		if (inFlow) {
 			portal.set(comboboxDiv.closest<HTMLElement>(".svelte-flow__node"));
 		}
