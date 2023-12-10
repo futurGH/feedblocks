@@ -1,4 +1,4 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [
 		{
@@ -16,6 +16,7 @@
 			description: "Whether the post is of the specified type",
 		},
 	];
+	export const newData = () => ({ postType: writable<string>() });
 	export const title = "post is type";
 	export const description = "Outputs whether the provided post is of the specified type";
 </script>
@@ -27,6 +28,9 @@
 
 	type $$Props = NodeProps;
 
+	export let data = newData();
+	let { postType } = data;
+
 	const postTypes = [
 		{ label: "post", value: "post" },
 		{ label: "reply", value: "reply" },
@@ -35,6 +39,7 @@
 	];
 
 	let selected: Writable<ComboboxItem> = writable(postTypes[0]);
+	$: postType.set($selected.value);
 </script>
 
 <BaseNode

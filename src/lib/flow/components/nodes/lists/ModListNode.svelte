@@ -1,4 +1,4 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [];
 	export const outputs = [
@@ -9,6 +9,7 @@
 			description: "The mod list at the specified URL",
 		},
 	];
+	export const newData = () => ({ uri: writable<string>() });
 	export const title = "mod list";
 	export const description = "Outputs the moderation list at the specified URL";
 </script>
@@ -21,7 +22,9 @@
 	type $$Props = NodeProps;
 
 	export let id: $$Props["id"];
-	let uri = "";
+
+	export let data = newData();
+	let { uri } = data;
 </script>
 
 <BaseNode
@@ -44,6 +47,6 @@
 		label="Moderation list"
 		placeholder="list url"
 		hideLabel
-		bind:value={uri}
+		bind:value={$uri}
 	/>
 </BaseNode>

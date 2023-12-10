@@ -15,6 +15,7 @@
 
 	type $$Props = NodeProps & {
 		title: string;
+		description: string;
 		color: string;
 		handleType: "source" | "target";
 		handle: InputOutput;
@@ -24,6 +25,7 @@
 	export let id: $$Props["id"];
 
 	export let title: string;
+	export let description: string;
 	export let color: string;
 	export let handleType: $$Props["handleType"];
 	export let handle: $$Props["handle"];

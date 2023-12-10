@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script lang="ts" context="module">
 	import type { Node, Edge } from "@xyflow/svelte";
 	import { nodeCategories, nodeTypeToCategory } from "$lib/flow/components/nodes";
 	import WrappedHandle from "$lib/flow/components/WrappedHandle.svelte";
@@ -120,6 +120,15 @@
 		inFlow ? "w-52" : "w-full"
 	)}
 >
+	{#if selected}
+		<div
+			class="absolute -top-2 left-1/2 flex h-6 -translate-x-1/2 -translate-y-full flex-row overflow-clip rounded-lg bg-zinc-100 ring-1 ring-zinc-300 dark:bg-zinc-900 dark:ring-zinc-700"
+		>
+			<button class="h-6 w-6">t</button>
+			<button class="h-6 w-6 border-x border-x-zinc-300 dark:border-x-zinc-700">t</button>
+			<button class="h-6 w-6">t</button>
+		</div>
+	{/if}
 	<div
 		class={cn(
 			"flex w-full items-center justify-center rounded-t-2xl border-b border-b-zinc-300 py-2.5 dark:border-b-zinc-700",

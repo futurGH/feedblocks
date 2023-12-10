@@ -22,6 +22,7 @@
 			description: "Whether the two inputs meet the specified condition",
 		},
 	];
+	export const newData = () => ({ comparator: writable<string>() });
 	export const title = "compare";
 	export const description = "Output whether the two inputs meet the specified condition";
 </script>
@@ -34,9 +35,19 @@
 
 	type $$Props = NodeProps;
 
-	const options = ["a > b", "a < b", "a = b", "a ≥ b", "a ≤ b"];
+	export let data = newData();
+	let { comparator } = data;
 
-	let selected: Writable<SelectOption<string>> = writable({ value: options[0] });
+	const comparators = [
+		{ label: "a > b", value: ">" },
+		{ label: "a < b", value: "<" },
+		{ label: "a = b", value: "=" },
+		{ label: "a ≥ b", value: ">=" },
+		{ label: "a ≤ b", value: "<=" },
+	];
+
+	let selected: Writable<SelectOption<string>> = writable(comparators[0]);
+	$: comparator.set($selected.value);
 
 	// TODO: add error when input types don't match up
 	// waiting on https://github.com/xyflow/xyflow/pull/3688
@@ -56,7 +67,7 @@
 	<Select
 		slot="additional"
 		bind:selected
-		{options}
+		options={comparators}
 		label="Select a comparison method"
 		hideLabel
 		inFlow

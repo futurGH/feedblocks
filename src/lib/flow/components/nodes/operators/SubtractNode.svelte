@@ -19,6 +19,7 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "number",
+			description: "The result of subtracting two numbers.",
 		},
 	];
 	export const title = "subtract";

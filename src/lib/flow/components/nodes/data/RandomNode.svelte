@@ -1,5 +1,6 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	import { writable } from "svelte/store";
 	export const inputs = [];
 	export const outputs = [
 		{
@@ -9,6 +10,7 @@
 			description: "A random integer between the minimum and maximum values entered",
 		},
 	];
+	export const newData = () => ({ min: writable<number>(0), max: writable<number>(0) });
 	export const title = "random";
 	export const description =
 		"Outputs a random integer between the provided minimum and maximum values.";
@@ -22,8 +24,14 @@
 
 	export let id: $$Props["id"];
 
-	let min: string;
-	let max: string;
+	export let data = newData();
+	let { min, max } = data;
+
+	let minValue: string;
+	let maxValue: string;
+
+	$: min.set(Number(minValue || 0));
+	$: max.set(Number(maxValue || 0));
 </script>
 
 <BaseNode
@@ -45,7 +53,7 @@
 			type="number"
 			label="Minimum"
 			hideLabel
-			bind:value={min}
+			bind:value={minValue}
 		/>
 		<span class="font-medium text-zinc-900/75 text-label dark:text-zinc-100/80">to</span>
 		<Input
@@ -54,7 +62,7 @@
 			type="number"
 			label="Maximum"
 			hideLabel
-			bind:value={max}
+			bind:value={maxValue}
 		/>
 	</div>
 </BaseNode>

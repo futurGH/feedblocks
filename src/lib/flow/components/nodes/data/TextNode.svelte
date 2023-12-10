@@ -1,5 +1,6 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	import { writable } from "svelte/store";
 	export const inputs = [];
 	export const outputs = [
 		{
@@ -9,6 +10,7 @@
 			description: "The text value entered",
 		},
 	];
+	export const newData = () => ({ text: writable<string>() });
 	export const title = "text";
 	export const description = "Outputs a provided text value";
 </script>
@@ -20,7 +22,9 @@
 	type $$Props = NodeProps;
 
 	export let id: $$Props["id"];
-	let value: string;
+	export let data = newData();
+
+	let { text } = data;
 </script>
 
 <BaseNode
@@ -42,6 +46,6 @@
 		type="text"
 		label="Text"
 		hideLabel
-		bind:value
+		bind:value={$text}
 	/>
 </BaseNode>

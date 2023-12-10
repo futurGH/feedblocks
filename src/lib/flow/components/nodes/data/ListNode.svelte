@@ -1,5 +1,6 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	import { writable } from "svelte/store";
 	export const inputs = [];
 	export const outputs = [
 		{
@@ -9,6 +10,7 @@
 			description: "The list entered",
 		},
 	];
+	export const newData = () => ({ items: writable<Array<string>>(["", ""]) });
 	export const title = "list";
 	export const description = "Outputs a provided list of strings";
 </script>
@@ -22,7 +24,8 @@
 
 	export let id: $$Props["id"];
 
-	let items: Array<string> = ["", ""];
+	export let data = newData();
+	let { items } = data;
 </script>
 
 <BaseNode
@@ -38,16 +41,16 @@
 	on:connectend
 >
 	<div slot="additional" class="flex flex-col items-center gap-y-3">
-		{#each items as _, i (i)}
+		{#each $items as _, i (i)}
 			<Input
 				id={`${id}-${i}-input`}
 				class="w-36"
 				type="text"
 				label={`Text field ${i}`}
 				hideLabel
-				bind:value={items[i]}
+				bind:value={$items[i]}
 			/>
 		{/each}
 	</div>
-	<InputCountControls slot="controls" bind:inputs={items} newInput={() => ""} />
+	<InputCountControls slot="controls" min={2} max={10} bind:inputs={items} newInput={() => ""} />
 </BaseNode>

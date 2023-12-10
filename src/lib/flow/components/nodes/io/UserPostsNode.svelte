@@ -1,5 +1,6 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	import { writable } from "svelte/store";
 	export const inputs = [];
 	export const outputs = [
 		{
@@ -9,6 +10,7 @@
 			description: "All posts from the provided user",
 		},
 	];
+	export const newData = () => ({ handle: writable<string>() });
 	export const title = "user posts";
 	export const description = "Outputs all posts from a provided user";
 </script>
@@ -20,7 +22,9 @@
 	type $$Props = NodeProps;
 
 	export let id: $$Props["id"];
-	let uri: string;
+
+	export let data = newData();
+	let { handle } = data;
 </script>
 
 <BaseNode
@@ -43,7 +47,7 @@
 		label="User handle"
 		placeholder="user.bsky.social"
 		hideLabel
-		bind:value={uri}
+		bind:value={$handle}
 	>
 		<span slot="before">@</span>
 	</Input>

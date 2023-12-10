@@ -1,4 +1,4 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [
 		{
@@ -16,6 +16,7 @@
 			description: "The sorted posts",
 		},
 	];
+	export const newData = () => ({ sortMethod: writable<string>() });
 	export const title = "sort";
 	export const description = "Sorts a list of posts based on the selected sort method";
 </script>
@@ -58,7 +59,11 @@
 		},
 	];
 
+	export let data = newData();
+	let { sortMethod } = data;
+
 	let selected: Writable<ComboboxItem> = writable(sortOptions[0]);
+	$: sortMethod.set($selected.value);
 </script>
 
 <BaseNode

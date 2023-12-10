@@ -5,7 +5,7 @@
 	import { onMount } from "svelte";
 	import { cn } from "$lib/util";
 
-	export let options: Array<string>;
+	export let options: Array<SelectOption<string>>;
 	export let selected: Writable<SelectOption<string>>;
 
 	export let placeholder: string = "Select an option";
@@ -58,7 +58,7 @@
 		{...$trigger}
 		use:trigger
 	>
-		{$selected.value || placeholder}
+		{$selected.label || placeholder}
 		{#if $open}
 			<ChevronUp class="h-4 w-4" />
 		{:else}
@@ -78,9 +78,9 @@
 				<li
 					class="relative flex cursor-pointer scroll-my-2 items-center justify-center rounded-lg p-2 data-[highlighted]:bg-zinc-900/10 data-[selected]:underline data-[highlighted]:dark:bg-zinc-100/10"
 					use:optionEl
-					{...$optionEl({ value: option })}
+					{...$optionEl(option)}
 				>
-					{option}
+					{option.label}
 				</li>
 			{/each}
 		</ul>

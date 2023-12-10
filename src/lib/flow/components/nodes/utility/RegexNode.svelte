@@ -1,4 +1,4 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [
 		{
@@ -16,6 +16,10 @@
 			description: "Whether the text matches the regex",
 		},
 	];
+	export const newData = () => ({
+		regex: writable<string>(),
+		caseSensitive: writable<boolean>(),
+	});
 	export const title = "match regex";
 	export const description = "Outputs whether the provided text matches the specified regex";
 </script>
@@ -30,8 +34,8 @@
 
 	export let id: $$Props["id"];
 
-	let text: string;
-	let caseSensitive: Writable<boolean> = writable(false);
+	export let data = newData();
+	let { regex, caseSensitive } = data;
 </script>
 
 <BaseNode
@@ -52,7 +56,7 @@
 			type="text"
 			label="Text"
 			hideLabel
-			bind:value={text}
+			bind:value={$regex}
 		>
 			<span slot="before">/</span>
 			<span slot="after">/</span>

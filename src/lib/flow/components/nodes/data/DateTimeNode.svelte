@@ -1,5 +1,6 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	import { writable } from "svelte/store";
 	export const inputs = [];
 	export const outputs = [
 		{
@@ -9,6 +10,7 @@
 			description: "The date and time entered",
 		},
 	];
+	export const newData = () => ({ dateTime: writable<ZonedDateTime>() });
 	export const title = "date and time";
 	export const description = "Outputs a provided date and time";
 </script>
@@ -21,7 +23,8 @@
 
 	type $$Props = NodeProps;
 
-	let value: Writable<ZonedDateTime>;
+	export let data: ReturnType<typeof newData> = newData();
+	let { dateTime } = data;
 </script>
 
 <BaseNode
@@ -41,6 +44,6 @@
 		class="w-44 justify-center gap-x-0.5 overflow-x-clip px-2"
 		label="Date and time"
 		hideLabel
-		bind:value
+		bind:value={dateTime}
 	/>
 </BaseNode>

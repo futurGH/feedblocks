@@ -1,4 +1,4 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [
 		{
@@ -22,6 +22,7 @@
 			description: "The combined list of posts",
 		},
 	];
+	export const newData = () => ({ sortMethod: writable<string>() });
 	export const title = "combine";
 	export const description =
 		"Combines two lists of posts into one list based on the selected sort method.";
@@ -67,7 +68,11 @@
 		},
 	];
 
+	export let data = newData();
+	let { sortMethod } = data;
+
 	let selected: Writable<ComboboxItem> = writable(sortOptions[0]);
+	$: sortMethod.set($selected.value);
 </script>
 
 <BaseNode

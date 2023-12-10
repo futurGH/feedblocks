@@ -1,4 +1,4 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [];
 	export const outputs = [
@@ -9,6 +9,10 @@
 			description: "The period of time between the two dates entered",
 		},
 	];
+	export const newData = () => ({
+		quantity: writable<number>(0),
+		unit: writable<string>("seconds"),
+	});
 	export const title = "period";
 	export const description = "Outputs the period of time between two provided dates";
 </script>
@@ -24,10 +28,24 @@
 
 	export let id: $$Props["id"];
 
-	const units = ["seconds", "minutes", "hours", "days", "weeks", "months", "years"];
+	export let data = newData();
+	let { quantity, unit } = data;
 
-	let quantity: string;
-	let unit: Writable<SelectOption<string>> = writable({ value: units[0] });
+	const units = [
+		{ value: "seconds", label: "seconds" },
+		{ value: "minutes", label: "minutes" },
+		{ value: "hours", label: "hours" },
+		{ value: "days", label: "days" },
+		{ value: "weeks", label: "weeks" },
+		{ value: "months", label: "months" },
+		{ value: "years", label: "years" },
+	];
+
+	let quantityValue: string;
+	let unitValue: Writable<SelectOption<string>> = writable(units[0]);
+
+	$: quantity.set(Number(quantityValue || 0));
+	$: unit.set($unitValue.value);
 </script>
 
 <BaseNode
@@ -49,8 +67,8 @@
 			type="number"
 			label="Number"
 			hideLabel
-			bind:value={quantity}
+			bind:value={quantityValue}
 		/>
-		<Select options={units} label="Unit" selected={unit} width="w-24" hideLabel inFlow />
+		<Select options={units} label="Unit" selected={unitValue} width="w-24" hideLabel inFlow />
 	</div>
 </BaseNode>

@@ -1,4 +1,4 @@
-<script context="module">
+<script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [
 		{
@@ -16,6 +16,7 @@
 			description: "Whether the post has an embed of the specified type",
 		},
 	];
+	export const newData = () => ({ embedType: writable<string>() });
 	export const title = "embed is type";
 	export const description =
 		"Outputs whether the provided post has an embed of the specified type.";
@@ -28,6 +29,9 @@
 
 	type $$Props = NodeProps;
 
+	export let data = newData();
+	let { embedType } = data;
+
 	const embedTypes = [
 		{ label: "media", value: "media" },
 		{ label: "link", value: "link" },
@@ -36,6 +40,7 @@
 	];
 
 	let selected: Writable<ComboboxItem> = writable(embedTypes[0]);
+	$: embedType.set($selected.value);
 </script>
 
 <BaseNode

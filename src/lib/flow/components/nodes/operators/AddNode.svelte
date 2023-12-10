@@ -29,17 +29,18 @@
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
 	import InputCountControls from "$lib/flow/components/InputCountControls.svelte";
+	import { writable } from "svelte/store";
 
 	type $$Props = NodeProps;
 
-	let _inputs = inputs;
+	let _inputs = writable(inputs);
 </script>
 
 <BaseNode
 	{title}
 	{description}
 	color="rose"
-	inputs={_inputs}
+	inputs={$_inputs}
 	{outputs}
 	{...$$props}
 	on:connect

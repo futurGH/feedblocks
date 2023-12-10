@@ -7,6 +7,7 @@
 		type Edge,
 		ConnectionLineType,
 		useSvelteFlow,
+		Panel,
 	} from "@xyflow/svelte";
 	import "@xyflow/svelte/dist/style.css";
 	import Sidebar from "$lib/flow/components/Sidebar.svelte";
@@ -16,19 +17,22 @@
 	import { createId } from "@paralleldrive/cuid2";
 
 	// This is ugly but it's a one-time thing so hopefully not too bad?
-	const nodeTypes = Object.values(nodeCategories).reduce((acc, category) => {
-		Object.assign(
-			acc,
-			Object.entries(category.nodes).reduce<Record<string, ComponentType>>(
-				(acc, [id, node]) => {
-					acc[id] = node.default;
-					return acc;
-				},
-				{}
-			)
-		);
-		return acc;
-	}, {});
+	const allNodes = Object.values(nodeCategories).reduce<
+		Partial<(typeof nodeCategories)[keyof typeof nodeCategories]["nodes"]>
+	>(
+		(acc, category) => ({
+			...acc,
+			...category.nodes,
+		}),
+		{}
+	);
+	const nodeTypes = Object.entries(allNodes).reduce<Record<string, ComponentType>>(
+		(acc, [id, node]) => ({
+			...acc,
+			[id]: node.default,
+		}),
+		{}
+	);
 
 	const nodes = writable<Array<Node>>([
 		{
@@ -69,7 +73,7 @@
 			type,
 			position,
 			origin: [0.5, 0],
-			data: {},
+			data: (type in allNodes && allNodes[type as never]?.newData?.()) || {},
 		});
 		$nodes = $nodes;
 	};
@@ -92,5 +96,13 @@
 		on:drop={onDrop}
 	>
 		<Background variant={BackgroundVariant.Dots} />
+		<Panel position="top-right">
+			<button
+				class="rounded-md bg-white px-4 py-2 text-black shadow-md"
+				on:click={() => console.log($nodes, $edges)}
+			>
+				Log nodes
+			</button>
+		</Panel>
 	</SvelteFlow>
 </main>
