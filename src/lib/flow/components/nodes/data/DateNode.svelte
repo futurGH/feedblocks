@@ -11,7 +11,7 @@
 		},
 	];
 	export const newData = () => ({ date: writable<CalendarDate>() });
-	const title = "date";
+	export const title = "date";
 	export const description = "Outputs a provided date";
 </script>
 

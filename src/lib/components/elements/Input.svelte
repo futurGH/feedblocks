@@ -6,6 +6,7 @@
 	type $$Props = Omit<HTMLInputAttributes, "value"> & {
 		value: string;
 		label: string;
+		width?: string;
 		hideLabel?: boolean;
 	};
 	type $$Slots = {
@@ -17,6 +18,7 @@
 	let className: string | null | undefined = null;
 	export let value: string;
 	export let label: string;
+	export let width = "";
 	export let hideLabel = false;
 	export { className as class };
 
@@ -37,7 +39,7 @@
 	>
 		{label}
 	</label>
-	<div class="relative h-8 min-w-fit max-w-full rounded-lg">
+	<div class={cn("relative min-w-fit max-w-full rounded-lg", width)}>
 		{#if $$slots.before}
 			<div
 				class="pointer-events-none absolute inset-y-0 left-0 flex items-center py-1.5 pl-3"
@@ -47,7 +49,8 @@
 		{/if}
 		<input
 			class={cn(
-				"block rounded-lg border-0 bg-zinc-100 px-3 py-1.5 ring-1 ring-zinc-300 placeholder:text-zinc-900/50 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:bg-zinc-900 dark:ring-zinc-700 placeholder:dark:text-zinc-100/60 focus:dark:ring-zinc-600",
+				"block h-8 rounded-lg border-0 bg-zinc-100 px-3 py-1.5 ring-1 ring-zinc-300 placeholder:text-zinc-900/50 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:bg-zinc-900 dark:ring-zinc-700 placeholder:dark:text-zinc-100/60 focus:dark:ring-zinc-600",
+				width,
 				className
 			)}
 			bind:value

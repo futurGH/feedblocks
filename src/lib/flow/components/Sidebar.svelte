@@ -2,8 +2,40 @@
 	import { ChevronLeftIcon } from "lucide-svelte";
 	import { cn } from "$lib/util";
 	import { nodeCategories } from "$lib/flow/components/nodes";
+	import Input from "$lib/components/elements/Input.svelte";
+	import type { ComponentType } from "svelte";
+
+	type NodeImport = {
+		id: string;
+		name: string;
+		default: ComponentType;
+	};
 
 	let open = true;
+	let filter = "";
+
+	$: filteredNodeCategories = Object.entries(nodeCategories).reduce<
+		Array<{ name: string; id: string; nodes: Array<NodeImport> }>
+	>((acc, [id, category]) => {
+		const nodes = Object.entries(category.nodes).reduce<Array<NodeImport>>(
+			(acc, [id, node]) => {
+				if (id === "feedOutput") return acc;
+				if (node.title.toLowerCase().includes(filter.toLowerCase())) {
+					acc.push({ id, ...node });
+				}
+				return acc;
+			},
+			[]
+		);
+		if (!nodes.length) return acc;
+
+		acc.push({
+			name: category.name,
+			id,
+			nodes,
+		});
+		return acc;
+	}, []);
 
 	const onDragStart = (event: DragEvent, nodeType: string) => {
 		if (!event.dataTransfer) return;
@@ -40,34 +72,40 @@
 	</button>
 	<div class="flex h-full flex-col overflow-y-scroll px-6 py-4">
 		<span class="self-center font-medium text-zinc-900/75 text-lg">drag a node</span>
-		{#each Object.entries(nodeCategories) as [id, category] (id)}
+		<Input
+			class="-mb-2 mt-6 bg-zinc-50"
+			width="w-full"
+			bind:value={filter}
+			label="search"
+			placeholder="search"
+			hideLabel
+		/>
+		{#each filteredNodeCategories as category (category.id)}
 			<div class="mt-12 flex flex-col">
-				<span class="text-md mb-6 font-medium lowercase text-zinc-900/75"
+				<span class="text-md mb-4 font-medium lowercase text-zinc-900/75"
 					>{category.name}</span
 				>
 				<ul class="flex flex-col gap-8">
-					{#each Object.entries(category.nodes) as [id, node] (id)}
-						{#if id !== "feedOutput"}
-							<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-							<!-- https://docs.dndkit.com/api-documentation/draggable/usedraggable -->
-							<li
-								class="w-full cursor-grab"
-								tabindex="0"
-								aria-roledescription={`draggable ${node.name} node`}
-								draggable="true"
-								on:dragstart={(e) => onDragStart(e, id)}
-								on:dragend={onDragEnd}
+					{#each category.nodes as node (node.id)}
+						<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+						<!-- see https://docs.dndkit.com/api-documentation/draggable/usedraggable -->
+						<li
+							class="w-full cursor-grab"
+							tabindex="0"
+							aria-roledescription={`draggable ${node.name} node`}
+							draggable="true"
+							on:dragstart={(e) => onDragStart(e, node.id)}
+							on:dragend={onDragEnd}
+						>
+							<div
+								class="pointer-events-none w-full"
+								tabindex="-1"
+								role="presentation"
+								inert
 							>
-								<div
-									class="pointer-events-none w-full"
-									tabindex="-1"
-									role="presentation"
-									inert
-								>
-									<svelte:component this={node.default} {id} inFlow={false} />
-								</div>
-							</li>
-						{/if}
+								<svelte:component this={node.default} id={node.id} inFlow={false} />
+							</div>
+						</li>
 					{/each}
 				</ul>
 			</div>
