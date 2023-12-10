@@ -19,7 +19,8 @@
 	const nodes = useNodes();
 	const { deleteElements } = useSvelteFlow();
 
-	const deletable = $nodes.find((node) => node.id === id)?.deletable ?? true;
+	export let deletable: boolean = $nodes.find((node) => node.id === id)?.deletable ?? true;
+	export let copyable: boolean = true;
 
 	let descriptionOpen = false;
 </script>
@@ -52,6 +53,7 @@
 	</div>
 {/if}
 <div
+	data-node-actions
 	class="absolute -top-2 left-1/2 flex h-8 -translate-x-1/2 -translate-y-full flex-row divide-x divide-zinc-300 overflow-clip rounded-lg bg-zinc-100 text-zinc-900/75 ring-1 ring-zinc-300 dark:divide-zinc-700 dark:bg-zinc-900 dark:text-zinc-700 dark:ring-zinc-700"
 >
 	<TooltipButton
@@ -69,10 +71,14 @@
 	</TooltipButton>
 	<TooltipButton
 		buttonProps={{
-			class: "flex h-8 w-8 items-center justify-center hover:bg-zinc-300 hover:dark:bg-zinc-700",
+			class: "flex h-8 w-8 items-center justify-center disabled:text-zinc-900/30 disabled:dark:text-zinc-100/40 hover:enabled:bg-zinc-300 hover:enabled:dark:bg-zinc-700",
+			disabled: !copyable,
 		}}
 		tooltipProps={{
 			class: "px-3 py-1.5 text-xs font-medium text-zinc-900/75 dark:text-zinc-100/60",
+		}}
+		createProps={{
+			onOpenChange: ({ next }) => (copyable ? next : false),
 		}}
 		on:click={() => {
 			const newNode = duplicateNode($$props);

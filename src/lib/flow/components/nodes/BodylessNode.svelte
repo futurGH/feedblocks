@@ -20,6 +20,8 @@
 		color: string;
 		handleType: "source" | "target";
 		handle: InputOutput;
+		copyable: boolean;
+		deletable: boolean;
 		inFlow?: boolean;
 	};
 
@@ -29,7 +31,6 @@
 	export let color: string;
 	export let handleType: $$Props["handleType"];
 	export let handle: $$Props["handle"];
-
 	export let inFlow = true;
 
 	let nodes: Writable<Array<Node>>;
@@ -77,6 +78,8 @@
 		$$props.selected && "ring-2 ring-zinc-400 dark:ring-zinc-600",
 		inFlow ? "w-52" : "w-full"
 	)}
+	role="presentation"
+	on:click
 >
 	{#if selected}
 		<NodeActions {...$$props} />

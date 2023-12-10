@@ -18,6 +18,8 @@
 		inputs: Array<InputOutput>;
 		outputs: Array<InputOutput>;
 		showHandleNames?: boolean;
+		copyable?: boolean;
+		deletable?: boolean;
 		inFlow?: boolean;
 	};
 
@@ -121,6 +123,8 @@
 		$$props.selected && "ring-2 ring-zinc-400 dark:ring-zinc-600",
 		inFlow ? "w-52" : "w-full"
 	)}
+	role="presentation"
+	on:click
 >
 	{#if selected}
 		<NodeActions {...$$props} />
