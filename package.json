@@ -10,6 +10,7 @@
 	"devDependencies": {
 		"@internationalized/date": "^3.5.0",
 		"@melt-ui/svelte": "^0.63.1",
+		"@svelte-put/shortcut": "^3.0.0",
 		"@sveltejs/adapter-cloudflare": "^2.3.3",
 		"@types/eslint": "^8.44.3",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",

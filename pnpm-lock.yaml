@@ -37,6 +37,9 @@ devDependencies:
   '@melt-ui/svelte':
     specifier: ^0.63.1
     version: 0.63.1(svelte@4.2.7)
+  '@svelte-put/shortcut':
+    specifier: ^3.0.0
+    version: 3.0.0
   '@sveltejs/adapter-cloudflare':
     specifier: ^2.3.3
     version: 2.3.3(@sveltejs/kit@1.27.6)
@@ -737,7 +740,6 @@ packages:
 
   /@svelte-put/shortcut@3.0.0:
     resolution: {integrity: sha512-nZg3pwpTi9wUsvQPlqOzEsxZcF2jmY5j+VBq/20IUjjd2OpM92XqZAga0PCCjE6OuEobOt58UMnC2QZgOvk0tQ==}
-    dev: false
 
   /@sveltejs/adapter-cloudflare@2.3.3(@sveltejs/kit@1.27.6):
     resolution: {integrity: sha512-bbcm6kq4dEluFtFJZed3KSRG4f5GUElYkVfOmnPruTqZ29nTElPJTomAu5QCp7GLkwA26O3h1Dk7+d9yLTQEXg==}

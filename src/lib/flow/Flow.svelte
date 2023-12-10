@@ -15,6 +15,7 @@
 	import { allNodes } from "$lib/flow/components/nodes";
 	import { type ComponentType, onMount } from "svelte";
 	import { createId } from "@paralleldrive/cuid2";
+	import ClipboardProvider from "$lib/flow/ClipboardProvider.svelte";
 
 	// This is ugly but it's a one-time thing so hopefully not too bad?
 	const nodeTypes = Object.entries(allNodes).reduce<Record<string, ComponentType>>(
@@ -35,6 +36,7 @@
 		{
 			id: "output",
 			type: "feedOutput",
+			selectable: false,
 			deletable: false,
 			position: { x: 200, y: 0 },
 			data: {},
@@ -73,27 +75,29 @@
 </script>
 
 <main class="h-screen w-screen">
-	<Sidebar />
-	<SvelteFlow
-		{nodeTypes}
-		{nodes}
-		{edges}
-		fitView
-		connectionLineType={ConnectionLineType.SmoothStep}
-		defaultEdgeOptions={{ type: "smoothstep" }}
-		deleteKey="Delete"
-		proOptions={{ hideAttribution: true }}
-		on:dragover={onDragOver}
-		on:drop={onDrop}
-	>
-		<Background variant={BackgroundVariant.Dots} />
-		<Panel position="top-right">
-			<button
-				class="rounded-md bg-white px-4 py-2 text-black shadow-md"
-				on:click={() => console.log($nodes, $edges)}
-			>
-				Log nodes
-			</button>
-		</Panel>
-	</SvelteFlow>
+	<ClipboardProvider>
+		<Sidebar />
+		<SvelteFlow
+			{nodeTypes}
+			{nodes}
+			{edges}
+			fitView
+			connectionLineType={ConnectionLineType.SmoothStep}
+			defaultEdgeOptions={{ type: "smoothstep" }}
+			deleteKey="Delete"
+			proOptions={{ hideAttribution: true }}
+			on:dragover={onDragOver}
+			on:drop={onDrop}
+		>
+			<Background variant={BackgroundVariant.Dots} />
+			<Panel position="top-right">
+				<button
+					class="rounded-md bg-white px-4 py-2 text-black shadow-md"
+					on:click={() => console.log($nodes, $edges)}
+				>
+					Log nodes
+				</button>
+			</Panel>
+		</SvelteFlow>
+	</ClipboardProvider>
 </main>
