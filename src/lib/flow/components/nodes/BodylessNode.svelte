@@ -72,8 +72,9 @@
 
 <div
 	class={cn(
-		"relative flex flex-col items-center justify-center rounded-full border border-zinc-300 bg-zinc-100 py-2.5 dark:border-zinc-700 dark:bg-zinc-900",
+		"relative flex flex-col items-center justify-center rounded-full bg-zinc-100 py-2.5 ring-1 ring-zinc-300 dark:bg-zinc-900 dark:ring-zinc-700",
 		`bg-header-${color}`,
+		$$props.selected && "ring-2 ring-zinc-400 dark:ring-zinc-600",
 		inFlow ? "w-52" : "w-full"
 	)}
 >
