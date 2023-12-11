@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	import type { InputOutput } from "$lib/flow/types";
 	export const inputs = [
 		{
 			connectorType: ConnectorType.Condition,
@@ -22,6 +23,7 @@
 			description: "Whether any input condition is true",
 		},
 	];
+	export const newData = () => ({ inputs: writable<Array<InputOutput>>(inputs) });
 	export const title = "or";
 	export const description = "Outputs whether any input condition is true";
 </script>
@@ -33,7 +35,8 @@
 
 	type $$Props = NodeProps;
 
-	let _inputs = writable(inputs);
+	export let data = newData();
+	let { inputs: _inputs } = data;
 </script>
 
 <BaseNode

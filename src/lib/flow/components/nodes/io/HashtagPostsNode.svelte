@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	import { writable } from "svelte/store";
+
 	export const inputs = [];
 	export const outputs = [
 		{
@@ -18,7 +20,6 @@
 	import type { NodeProps } from "@xyflow/svelte";
 	import Input from "$lib/components/elements/Input.svelte";
 	import InputCountControls from "$lib/flow/components/InputCountControls.svelte";
-	import { writable, type Writable } from "svelte/store";
 
 	type $$Props = NodeProps;
 

@@ -1,5 +1,8 @@
 <script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
+	import type { InputOutput } from "$lib/flow/types";
+	import { writable } from "svelte/store";
+
 	export const inputs = [
 		{
 			connectorType: ConnectorType.Condition,
@@ -22,6 +25,7 @@
 			description: "Whether all input conditions are true",
 		},
 	];
+	export const newData = () => ({ inputs: writable<Array<InputOutput>>(inputs) });
 	export const title = "and";
 	export const description = "Outputs whether all input conditions are true";
 </script>
@@ -29,11 +33,11 @@
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
 	import InputCountControls from "$lib/flow/components/InputCountControls.svelte";
-	import { writable } from "svelte/store";
 
 	type $$Props = NodeProps;
 
-	let _inputs = writable(inputs);
+	export let data = newData();
+	let { inputs: _inputs } = data;
 </script>
 
 <BaseNode
