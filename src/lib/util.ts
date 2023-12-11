@@ -17,14 +17,14 @@ export const makeHandleId = ({
 }) => `${nodeTitle}-${nodeId}-${handleName}`.replace(/[^a-zA-Z0-9-]/g, `_`);
 
 export function duplicateNode(props: NodeProps) {
-	if (!props.type || !props.xPos || !props.yPos) return;
+	if (!props.type || !props.positionAbsolute) return;
 	if (!(props.type in allNodes)) return;
 	return {
 		id: createId(),
 		type: props.type,
 		position: {
-			x: props.xPos,
-			y: props.yPos + 100,
+			x: props.positionAbsolute.x,
+			y: props.positionAbsolute.y + 100,
 		},
 		// @ts-expect-error - optional chaining handles undefined node
 		// eslint-disable-next-line
