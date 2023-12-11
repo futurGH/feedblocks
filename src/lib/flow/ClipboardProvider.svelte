@@ -47,7 +47,6 @@
 	};
 
 	function copy() {
-		console.log("copy");
 		const selectedNodes = $nodes.filter((node) => node.selected);
 		const selectedEdges = getConnectedEdges(selectedNodes, $edges).filter((edge) => {
 			const sourceOutsideSelection = selectedNodes.every((n) => n.id !== edge.source);
