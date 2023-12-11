@@ -23,7 +23,7 @@
 </script>
 
 <div
-	class="nodrag flex flex-col gap-1 font-medium text-zinc-900/75 text-label dark:text-zinc-100/80"
+	class="nodrag nokey flex flex-col gap-1 font-medium text-zinc-900/75 text-label dark:text-zinc-100/80"
 >
 	<span {...$labelEl} use:labelEl class={hideLabel ? "sr-only" : ""}>
 		{label}

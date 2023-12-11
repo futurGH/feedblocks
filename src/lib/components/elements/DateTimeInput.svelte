@@ -23,7 +23,7 @@
 </script>
 
 <div
-	class="nodrag flex flex-col gap-1 font-medium text-zinc-900/75 text-label dark:text-zinc-100/80"
+	class="nodrag nokey flex flex-col gap-1 font-medium text-zinc-900/75 text-label dark:text-zinc-100/80"
 >
 	<span {...$labelEl} use:labelEl class={hideLabel ? "sr-only" : ""}>
 		{label}
@@ -31,8 +31,8 @@
 	<div
 		{...$field}
 		use:field
-		aria-disabled={$field["aria-disabled"] === "true" ? "true" : "false"}
-		aria-readonly={$field["aria-readonly"] === "true" ? "true" : "false"}
+		aria-disabled={$field["aria-disabled"] === "true"}
+		aria-readonly={$field["aria-readonly"] === "true"}
 		class={cn(
 			"flex h-8 w-44 min-w-fit max-w-full items-center rounded-lg bg-zinc-100 px-3 py-1.5 ring-1 ring-zinc-300 dark:bg-zinc-900 dark:ring-zinc-700",
 			className

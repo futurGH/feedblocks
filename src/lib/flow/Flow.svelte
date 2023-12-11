@@ -84,7 +84,6 @@
 			fitView
 			connectionLineType={ConnectionLineType.SmoothStep}
 			defaultEdgeOptions={{ type: "smoothstep" }}
-			deleteKey="Delete"
 			proOptions={{ hideAttribution: true }}
 			on:dragover={onDragOver}
 			on:drop={onDrop}
