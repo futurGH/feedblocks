@@ -6,6 +6,17 @@ import { createId } from "@paralleldrive/cuid2";
 
 export const cn = (...args: Array<ClassValue>) => twMerge(clsx(...args));
 
+export function debounce<T extends (...args: never[]) => unknown>(
+	fn: T,
+	wait: number
+): (...args: Parameters<T>) => void {
+	let timeout: ReturnType<typeof setTimeout> | undefined;
+	return (...args) => {
+		if (timeout) clearTimeout(timeout);
+		timeout = setTimeout(() => fn(...args), wait);
+	};
+}
+
 export const makeHandleId = ({
 	title: nodeTitle,
 	id: nodeId,

@@ -16,6 +16,7 @@
 	import { type ComponentType, onMount } from "svelte";
 	import { createId } from "@paralleldrive/cuid2";
 	import ClipboardProvider from "$lib/flow/ClipboardProvider.svelte";
+	import HistoryProvider from "$lib/flow/HistoryProvider.svelte";
 
 	// This is ugly but it's a one-time thing so hopefully not too bad?
 	const nodeTypes = Object.entries(allNodes).reduce<Record<string, ComponentType>>(
@@ -75,28 +76,30 @@
 </script>
 
 <main class="h-screen w-screen">
-	<ClipboardProvider>
-		<Sidebar />
-		<SvelteFlow
-			{nodeTypes}
-			{nodes}
-			{edges}
-			fitView
-			connectionLineType={ConnectionLineType.SmoothStep}
-			defaultEdgeOptions={{ type: "smoothstep" }}
-			proOptions={{ hideAttribution: true }}
-			on:dragover={onDragOver}
-			on:drop={onDrop}
-		>
-			<Background variant={BackgroundVariant.Dots} />
-			<Panel position="top-right">
-				<button
-					class="rounded-md bg-white px-4 py-2 text-black shadow-md"
-					on:click={() => console.log($nodes, $edges)}
-				>
-					Log nodes
-				</button>
-			</Panel>
-		</SvelteFlow>
-	</ClipboardProvider>
+	<HistoryProvider>
+		<ClipboardProvider>
+			<Sidebar />
+			<SvelteFlow
+				{nodeTypes}
+				{nodes}
+				{edges}
+				fitView
+				connectionLineType={ConnectionLineType.SmoothStep}
+				defaultEdgeOptions={{ type: "smoothstep" }}
+				proOptions={{ hideAttribution: true }}
+				on:dragover={onDragOver}
+				on:drop={onDrop}
+			>
+				<Background variant={BackgroundVariant.Dots} />
+				<Panel position="top-right">
+					<button
+						class="rounded-md bg-white px-4 py-2 text-black shadow-md"
+						on:click={() => console.log($nodes, $edges)}
+					>
+						Log nodes
+					</button>
+				</Panel>
+			</SvelteFlow>
+		</ClipboardProvider>
+	</HistoryProvider>
 </main>
