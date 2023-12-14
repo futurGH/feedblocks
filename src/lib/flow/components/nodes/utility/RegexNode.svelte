@@ -38,17 +38,7 @@
 	let { regex, caseSensitive } = data;
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="indigo"
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="indigo" {inputs} {outputs} {...$$props}>
 	<svelte:fragment slot="additional">
 		<Input
 			id={`${id}-input`}

@@ -10,7 +10,7 @@
 :root {
 	--node-header-background-color: theme("colors.zinc.100");
 	--node-header-background-gradient: linear-gradient(var(--node-header-background-color), var(--node-header-background-color));
-	--handle-background-color: theme("colors.zinc.700");
+	--xy-handle-background-color: theme("colors.zinc.700");
 
 	--header-bg-slate: theme("colors.slate.400")33;
 	--header-bg-amber: theme("colors.amber.400")33;
@@ -30,7 +30,7 @@
 }
 :root.dark {
 	--node-header-background-color: theme("colors.zinc.800");
-	--handle-background-color: theme("colors.zinc.500");
+	--xy-handle-background-color: theme("colors.zinc.500");
 
 	--header-bg-slate: theme("colors.slate.400")4d;
 	--header-bg-amber: theme("colors.amber.400")4d;
@@ -50,16 +50,16 @@
 }
 
 .svelte-flow {
-	--background-color: theme("colors.slate.50");
-	--edge-stroke: theme("colors.zinc.700");
-	--edge-stroke-width: 0.1875rem;
-	--connectionline-stroke: theme("colors.zinc.600");
-	--connectionline-stroke-width: 0.125rem;
+	--xy-background-color: theme("colors.slate.50");
+	--xy-edge-stroke: theme("colors.zinc.700");
+	--xy-edge-stroke-width: 0.1875rem;
+	--xy-connectionline-stroke: theme("colors.zinc.600");
+	--xy-connectionline-stroke-width: 0.125rem;
 }
 .dark .svelte-flow {
-	--background-color: theme("colors.zinc.900");
-	--edge-stroke: theme("colors.zinc.500");
-	--connectionline-stroke: theme("colors.zinc.500");
+	--xy-background-color: theme("colors.zinc.900");
+	--xy-edge-stroke: theme("colors.zinc.500");
+	--xy-connectionline-stroke: theme("colors.zinc.500");
 }
 
 .svelte-flow .svelte-flow__background-pattern.dots {

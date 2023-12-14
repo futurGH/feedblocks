@@ -15,7 +15,7 @@
 </script>
 
 {#if inFlow}
-	<Handle {...$$props} on:connect on:connectstart on:connectend />
+	<Handle {...$$props} />
 {:else}
 	<div
 		{...$$props}

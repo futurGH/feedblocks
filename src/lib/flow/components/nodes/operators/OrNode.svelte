@@ -39,16 +39,6 @@
 	let { inputs: _inputs } = data;
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="rose"
-	inputs={$_inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="rose" inputs={$_inputs} {outputs} {...$$props}>
 	<InputCountControls slot="controls" bind:inputs={_inputs} />
 </BaseNode>

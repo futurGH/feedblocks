@@ -21,6 +21,7 @@
 		copyable?: boolean;
 		deletable?: boolean;
 		inFlow?: boolean;
+		hasBody?: boolean;
 	};
 
 	// Returns the colour an edge should be based on the colour of its source node
@@ -48,7 +49,7 @@
 
 <script lang="ts">
 	import { cn } from "$lib/util";
-	import { Position, useNodes, useEdges } from "@xyflow/svelte";
+	import { Position, useNodes, useEdges, type Connection } from "@xyflow/svelte";
 	import { AlertCircleIcon } from "lucide-svelte";
 	import type { InputOutput } from "$lib/flow/types";
 	import { writable, type Writable } from "svelte/store";
@@ -72,6 +73,7 @@
 
 	export let showHandleNames = true;
 	export let inFlow = true;
+	export let hasBody = true;
 
 	export let inputs: Array<InputOutput> = [];
 	export let outputs: Array<InputOutput> = [];
@@ -89,32 +91,37 @@
 		inFlow = false;
 	}
 
-	let isHandleConnectable: Record<string, boolean> = {};
-	let edgeTargetHandleToEdgeColor: Record<string, string> = {};
+	const edgeTargetHandleToEdgeColor: Record<string, string> = {};
 
-	edges.subscribe((edges) => {
-		// Start with the assumption that all handles can be connected to
-		isHandleConnectable = inputs.reduce<Record<string, boolean>>((acc, { name }) => {
-			acc[makeHandleId({ title, id, name })] = true;
-			return acc;
-		}, {});
-		edgeTargetHandleToEdgeColor = {};
+	// When an edge is created whose source is this node, its colour should be this node's colour
+	function onSourceConnect(connections: Array<Connection>) {
+		// The only way more than one connection can be created at a time is if nodes are copied/pasted
+		if (connections.length !== 1) return;
+		const connection = connections[0];
+		if (connection.source !== id || !connection.sourceHandle) return;
+		const edgeIndex = $edges.findIndex(
+			(edge) =>
+				edge.source === connection.source && edge.sourceHandle === connection.sourceHandle
+		);
+		if (edgeIndex === -1) return;
+		$edges[edgeIndex].style = `--xy-edge-stroke: var(--edge-${color});`;
+		$edges = $edges;
+	}
 
-		for (const edge of edges) {
-			if (edge.target !== id || !edge.targetHandle) continue;
-
-			// If an edge exists whose target is a handle owned by this node, it should no longer be connectable
-			if (isHandleConnectable[edge.targetHandle]) {
-				isHandleConnectable[edge.targetHandle] = false;
-			}
-
-			const edgeColor = getEdgeColor(edge, $nodes);
-			if (edgeColor) {
-				edgeTargetHandleToEdgeColor[edge.targetHandle] = edgeColor;
-				edge.style = `--edge-stroke: var(--edge-${edgeColor});`;
-			}
-		}
-	});
+	// When an edge is created whose target is this node, the target handle should take on the source node's colour
+	function onTargetConnect(connections: Array<Connection>) {
+		// The only way more than one connection can be created at a time is if nodes are copied/pasted
+		if (connections.length !== 1) return;
+		const connection = connections[0];
+		if (connection.target !== id || !connection.targetHandle) return;
+		const edge = $edges.find(
+			(edge) =>
+				edge.target === connection.target && edge.targetHandle === connection.targetHandle
+		);
+		if (!edge) return;
+		const edgeColor = getEdgeColor(edge, $nodes);
+		if (edgeColor) edgeTargetHandleToEdgeColor[connection.targetHandle] = edgeColor;
+	}
 </script>
 
 <div
@@ -131,87 +138,110 @@
 	{/if}
 	<div
 		class={cn(
-			"flex w-full items-center justify-center rounded-t-2xl border-b border-b-zinc-300 py-2.5 dark:border-b-zinc-700",
-			`bg-header-${color}`
+			"flex w-full items-center justify-center py-2.5",
+			`bg-header-${color}`,
+			hasBody
+				? "rounded-t-2xl border-b border-b-zinc-300 dark:border-b-zinc-700"
+				: "rounded-2xl"
 		)}
 	>
 		<span class="font-semibold text-zinc-900/75 text-title dark:text-zinc-50/75">{title}</span>
 	</div>
-	<div
-		class={cn("flex flex-col", hasConnectors ? "py-2" : "py-3", !showHandleNames && "relative")}
-	>
-		{#if hasConnectors && showHandleNames}
-			<div class="flex justify-between self-stretch py-2">
-				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
-					{#each inputs as { name, connectorType }}
-						{@const handleId = makeHandleId({ title, id, name })}
-						<div class="relative pl-4">
-							<WrappedHandle
-								id={handleId}
-								type="target"
-								class={cn(
-									"mt-0.5 !border-none",
-									getHandleShape(connectorType),
-									edgeTargetHandleToEdgeColor[handleId] &&
-										`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
-								)}
-								position={Position.Left}
-								isConnectable={isHandleConnectable[handleId]}
-								on:connect
-								on:connectstart
-								on:connectend
-							/>
-							<span
-								class="font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
-								>{name}
-							</span>
-						</div>
-					{/each}
+	{#if hasBody}
+		<div
+			class={cn(
+				"flex flex-col",
+				hasConnectors ? "py-2" : "py-3",
+				!showHandleNames && "relative"
+			)}
+		>
+			{#if hasConnectors && showHandleNames}
+				<div class="flex justify-between self-stretch py-2">
+					<div class="flex min-w-fit max-w-full flex-col gap-y-4">
+						{#each inputs as { name, connectorType }}
+							<!-- targets -->
+							{@const handleId = makeHandleId({ title, id, name })}
+							<div class="relative pl-4">
+								<WrappedHandle
+									id={handleId}
+									type="target"
+									class={cn(
+										"mt-0.5 !border-none",
+										getHandleShape(connectorType),
+										edgeTargetHandleToEdgeColor[handleId] &&
+											`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
+									)}
+									position={Position.Left}
+									onconnect={onTargetConnect}
+								/>
+								<span
+									class="font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
+									>{name}
+								</span>
+							</div>
+						{/each}
+					</div>
+					<div class="flex min-w-fit max-w-full flex-col gap-y-4">
+						{#each outputs as { name, connectorType }}
+							<!-- sources -->
+							{@const handleId = makeHandleId({ title, id, name })}
+							<div class="relative pr-4">
+								<span
+									class="flex-grow text-right font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
+									>{name}</span
+								>
+								<WrappedHandle
+									id={handleId}
+									type="source"
+									class={cn(
+										`!bg-${color}-edge mt-0.5 !border-none`,
+										getHandleShape(connectorType)
+									)}
+									position={Position.Right}
+									onconnect={onSourceConnect}
+								/>
+							</div>
+						{/each}
+					</div>
 				</div>
-				<div class="flex min-w-fit max-w-full flex-col gap-y-4">
-					{#each outputs as { name, connectorType }}
-						{@const handleId = makeHandleId({ title, id, name })}
-						<div class="relative pr-4">
-							<span
-								class="flex-grow text-right font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
-								>{name}</span
-							>
-							<WrappedHandle
-								id={handleId}
-								type="source"
-								class={cn(
-									`!bg-${color}-edge mt-0.5 !border-none`,
-									getHandleShape(connectorType)
-								)}
-								position={Position.Right}
-								on:connect
-								on:connectstart
-								on:connectend
-							/>
-						</div>
-					{/each}
+			{:else if hasConnectors && !showHandleNames}
+				{#each outputs as { name, connectorType }}
+					<!-- sources -->
+					{@const handleId = makeHandleId({ title, id, name })}
+					<WrappedHandle
+						id={handleId}
+						type="source"
+						class={cn(`!bg-${color}-edge !border-none`, getHandleShape(connectorType))}
+						position={Position.Right}
+						onconnect={onSourceConnect}
+					/>
+				{/each}
+			{/if}
+			{#if $$slots.additional}
+				<div class="flex flex-col items-center justify-center gap-4 py-2">
+					<slot name="additional" />
 				</div>
-			</div>
-		{:else if hasConnectors && !showHandleNames}
-			{#each outputs as { name, connectorType }}
-				{@const handleId = makeHandleId({ title, id, name })}
-				<WrappedHandle
-					id={handleId}
-					type="source"
-					class={cn(`!bg-${color}-edge !border-none`, getHandleShape(connectorType))}
-					position={Position.Right}
-					on:connect
-					on:connectstart
-					on:connectend
-				/>
-			{/each}
-		{/if}
-		{#if $$slots.additional}
-			<div class="flex flex-col items-center justify-center gap-4 py-2">
-				<slot name="additional" />
-			</div>
-		{/if}
-	</div>
+			{/if}
+		</div>
+	{:else}
+		{@const handle = inputs[0] || outputs[0]}
+		{@const handleType = inputs[0] ? "target" : "source"}
+		{@const handlePosition = inputs[0] ? Position.Left : Position.Right}
+		{@const handleId = makeHandleId({ title, id, name: handle.name })}
+		<WrappedHandle
+			id={handleId}
+			type={handleType}
+			class={cn(
+				"mt-0.5 !border-none",
+				getHandleShape(handle.connectorType),
+				handleType === "source" && `!bg-${color}-edge`,
+				handleType === "target" &&
+					edgeTargetHandleToEdgeColor[handleId] &&
+					`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
+			)}
+			position={handlePosition}
+		/>
+	{/if}
 	{#if $$slots.error}
 		<div class="flex flex-row items-center justify-center gap-x-1 pb-2 text-red-800">
 			<AlertCircleIcon class="h-2.5 w-2.5" />

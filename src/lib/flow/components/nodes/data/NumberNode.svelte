@@ -30,18 +30,7 @@
 	$: number.set(Number(value || 0));
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="sky"
-	showHandleNames={false}
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="sky" showHandleNames={false} {inputs} {outputs} {...$$props}>
 	<Input
 		slot="additional"
 		id={`${id}-input`}

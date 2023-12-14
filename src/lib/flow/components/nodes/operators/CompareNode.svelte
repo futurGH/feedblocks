@@ -53,17 +53,7 @@
 	// waiting on https://github.com/xyflow/xyflow/pull/3688
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="rose"
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="rose" {inputs} {outputs} {...$$props}>
 	<Select
 		slot="additional"
 		bind:selected

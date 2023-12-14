@@ -28,18 +28,7 @@
 	let { items } = data;
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="sky"
-	showHandleNames={false}
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="sky" showHandleNames={false} {inputs} {outputs} {...$$props}>
 	<div slot="additional" class="flex flex-col items-center gap-y-3">
 		{#each $items as _, i (i)}
 			<Input

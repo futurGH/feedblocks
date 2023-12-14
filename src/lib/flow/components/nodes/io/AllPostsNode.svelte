@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import BodylessNode from "$lib/flow/components/nodes/BodylessNode.svelte";
 	import { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	export const inputs = [];
 	export const outputs = [
@@ -16,18 +15,9 @@
 
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
+	import BaseNode from "$lib/flow/components/nodes/BaseNode.svelte";
 
 	type $$Props = NodeProps;
 </script>
 
-<BodylessNode
-	{title}
-	{description}
-	color="slate"
-	handleType="source"
-	handle={outputs[0]}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
-/>
+<BaseNode {title} {description} color="slate" {inputs} {outputs} hasBody={false} {...$$props} />

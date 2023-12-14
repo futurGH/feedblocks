@@ -48,18 +48,7 @@
 	$: unit.set($unitValue.value);
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="sky"
-	showHandleNames={false}
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="sky" showHandleNames={false} {inputs} {outputs} {...$$props}>
 	<div slot="additional" class="flex flex-row gap-x-2">
 		<Input
 			id={`${id}-number`}

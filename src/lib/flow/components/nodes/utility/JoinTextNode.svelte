@@ -32,14 +32,4 @@
 	type $$Props = NodeProps;
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="indigo"
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
-/>
+<BaseNode {title} {description} color="indigo" {inputs} {outputs} {...$$props} />

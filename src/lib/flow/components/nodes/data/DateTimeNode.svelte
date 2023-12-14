@@ -27,18 +27,7 @@
 	let { dateTime } = data;
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="sky"
-	showHandleNames={false}
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="sky" showHandleNames={false} {inputs} {outputs} {...$$props}>
 	<DateTimeInput
 		slot="additional"
 		class="w-44 justify-center gap-x-0.5 overflow-x-clip px-2"

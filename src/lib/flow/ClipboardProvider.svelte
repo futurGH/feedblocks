@@ -87,12 +87,29 @@
 			},
 		}));
 
-		const newEdges = $edgeBuffer.map((edge) => ({
-			...edge,
-			id: createId(),
-			source: nodeIdMapping[edge.source],
-			target: nodeIdMapping[edge.target],
-		}));
+		const newEdges = $edgeBuffer.map((edge) => {
+			const [sourceNodeType, sourceNodeId, sourceHandleId] =
+				edge.sourceHandle?.split("-") ?? [];
+			const [targetNodeType, targetNodeId, targetHandleId] =
+				edge.targetHandle?.split("-") ?? [];
+			const newSourceNodeId = nodeIdMapping[sourceNodeId];
+			const newTargetNodeId = nodeIdMapping[targetNodeId];
+			const sourceHandle = sourceHandleId
+				? `${sourceNodeType}-${newSourceNodeId}-${sourceHandleId}`
+				: null;
+			const targetHandle = targetHandleId
+				? `${targetNodeType}-${newTargetNodeId}-${targetHandleId}`
+				: null;
+			return {
+				...edge,
+				id: createId(),
+				source: newSourceNodeId,
+				target: newTargetNodeId,
+				sourceHandle,
+				targetHandle,
+			};
+		});
+		console.log(newEdges);
 
 		nodes.update((nodes) => [
 			...nodes.map((node) => ({ ...node, selected: false })),

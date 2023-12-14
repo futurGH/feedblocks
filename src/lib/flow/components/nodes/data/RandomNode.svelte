@@ -34,18 +34,7 @@
 	$: max.set(Number(maxValue || 0));
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="sky"
-	showHandleNames={false}
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="sky" showHandleNames={false} {inputs} {outputs} {...$$props}>
 	<div slot="additional" class="flex flex-row items-center gap-x-3">
 		<Input
 			id={`${id}-min`}

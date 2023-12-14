@@ -66,17 +66,7 @@
 	$: sortMethod.set($selected.value);
 </script>
 
-<BaseNode
-	{title}
-	{description}
-	color="fuchsia"
-	{inputs}
-	{outputs}
-	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
->
+<BaseNode {title} {description} color="fuchsia" {inputs} {outputs} {...$$props}>
 	<Combobox
 		slot="additional"
 		bind:selected

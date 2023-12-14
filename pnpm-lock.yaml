@@ -12,8 +12,8 @@ dependencies:
     specifier: ^1.27.6
     version: 1.27.6(svelte@4.2.7)(vite@5.0.0)
   '@xyflow/svelte':
-    specifier: ^0.0.28
-    version: 0.0.28(svelte@4.2.7)
+    specifier: ^0.0.29
+    version: 0.0.29(svelte@4.2.7)
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -743,6 +743,11 @@ packages:
 
   /@svelte-put/shortcut@3.0.0:
     resolution: {integrity: sha512-nZg3pwpTi9wUsvQPlqOzEsxZcF2jmY5j+VBq/20IUjjd2OpM92XqZAga0PCCjE6OuEobOt58UMnC2QZgOvk0tQ==}
+    dev: true
+
+  /@svelte-put/shortcut@3.1.0:
+    resolution: {integrity: sha512-EWMEDkZ0+O3yMhb9yrqe5UYisV9CNRKX6Pl/JW3x62t74CiN+3COu1L9NzZUG0omagc2Z3J14PZNYxs77IC9NA==}
+    dev: false
 
   /@sveltejs/adapter-cloudflare@2.3.3(@sveltejs/kit@1.27.6):
     resolution: {integrity: sha512-bbcm6kq4dEluFtFJZed3KSRG4f5GUElYkVfOmnPruTqZ29nTElPJTomAu5QCp7GLkwA26O3h1Dk7+d9yLTQEXg==}
@@ -1160,19 +1165,19 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@xyflow/svelte@0.0.28(svelte@4.2.7):
-    resolution: {integrity: sha512-8mCyjorsHFPnfFvTNhoCs/Cvyyk2v8IZnFqw2zJMBMdL87OD/hMxDY/zbImL6M43paojQzJFb//Rl0aWoJaBxA==}
+  /@xyflow/svelte@0.0.29(svelte@4.2.7):
+    resolution: {integrity: sha512-YiSaIvA2POD96iRuDJhSGX4IwY3IvYdhe9ptSbR8hZzTN+C50/ugzDQt1exAnoP7oLaiGsjzeJV2ro6jq192OA==}
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0
     dependencies:
-      '@svelte-put/shortcut': 3.0.0
-      '@xyflow/system': 0.0.11
+      '@svelte-put/shortcut': 3.1.0
+      '@xyflow/system': 0.0.12
       classcat: 5.0.4
       svelte: 4.2.7
     dev: false
 
-  /@xyflow/system@0.0.11:
-    resolution: {integrity: sha512-QllVEdguVfRHonf1kuiHTt4nwDuISF7AXY47h2mjSG+99GrRxoUBHfhEiKq9vdJMuZJOCUCtrgLuxDezgw/R3w==}
+  /@xyflow/system@0.0.12:
+    resolution: {integrity: sha512-y+ejl5azmfIbbbduoknLX7K1PKeJdSAqqSJFAwq/AFkokskWymi+AHB7QJBaSSqRARGCXZgPsKcGaJ5QcEqQrw==}
     dependencies:
       '@types/d3': 7.4.3
       '@types/d3-drag': 3.0.7

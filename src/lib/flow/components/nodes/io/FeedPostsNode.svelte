@@ -36,9 +36,6 @@
 	{inputs}
 	{outputs}
 	{...$$props}
-	on:connect
-	on:connectstart
-	on:connectend
 >
 	<Input
 		slot="additional"
