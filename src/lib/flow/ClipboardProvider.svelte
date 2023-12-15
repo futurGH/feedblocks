@@ -12,6 +12,7 @@
 	import { onMount } from "svelte";
 	import { createId } from "@paralleldrive/cuid2";
 	import { shortcut } from "@svelte-put/shortcut";
+	import { makeHandleId, parseHandleId } from "$lib/util";
 
 	const mousePosition = writable({ x: 0, y: 0 });
 	const nodeBuffer = writable<Array<Node>>([]);
@@ -88,18 +89,34 @@
 		}));
 
 		const newEdges = $edgeBuffer.map((edge) => {
-			const [sourceNodeType, sourceNodeId, sourceHandleId] =
-				edge.sourceHandle?.split("-") ?? [];
-			const [targetNodeType, targetNodeId, targetHandleId] =
-				edge.targetHandle?.split("-") ?? [];
+			const {
+				type: sourceNodeType,
+				id: sourceNodeId = "",
+				name: sourceHandleName,
+			} = parseHandleId(edge.sourceHandle) ?? {};
+			const {
+				type: targetNodeType,
+				id: targetNodeId = "",
+				name: targetHandleName,
+			} = parseHandleId(edge.targetHandle) ?? {};
 			const newSourceNodeId = nodeIdMapping[sourceNodeId];
 			const newTargetNodeId = nodeIdMapping[targetNodeId];
-			const sourceHandle = sourceHandleId
-				? `${sourceNodeType}-${newSourceNodeId}-${sourceHandleId}`
-				: null;
-			const targetHandle = targetHandleId
-				? `${targetNodeType}-${newTargetNodeId}-${targetHandleId}`
-				: null;
+			const sourceHandle =
+				sourceHandleName && sourceNodeType && newSourceNodeId
+					? makeHandleId({
+							title: sourceNodeType,
+							id: newSourceNodeId,
+							name: sourceHandleName,
+					  })
+					: null;
+			const targetHandle =
+				targetHandleName && targetNodeType && newTargetNodeId
+					? makeHandleId({
+							title: targetNodeType,
+							id: newTargetNodeId,
+							name: targetHandleName,
+					  })
+					: null;
 			return {
 				...edge,
 				id: createId(),
@@ -109,7 +126,6 @@
 				targetHandle,
 			};
 		});
-		console.log(newEdges);
 
 		nodes.update((nodes) => [
 			...nodes.map((node) => ({ ...node, selected: false })),

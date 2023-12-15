@@ -27,6 +27,12 @@ export const makeHandleId = ({
 	name: string;
 }) => `${nodeTitle}-${nodeId}-${handleName}`.replace(/[^a-zA-Z0-9-]/g, `_`);
 
+export const parseHandleId = (handleId?: string | null) => {
+	if (!handleId) return null;
+	const [type, id, name] = handleId.split("-");
+	return name ? { type, id, name } : null;
+};
+
 export function duplicateNode(props: NodeProps) {
 	if (!props.type || !props.positionAbsolute) return;
 	if (!(props.type in allNodes)) return;
