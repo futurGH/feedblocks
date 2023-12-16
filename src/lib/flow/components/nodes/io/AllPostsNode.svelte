@@ -4,7 +4,7 @@
 	export const outputs = [
 		{
 			connectorType: ConnectorType.Data,
-			name: "all posts",
+			name: "output",
 			type: "posts",
 			description: "All posts from the Bluesky network",
 		},

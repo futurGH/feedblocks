@@ -3,7 +3,7 @@
 	export const inputs = [
 		{
 			connectorType: ConnectorType.Data,
-			name: "output",
+			name: "input",
 			type: "posts",
 			description: "The posts that this feed should output",
 		},

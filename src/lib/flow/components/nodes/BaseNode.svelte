@@ -243,11 +243,12 @@
 					`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
 			)}
 			position={handlePosition}
+			onconnect={onSourceConnect}
 		/>
 	{/if}
 	{#if error}
 		<div
-			class="text-detail flex flex-row items-center justify-center gap-x-1 pb-2 font-medium text-red-800 dark:text-red-300"
+			class="text-detail flex flex-row items-center justify-center gap-x-1 px-1.5 pb-2 font-medium text-red-800 dark:text-red-300"
 		>
 			<AlertCircleIcon class="h-2.5 w-2.5" />
 			<slot name="error" />
