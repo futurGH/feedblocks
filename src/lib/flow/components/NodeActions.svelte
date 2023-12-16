@@ -41,7 +41,7 @@
 					>
 				</div>
 			{/each}
-			{#if inputs.length}<span class="font-semibold text-label">outputs</span>{/if}
+			{#if outputs.length}<span class="font-semibold text-label">outputs</span>{/if}
 			{#each outputs as { name, description: outputDescription }}
 				<div class="flex flex-col gap-1">
 					<span class="text-label"
