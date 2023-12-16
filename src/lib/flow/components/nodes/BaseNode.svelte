@@ -22,6 +22,8 @@
 		deletable?: boolean;
 		inFlow?: boolean;
 		hasBody?: boolean;
+		// Needed because we can't conditionally render slots
+		error?: boolean;
 	};
 
 	// Returns the colour an edge should be based on the colour of its source node
@@ -74,6 +76,7 @@
 	export let showHandleNames = true;
 	export let inFlow = true;
 	export let hasBody = true;
+	export let error = false;
 
 	export let inputs: Array<InputOutput> = [];
 	export let outputs: Array<InputOutput> = [];
@@ -242,8 +245,10 @@
 			position={handlePosition}
 		/>
 	{/if}
-	{#if $$slots.error}
-		<div class="flex flex-row items-center justify-center gap-x-1 pb-2 text-red-800">
+	{#if error}
+		<div
+			class="text-detail flex flex-row items-center justify-center gap-x-1 pb-2 font-medium text-red-800 dark:text-red-300"
+		>
 			<AlertCircleIcon class="h-2.5 w-2.5" />
 			<slot name="error" />
 		</div>

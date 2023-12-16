@@ -48,3 +48,6 @@ export function duplicateNode(props: NodeProps) {
 		data: allNodes[props.type as never]?.newData?.() || {},
 	};
 }
+
+export const typesMatch = (a: string | undefined | null, b: string | undefined | null) =>
+	a === b || a === "any" || b === "any";

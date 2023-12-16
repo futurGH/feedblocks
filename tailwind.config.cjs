@@ -23,8 +23,9 @@ module.exports = {
 		},
 		extend: {
 			fontSize: {
-				"label": "0.8125rem",
-				"title": "0.875rem",
+				"detail": "0.625rem", // 10px
+				"label": "0.8125rem", // 13px
+				"title": "0.875rem", // 14px
 			},
 			fontWeight: {
 				"semibold": 550,
