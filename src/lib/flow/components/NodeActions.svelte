@@ -34,7 +34,7 @@
 			<span class="font-semibold text-title">{title}</span>
 			<span class="text-label">{description}</span>
 			{#if inputs.length}<span class="font-semibold text-label">inputs</span>{/if}
-			{#each inputs as { name, description: inputDescription }}
+			{#each inputs.filter((input) => input.description) as { name, description: inputDescription } (name)}
 				<div class="flex flex-col gap-1">
 					<span class="text-label"
 						><span class="font-semibold">{name}: </span>{inputDescription}</span
@@ -42,7 +42,7 @@
 				</div>
 			{/each}
 			{#if outputs.length}<span class="font-semibold text-label">outputs</span>{/if}
-			{#each outputs as { name, description: outputDescription }}
+			{#each outputs.filter((output) => output.description) as { name, description: outputDescription } (name)}
 				<div class="flex flex-col gap-1">
 					<span class="text-label"
 						><span class="font-semibold">{name}: </span>{outputDescription}</span

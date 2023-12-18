@@ -3,6 +3,8 @@
 	import { nodeCategories, nodeTypeToCategory } from "$lib/flow/components/nodes";
 	import WrappedHandle from "$lib/flow/components/WrappedHandle.svelte";
 
+	export const REST_HANDLE_NAME = "...rest";
+
 	export const ConnectorType = {
 		Data: "data",
 		List: "list",
@@ -162,26 +164,28 @@
 				<div class="flex justify-between self-stretch py-2">
 					<div class="flex min-w-fit max-w-full flex-col gap-y-4">
 						{#each inputs as { name, connectorType }}
-							<!-- targets -->
-							{@const handleId = makeHandleId({ title, id, name })}
-							<div class="relative pl-4">
-								<WrappedHandle
-									id={handleId}
-									type="target"
-									class={cn(
-										"mt-0.5 !border-none",
-										getHandleShape(connectorType),
-										edgeTargetHandleToEdgeColor[handleId] &&
-											`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
-									)}
-									position={Position.Left}
-									onconnect={onTargetConnect}
-								/>
-								<span
-									class="font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
-									>{name}
-								</span>
-							</div>
+							{#if name !== REST_HANDLE_NAME}
+								<!-- targets -->
+								{@const handleId = makeHandleId({ title, id, name })}
+								<div class="relative pl-4">
+									<WrappedHandle
+										id={handleId}
+										type="target"
+										class={cn(
+											"mt-0.5 !border-none",
+											getHandleShape(connectorType),
+											edgeTargetHandleToEdgeColor[handleId] &&
+												`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
+										)}
+										position={Position.Left}
+										onconnect={onTargetConnect}
+									/>
+									<span
+										class="font-medium text-zinc-900/75 font-sans text-label capsize dark:text-zinc-100/80"
+										>{name}
+									</span>
+								</div>
+							{/if}
 						{/each}
 					</div>
 					<div class="flex min-w-fit max-w-full flex-col gap-y-4">
@@ -248,7 +252,7 @@
 	{/if}
 	{#if error}
 		<div
-			class="text-detail flex flex-row items-center justify-center gap-x-1 px-1.5 pb-2 font-medium text-red-800 dark:text-red-300"
+			class="flex flex-row items-center justify-center gap-x-1 px-1.5 pb-2 font-medium text-red-800 text-detail dark:text-red-300"
 		>
 			<AlertCircleIcon class="h-2.5 w-2.5" />
 			<slot name="error" />
