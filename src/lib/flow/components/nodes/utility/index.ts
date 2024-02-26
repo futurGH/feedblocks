@@ -4,6 +4,7 @@ import * as JoinTextNode from "./JoinTextNode.svelte";
 import * as ListIncludesNode from "./ListIncludesNode.svelte";
 import * as ExistsNode from "./ExistsNode.svelte";
 import * as PostIsTypeNode from "./PostIsTypeNode.svelte";
+import * as PostHasLabelNode from "./PostHasLabelNode.svelte";
 import * as EmbedIsTypeNode from "./EmbedIsTypeNode.svelte";
 
 export const utilityNodes = {
@@ -13,6 +14,7 @@ export const utilityNodes = {
 	listIncludes: ListIncludesNode,
 	exists: ExistsNode,
 	postIsType: PostIsTypeNode,
+	postHasLabel: PostHasLabelNode,
 	embedIsType: EmbedIsTypeNode,
 };
 export {
@@ -22,5 +24,6 @@ export {
 	ListIncludesNode,
 	ExistsNode,
 	PostIsTypeNode,
+	PostHasLabelNode,
 	EmbedIsTypeNode,
 };
