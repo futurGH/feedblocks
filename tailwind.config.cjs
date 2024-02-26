@@ -11,6 +11,7 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			sans: ["'General Sans'", ...defaultTheme.fontFamily.sans],
+			mono: ["'JetBrains Mono'", ...defaultTheme.fontFamily.mono],
 		},
 		fontMetrics: {
 			sans: {
