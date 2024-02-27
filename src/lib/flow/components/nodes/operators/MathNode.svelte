@@ -28,7 +28,7 @@
 			connectorType: ConnectorType.Data,
 			name: "output",
 			type: "number",
-			description: "The result of the specified equation",
+			description: "The number result of the equation",
 		},
 	];
 	export const newData = () => ({
@@ -36,7 +36,7 @@
 		equation: writable<string>(),
 	});
 	export const title = "math";
-	export const description = "Outputs the result of the specified equation with the given inputs";
+	export const description = `Outputs the result of the specified equation<br>Supported operations: +, -, *, /, ^, ()`;
 </script>
 
 <script lang="ts">
@@ -56,7 +56,7 @@
 	<Input
 		slot="additional"
 		id={`${id}-input`}
-		class="font-mono w-44"
+		class="w-44 font-mono"
 		type="text"
 		label="Equation"
 		placeholder="math equation"

@@ -32,7 +32,7 @@
 	>
 		<div class="flex flex-col gap-1 p-2 leading-relaxed">
 			<span class="font-semibold text-title">{title}</span>
-			<span class="text-label">{description}</span>
+			<span class="text-label">{@html description}</span>
 			{#if inputs.length}<span class="font-semibold text-label">inputs</span>{/if}
 			{#each inputs.filter((input) => input.description) as { name, description: inputDescription } (name)}
 				<div class="flex flex-col gap-1">

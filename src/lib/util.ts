@@ -45,7 +45,7 @@ export function duplicateNode(props: NodeProps) {
 		},
 		// @ts-expect-error - optional chaining handles undefined node
 		// eslint-disable-next-line
-		data: allNodes[props.type as never]?.newData?.() || {},
+		data: allNodes[props.type as keyof typeof allNodes]?.newData?.() || {},
 	};
 }
 

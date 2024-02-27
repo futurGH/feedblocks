@@ -23,7 +23,7 @@
 		},
 	];
 	export const title = "text contains";
-	export const description = "Outputs whether the provided text contains the query";
+	export const description = "Outputs whether the text contains the query.";
 </script>
 
 <script lang="ts">

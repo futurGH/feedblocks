@@ -18,7 +18,7 @@
 	];
 	export const newData = () => ({ postType: writable<string>() });
 	export const title = "post is type";
-	export const description = "Outputs whether the provided post is of the specified type";
+	export const description = "Outputs whether a post is of the specified type";
 </script>
 
 <script lang="ts">

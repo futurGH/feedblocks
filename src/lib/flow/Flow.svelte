@@ -69,7 +69,7 @@
 			type,
 			position,
 			origin: [0.5, 0],
-			data: (type in allNodes && allNodes[type as never]?.newData?.()) || {},
+			data: (type in allNodes && allNodes[type as keyof typeof allNodes]?.newData?.()) || {},
 		});
 		$nodes = $nodes;
 	}

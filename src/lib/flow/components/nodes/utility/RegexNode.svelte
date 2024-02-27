@@ -42,14 +42,14 @@
 	<svelte:fragment slot="additional">
 		<Input
 			id={`${id}-input`}
-			class="w-36 px-6"
+			class="w-36 px-6 font-mono [font-variant-ligatures:none]"
 			type="text"
 			label="Text"
 			hideLabel
 			bind:value={$regex}
 		>
-			<span slot="before">/</span>
-			<span slot="after">/</span>
+			<span slot="before" class="font-mono">/</span>
+			<span slot="after" class="font-mono">/</span>
 		</Input>
 		<Switch
 			id={`${id}-switch`}

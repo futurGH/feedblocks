@@ -24,7 +24,7 @@
 	];
 	export const newData = () => ({ comparator: writable<string>() });
 	export const title = "compare";
-	export const description = "Output whether the two inputs meet the specified condition";
+	export const description = "Outputs whether the two inputs meet the specified condition";
 </script>
 
 <script lang="ts">
@@ -85,7 +85,7 @@
 		const sourceNode = $nodes.find((node) => node.id === connection.source);
 		if (!sourceNode?.type) return;
 		const { name: sourceHandleName } = parseHandleId(connection.sourceHandle) ?? {};
-		const sourceType = allNodes[sourceNode.type as never]?.outputs.find(
+		const sourceType = allNodes[sourceNode.type as keyof typeof allNodes]?.outputs.find(
 			(output: InputOutput) => output.name === sourceHandleName
 		)?.type;
 		if (!sourceType) return;

@@ -18,7 +18,7 @@
 	];
 	export const newData = () => ({ label: writable<string>() });
 	export const title = "post has label";
-	export const description = "Outputs whether the provided post has the specified label";
+	export const description = "Outputs whether a post has the specified label";
 </script>
 
 <script lang="ts">
