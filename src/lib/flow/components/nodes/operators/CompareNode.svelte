@@ -76,8 +76,8 @@
 		conns.forEach((conn) => handleConnectionChange("b", conn));
 	});
 
-	let inputTypesInequal: boolean;
-	$: inputTypesInequal = !!aType && !!bType && !typesMatch(aType, bType);
+	let inputTypesUnequal: boolean;
+	$: inputTypesUnequal = !!aType && !!bType && !typesMatch(aType, bType);
 
 	// Whenever there's a new connection, we store the source handle's output type in the relevant variable
 	// This is ueed to display an error message if the types don't match
@@ -100,7 +100,7 @@
 	color="rose"
 	{inputs}
 	{outputs}
-	error={inputTypesInequal}
+	error={inputTypesUnequal}
 	{...$$props}
 >
 	<Select

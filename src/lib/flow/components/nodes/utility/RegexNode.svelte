@@ -44,7 +44,7 @@
 			id={`${id}-input`}
 			class="w-36 px-6 font-mono [font-variant-ligatures:none]"
 			type="text"
-			label="Text"
+			label="regex"
 			hideLabel
 			bind:value={$regex}
 		>
