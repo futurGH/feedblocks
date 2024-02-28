@@ -18,10 +18,10 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "result",
-			type: "boolean",
 			description: "Whether the text contains the query",
 		},
 	];
+	export const newData = () => ({ outputType: () => "boolean" });
 	export const title = "text contains";
 	export const description = "Outputs whether the text contains the query.";
 </script>
@@ -30,6 +30,8 @@
 	import type { NodeProps } from "@xyflow/svelte";
 
 	type $$Props = NodeProps;
+
+	export const data = newData();
 </script>
 
 <BaseNode {title} {description} color="indigo" {inputs} {outputs} {...$$props} />

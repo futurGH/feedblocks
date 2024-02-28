@@ -4,13 +4,13 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "a",
-			type: "posts",
+			type: "post[]",
 			description: "The first list of posts to combine",
 		},
 		{
 			connectorType: ConnectorType.Data,
 			name: "b",
-			type: "posts",
+			type: "post[]",
 			description: "The second list of posts to combine",
 		},
 	];
@@ -18,11 +18,10 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "posts",
 			description: "The combined list of posts",
 		},
 	];
-	export const newData = () => ({ sortMethod: writable<string>() });
+	export const newData = () => ({ sortMethod: writable<string>(), outputType: () => "post[]" });
 	export const title = "combine";
 	export const description =
 		"Combines two lists of posts into one list based on the selected sort method.";

@@ -12,11 +12,10 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "result",
-			type: "boolean",
 			description: "Whether the post has an embed of the specified type",
 		},
 	];
-	export const newData = () => ({ embedType: writable<string>() });
+	export const newData = () => ({ embedType: writable<string>(), outputType: () => "boolean" });
 	export const title = "embed is type";
 	export const description =
 		"Outputs whether the provided post has an embed of the specified type.";
@@ -37,6 +36,7 @@
 		{ label: "link", value: "link" },
 		{ label: "quote", value: "quote" },
 		{ label: "feed", value: "feed" },
+		{ label: "list", value: "list" },
 	];
 
 	let selected: Writable<ComboboxItem> = writable(embedTypes[0]);

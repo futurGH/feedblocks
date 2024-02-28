@@ -5,13 +5,13 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "period",
 			description: "The period of time between the two dates entered",
 		},
 	];
 	export const newData = () => ({
 		quantity: writable<number>(0),
 		unit: writable<string>("seconds"),
+		outputType: () => "period",
 	});
 	export const title = "period";
 	export const description = "Outputs the period of time between two provided dates";

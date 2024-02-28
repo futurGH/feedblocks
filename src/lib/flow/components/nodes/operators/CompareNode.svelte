@@ -18,11 +18,10 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "result",
-			type: "boolean",
 			description: "Whether the two inputs meet the specified condition",
 		},
 	];
-	export const newData = () => ({ comparator: writable<string>() });
+	export const newData = () => ({ comparator: writable<string>(), outputType: () => "boolean" });
 	export const title = "compare";
 	export const description = "Outputs whether the two inputs meet the specified condition";
 </script>

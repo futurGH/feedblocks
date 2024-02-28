@@ -5,10 +5,10 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "posts",
 			description: "All posts from the Bluesky network",
 		},
 	];
+	export const newData = () => ({ outputType: () => "post[]" });
 	export const title = "all posts";
 	export const description = "Outputs all posts from the Bluesky network";
 </script>
@@ -18,6 +18,8 @@
 	import BaseNode from "$lib/flow/components/nodes/BaseNode.svelte";
 
 	type $$Props = NodeProps;
+
+	export const data = newData();
 </script>
 
 <BaseNode {title} {description} color="slate" {inputs} {outputs} hasBody={false} {...$$props} />

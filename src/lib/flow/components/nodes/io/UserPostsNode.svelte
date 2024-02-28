@@ -6,11 +6,10 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "posts",
 			description: "All posts from the provided user",
 		},
 	];
-	export const newData = () => ({ handle: writable<string>() });
+	export const newData = () => ({ handle: writable<string>(), outputType: () => "post[]" });
 	export const title = "user posts";
 	export const description = "Outputs all posts from a provided user";
 </script>

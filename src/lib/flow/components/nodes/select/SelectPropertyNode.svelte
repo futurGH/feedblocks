@@ -13,24 +13,23 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "any",
 			description: "The value of the selected property",
 		},
 	];
 	export const newData = () => ({
 		path: writable<string>(),
+		outputType: () => "any",
 	});
 	export const title = "select property";
 	export const description = "Selects a property from an item";
 </script>
 
 <script lang="ts">
-	import { type NodeProps, useHandleConnections, useNodes } from "@xyflow/svelte";
-	import Input from "$lib/components/elements/Input.svelte";
+	import { type NodeProps, useHandleConnections, useSvelteFlow } from "@xyflow/svelte";
 	import { types } from "$lib/conversion/types";
-	import { makeHandleId, parseHandleId } from "$lib/util";
-	import { allNodes } from "$lib/flow/components/nodes/index";
-	import type { InputOutput } from "$lib/flow/types";
+	import { makeHandleId } from "$lib/util";
+	import Combobox, { type ComboboxItem } from "$lib/components/elements/Combobox.svelte";
+	import type { Writable } from "svelte/store";
 
 	type $$Props = NodeProps;
 
@@ -39,7 +38,10 @@
 	export let data = newData();
 	let { path } = data;
 
-	const nodes = useNodes();
+	let selected: Writable<ComboboxItem> = writable();
+	$: $path = $selected?.value;
+
+	const { getNode } = useSvelteFlow();
 
 	let inputType: string | undefined;
 	const inputConnections = useHandleConnections({
@@ -48,28 +50,54 @@
 		id: makeHandleId({ title, id, name: "item" }),
 	});
 	inputConnections.subscribe((connections) => {
-		for (const connection of connections) {
-			const sourceNode = $nodes.find((node) => node.id === connection.source);
-			if (!sourceNode?.type) return;
-			const { name: sourceHandleName } = parseHandleId(connection.sourceHandle) ?? {};
-			const sourceType = allNodes[sourceNode.type as keyof typeof allNodes]?.outputs.find(
-				(output: InputOutput) => output.name === sourceHandleName
-			)?.type;
-			if (!sourceType) return;
-			inputType = sourceType;
-		}
+		const sourceNode = getNode(connections[0]?.source);
+		inputType = sourceNode?.data?.outputType?.();
 	});
 
-	$: pathFragments = $path?.split(".") ?? [];
-	$: currentKey = pathFragments[pathFragments.length - 1];
+	path.subscribe((value) => {
+		const outputType = resolvePath(value);
+		if (outputType) data.outputType = () => outputType;
+	});
 
-	function resolveFragments(fragments: string[]) {
-		let result = types;
-		for (let fragment of fragments) {
-			if (!result) return null;
-			result = result[fragment];
+	let propertyAutocompletion: Array<ComboboxItem> = [];
+	$: if (inputType) {
+		let typeObject = inputType.endsWith("[]")
+			? types[inputType.slice(0, -2) as keyof typeof types]
+			: types[inputType as keyof typeof types];
+		if (typeObject)
+			propertyAutocompletion = Object.keys(typeObject).map((key) => ({
+				label: key,
+				value: key,
+			}));
+		else propertyAutocompletion = [];
+	}
+
+	$: console.log(inputType, propertyAutocompletion);
+
+	function resolvePath(path = $path) {
+		if (!inputType) return;
+		let currentType = inputType.endsWith("[]") ? inputType.slice(0, -2) : inputType;
+		if (!(currentType in types)) return;
+		let currentObject: Record<string, string> = types[currentType as keyof typeof types];
+
+		console.log(currentType, currentObject);
+		for (const part of path.split(".")) {
+			if (!part) return null;
+
+			if (currentType.endsWith("[]")) {
+				if (isNaN(Number.parseInt(part, 10))) return null;
+				currentType = currentType.slice(0, -2);
+			} else {
+				currentType = currentObject[part];
+			}
+			if (!currentType) return null;
+
+			if (currentType in types) {
+				currentObject = types[currentType as keyof typeof types];
+			}
 		}
-		return result;
+
+		return currentType;
 	}
 </script>
 
@@ -82,15 +110,13 @@
 	{outputs}
 	{...$$props}
 >
-	<svelte:fragment slot="additional">
-		<Input
-			id={`${id}-input`}
-			class="w-36"
-			type="text"
-			label="path"
-			placeholder="path"
-			hideLabel
-			bind:value={$path}
-		/>
-	</svelte:fragment>
+	<Combobox
+		slot="additional"
+		label="Enter a property path to select"
+		placeholder="likers.0.handle"
+		hideLabel
+		inFlow
+		bind:selected
+		options={propertyAutocompletion}
+	/>
 </BaseNode>

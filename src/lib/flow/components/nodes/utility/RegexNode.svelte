@@ -12,13 +12,13 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "result",
-			type: "boolean",
 			description: "Whether the text matches the regex",
 		},
 	];
 	export const newData = () => ({
 		regex: writable<string>(),
 		caseSensitive: writable<boolean>(),
+		outputType: () => "boolean",
 	});
 	export const title = "match regex";
 	export const description = "Outputs whether the provided text matches the specified regex";

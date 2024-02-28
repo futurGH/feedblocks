@@ -4,7 +4,7 @@
 		{
 			connectorType: ConnectorType.List,
 			name: "list",
-			type: "array",
+			type: "any[]",
 			description: "The list to check",
 		},
 		{
@@ -18,10 +18,10 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "result",
-			type: "boolean",
 			description: "Whether the list includes the item",
 		},
 	];
+	export const newData = () => ({ outputType: () => "boolean" });
 	export const title = "list includes";
 	export const description = "Outputs whether the list includes the item";
 </script>
@@ -30,6 +30,8 @@
 	import type { NodeProps } from "@xyflow/svelte";
 
 	type $$Props = NodeProps;
+
+	export const data = newData();
 </script>
 
 <BaseNode {title} {description} color="indigo" {inputs} {outputs} {...$$props} />

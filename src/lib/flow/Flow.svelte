@@ -10,6 +10,7 @@
 		Panel,
 		type OnConnectStartParams,
 		type IsValidConnection,
+		SelectionMode,
 	} from "@xyflow/svelte";
 	import "@xyflow/svelte/dist/style.css";
 	import Sidebar from "$lib/flow/components/Sidebar.svelte";
@@ -19,6 +20,7 @@
 	import { createId } from "@paralleldrive/cuid2";
 	import ClipboardProvider from "$lib/flow/ClipboardProvider.svelte";
 	import HistoryProvider from "$lib/flow/HistoryProvider.svelte";
+	import { newData as newAllPostsData } from "$lib/flow/components/nodes/io/AllPostsNode.svelte";
 
 	// This is ugly but it's a one-time thing so hopefully not too bad?
 	const nodeTypes = Object.entries(allNodes).reduce<Record<string, ComponentType>>(
@@ -34,7 +36,7 @@
 			id: "firehose",
 			type: "allPosts",
 			position: { x: -200, y: 0 },
-			data: {},
+			data: newAllPostsData(),
 		},
 		{
 			id: "output",
@@ -116,7 +118,10 @@
 				{nodes}
 				{edges}
 				fitView
+				panOnScroll
+				zoomOnScroll={false}
 				connectionLineType={ConnectionLineType.SmoothStep}
+				selectionMode={SelectionMode.Partial}
 				defaultEdgeOptions={{ type: "smoothstep" }}
 				proOptions={{ hideAttribution: true }}
 				on:dragover={onDragOver}

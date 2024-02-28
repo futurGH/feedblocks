@@ -6,11 +6,10 @@
 		{
 			connectorType: ConnectorType.List,
 			name: "output",
-			type: "list",
 			description: "The user list at the provided URL",
 		},
 	];
-	export const newData = () => ({ uri: writable<string>() });
+	export const newData = () => ({ uri: writable<string>(), outputType: () => "user[]" });
 	export const title = "user list";
 	export const description = "Outputs the user list at the provided URL";
 </script>

@@ -12,11 +12,10 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "result",
-			type: "boolean",
 			description: "Whether the post has the specified label",
 		},
 	];
-	export const newData = () => ({ label: writable<string>() });
+	export const newData = () => ({ label: writable<string>(), outputType: () => "boolean" });
 	export const title = "post has label";
 	export const description = "Outputs whether a post has the specified label";
 </script>
