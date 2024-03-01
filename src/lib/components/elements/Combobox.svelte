@@ -17,13 +17,6 @@
 
 	export let inFlow: boolean = false;
 
-	export let onClose: () => void = () => ($inputValue = $selected?.label ?? "");
-	export let filterOptions: (
-		options: Array<ComboboxItem>,
-		inputValue: string
-	) => Array<ComboboxItem> = (options, inputValue) =>
-		options.filter((option) => option.label.toLowerCase().includes(inputValue.toLowerCase()));
-
 	let comboboxDiv: HTMLDivElement;
 
 	const {
@@ -45,12 +38,14 @@
 		return () => closeMenu();
 	});
 
-	$: if (!$open) onClose();
-	$: filteredOptions = $touchedInput ? filterOptions(options, $inputValue) : options;
+	$: if (!$open) inputValue.set($selected?.label ?? "");
+	$: filteredOptions = $touchedInput
+		? options.filter((option) => option.label.toLowerCase().includes($inputValue.toLowerCase()))
+		: options;
 </script>
 
 <div
-	class="nodrag flex max-w-full flex-col gap-1 font-medium text-zinc-900/75 text-label dark:text-zinc-100/80"
+	class="flex max-w-full flex-col gap-1 font-medium text-zinc-900/75 text-label dark:text-zinc-100/80"
 	bind:this={comboboxDiv}
 >
 	<!-- svelte-ignore a11y-label-has-associated-control -->
