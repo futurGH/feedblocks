@@ -14,7 +14,6 @@ export const post = {
 	replies: "post[]",
 	langs: "string[]",
 	tags: "string[]",
-	labels: "string[]",
 };
 
 export const user = {
