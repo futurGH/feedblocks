@@ -12,8 +12,8 @@ dependencies:
     specifier: ^1.27.6
     version: 1.27.6(svelte@4.2.7)(vite@5.0.0)
   '@xyflow/svelte':
-    specifier: ^0.0.29
-    version: 0.0.29(svelte@4.2.7)
+    specifier: ^0.0.36
+    version: 0.0.36(svelte@4.2.7)
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -1165,19 +1165,19 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@xyflow/svelte@0.0.29(svelte@4.2.7):
-    resolution: {integrity: sha512-YiSaIvA2POD96iRuDJhSGX4IwY3IvYdhe9ptSbR8hZzTN+C50/ugzDQt1exAnoP7oLaiGsjzeJV2ro6jq192OA==}
+  /@xyflow/svelte@0.0.36(svelte@4.2.7):
+    resolution: {integrity: sha512-OqWKE1Y0Z+i+xEVpMdmIYwMoswi7nJ6EifmS2KGOA921lzvaOo4Bk8XAwtatTLX3qRYMyNfgH/ddHn8XIUdyHg==}
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0
     dependencies:
       '@svelte-put/shortcut': 3.1.0
-      '@xyflow/system': 0.0.12
+      '@xyflow/system': 0.0.17
       classcat: 5.0.4
       svelte: 4.2.7
     dev: false
 
-  /@xyflow/system@0.0.12:
-    resolution: {integrity: sha512-y+ejl5azmfIbbbduoknLX7K1PKeJdSAqqSJFAwq/AFkokskWymi+AHB7QJBaSSqRARGCXZgPsKcGaJ5QcEqQrw==}
+  /@xyflow/system@0.0.17:
+    resolution: {integrity: sha512-3a7ulxW4xQvpFN9USjfbLi0whyltqDv6KxguIrOK2AOg6l1KMNimbV+WxiM0LdQAtJAW6ftthbhdSCPw66JPIw==}
     dependencies:
       '@types/d3': 7.4.3
       '@types/d3-drag': 3.0.7
