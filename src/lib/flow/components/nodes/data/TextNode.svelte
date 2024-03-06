@@ -6,11 +6,10 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "string",
 			description: "The text value entered",
 		},
 	];
-	export const newData = () => ({ text: writable<string>() });
+	export const newData = () => ({ text: writable<string>(), outputType: () => "string" });
 	export const title = "text";
 	export const description = "Outputs a provided text value";
 </script>

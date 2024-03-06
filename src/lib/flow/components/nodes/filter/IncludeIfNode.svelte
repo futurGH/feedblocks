@@ -4,7 +4,7 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "posts",
-			type: "posts",
+			type: "post[]",
 			description: "The posts to filter",
 		},
 		{
@@ -18,10 +18,10 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "posts",
 			description: "The posts that match the condition",
 		},
 	];
+	export const newData = () => ({ outputType: () => "post[]" });
 	export const title = "include if";
 	export const description = "Outputs posts that match the condition";
 </script>
@@ -30,6 +30,8 @@
 	import type { NodeProps } from "@xyflow/svelte";
 
 	type $$Props = NodeProps;
+
+	export const data = newData();
 </script>
 
 <BaseNode {title} {description} color="fuchsia" {inputs} {outputs} {...$$props} />

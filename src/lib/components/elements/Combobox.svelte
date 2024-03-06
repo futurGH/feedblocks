@@ -38,14 +38,14 @@
 		return () => closeMenu();
 	});
 
-	$: if (!$open) $inputValue = $selected?.label ?? "";
+	$: if (!$open) inputValue.set($selected?.label ?? "");
 	$: filteredOptions = $touchedInput
 		? options.filter((option) => option.label.toLowerCase().includes($inputValue.toLowerCase()))
 		: options;
 </script>
 
 <div
-	class="nodrag flex max-w-full flex-col gap-1 font-medium text-zinc-900/75 text-label dark:text-zinc-100/80"
+	class="flex max-w-full flex-col gap-1 font-medium text-zinc-900/75 text-label dark:text-zinc-100/80"
 	bind:this={comboboxDiv}
 >
 	<!-- svelte-ignore a11y-label-has-associated-control -->
@@ -72,13 +72,13 @@
 </div>
 {#if $open}
 	<div
-		class="z-10 flex w-44 min-w-fit max-w-full flex-col overflow-hidden rounded-lg"
+		class="nopan nowheel z-10 flex h-52 w-44 min-w-fit max-w-full flex-col overflow-y-scroll rounded-lg"
 		{...$menu}
 		use:menu
 	>
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 		<ul
-			class="flex max-h-full flex-col overflow-y-auto rounded-lg border border-zinc-300 bg-zinc-100 p-1 font-medium text-zinc-900/75 text-label dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100/80"
+			class="flex flex-grow basis-0 flex-col overflow-y-scroll scroll-auto rounded-lg border border-zinc-300 bg-zinc-100 p-1 font-medium text-zinc-900/75 text-label dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100/80"
 			tabindex="0"
 		>
 			{#each filteredOptions as option, i (i)}

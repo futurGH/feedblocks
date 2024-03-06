@@ -5,11 +5,10 @@
 		{
 			connectorType: ConnectorType.List,
 			name: "output",
-			type: "list",
 			description: "The mod list at the specified URL",
 		},
 	];
-	export const newData = () => ({ uri: writable<string>() });
+	export const newData = () => ({ uri: writable<string>(), outputType: () => "user[]" });
 	export const title = "mod list";
 	export const description = "Outputs the moderation list at the specified URL";
 </script>

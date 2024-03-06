@@ -4,7 +4,7 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "posts",
-			type: "posts",
+			type: "post[]",
 			description: "The posts to sort",
 		},
 	];
@@ -12,11 +12,10 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "posts",
 			description: "The sorted posts",
 		},
 	];
-	export const newData = () => ({ sortMethod: writable<string>() });
+	export const newData = () => ({ sortMethod: writable<string>(), outputType: () => "post[]" });
 	export const title = "sort";
 	export const description = "Sorts a list of posts based on the selected sort method";
 </script>

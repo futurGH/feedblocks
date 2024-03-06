@@ -19,11 +19,13 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "output",
-			type: "boolean",
 			description: "Whether any input condition is true",
 		},
 	];
-	export const newData = () => ({ inputs: writable<Array<InputOutput>>(inputs) });
+	export const newData = () => ({
+		inputs: writable<Array<InputOutput>>(inputs),
+		outputType: () => "boolean",
+	});
 	export const title = "or";
 	export const description = "Outputs whether any input condition is true";
 </script>

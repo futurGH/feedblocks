@@ -6,11 +6,13 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "array",
 			description: "The list entered",
 		},
 	];
-	export const newData = () => ({ items: writable<Array<string>>(["", ""]) });
+	export const newData = () => ({
+		items: writable<Array<string>>(["", ""]),
+		outputType: () => "string[]",
+	});
 	export const title = "list";
 	export const description = "Outputs a provided list of strings";
 </script>

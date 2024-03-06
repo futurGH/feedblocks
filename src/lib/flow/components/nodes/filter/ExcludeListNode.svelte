@@ -4,13 +4,13 @@
 		{
 			connectorType: ConnectorType.List,
 			name: "list",
-			type: "array",
+			type: "any[]",
 			description: "The list to exclude from",
 		},
 		{
 			connectorType: ConnectorType.List,
 			name: "exclude",
-			type: "array",
+			type: "any[]",
 			description: "The list of items to exclude from the first list",
 		},
 	];
@@ -18,10 +18,10 @@
 		{
 			connectorType: ConnectorType.List,
 			name: "output",
-			type: "array",
 			description: "The combined list",
 		},
 	];
+	export const newData = () => ({ outputType: () => "invalid" });
 	export const title = "exclude list";
 	export const description =
 		"Excludes the items in the second list from the first list and outputs the combined list";
@@ -29,8 +29,15 @@
 
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
+	import { resolveInputTypes } from "$lib/conversion/util";
 
 	type $$Props = NodeProps;
+
+	export let data = newData();
+	data.outputType = () => {
+		const { list: listType } = resolveInputTypes($$props.id);
+		return listType;
+	};
 </script>
 
 <BaseNode {title} {description} color="fuchsia" {inputs} {outputs} {...$$props} />

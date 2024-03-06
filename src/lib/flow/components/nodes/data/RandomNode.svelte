@@ -5,12 +5,15 @@
 	export const outputs = [
 		{
 			connectorType: ConnectorType.Data,
-			name: "output",
-			type: "number",
+			name: "number",
 			description: "A random integer between the minimum and maximum values entered",
 		},
 	];
-	export const newData = () => ({ min: writable<number>(0), max: writable<number>(0) });
+	export const newData = () => ({
+		min: writable<number>(0),
+		max: writable<number>(0),
+		outputType: () => "number",
+	});
 	export const title = "random";
 	export const description =
 		"Outputs a random integer between the provided minimum and maximum values.";

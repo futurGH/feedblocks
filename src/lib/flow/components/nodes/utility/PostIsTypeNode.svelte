@@ -12,11 +12,10 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "result",
-			type: "boolean",
 			description: "Whether the post is of the specified type",
 		},
 	];
-	export const newData = () => ({ postType: writable<string>() });
+	export const newData = () => ({ postType: writable<string>(), outputType: () => "boolean" });
 	export const title = "post is type";
 	export const description = "Outputs whether a post is of the specified type";
 </script>

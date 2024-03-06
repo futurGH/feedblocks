@@ -12,10 +12,10 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "output",
-			type: "boolean",
 			description: "The inverted condition",
 		},
 	];
+	export const newData = () => ({ outputType: () => "boolean" });
 	export const title = "not";
 	export const description = "Inverts the input condition";
 </script>
@@ -24,6 +24,8 @@
 	import type { NodeProps } from "@xyflow/svelte";
 
 	type $$Props = NodeProps;
+
+	export const data = newData();
 </script>
 
 <BaseNode {title} {description} color="rose" {inputs} {outputs} {...$$props} />

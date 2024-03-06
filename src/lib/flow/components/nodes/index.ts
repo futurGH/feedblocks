@@ -1,17 +1,31 @@
 import { inputOutputNodes } from "./io";
+import { selectNodes } from "./select";
 import { dataNodes } from "./data";
 import { listNodes } from "./lists";
 import { utilityNodes } from "./utility";
 import { operatorNodes } from "./operators";
 import { filterNodes } from "./filter";
 
-export { inputOutputNodes, dataNodes, listNodes, utilityNodes, operatorNodes, filterNodes };
+export {
+	inputOutputNodes,
+	selectNodes,
+	dataNodes,
+	listNodes,
+	utilityNodes,
+	operatorNodes,
+	filterNodes,
+};
 
 export const nodeCategories = {
 	io: {
 		name: "Input/Output",
 		color: "slate",
 		nodes: inputOutputNodes,
+	},
+	select: {
+		name: "Select Property",
+		color: "amber",
+		nodes: selectNodes,
 	},
 	filter: {
 		name: "Filter",
@@ -44,6 +58,10 @@ export const nodeTypeToCategory = {
 		acc[key] = "io";
 		return acc;
 	}, {}),
+	...Object.keys(selectNodes).reduce<Record<string, "select">>((acc, key) => {
+		acc[key] = "select";
+		return acc;
+	}, {}),
 	...Object.keys(dataNodes).reduce<Record<string, "data">>((acc, key) => {
 		acc[key] = "data";
 		return acc;
@@ -68,6 +86,7 @@ export const nodeTypeToCategory = {
 
 export const allNodes = {
 	...inputOutputNodes,
+	...selectNodes,
 	...filterNodes,
 	...listNodes,
 	...utilityNodes,

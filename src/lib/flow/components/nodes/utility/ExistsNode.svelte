@@ -12,10 +12,10 @@
 		{
 			connectorType: ConnectorType.Condition,
 			name: "result",
-			type: "boolean",
 			description: "Whether the item exists",
 		},
 	];
+	export const newData = () => ({ outputType: () => "boolean" });
 	export const title = "exists";
 	export const description = "Outputs whether the provided item exists";
 </script>

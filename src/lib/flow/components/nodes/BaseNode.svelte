@@ -212,6 +212,24 @@
 					</div>
 				</div>
 			{:else if hasConnectors && !showHandleNames}
+				{#each inputs as { name, connectorType }}
+					{#if name !== REST_HANDLE_NAME}
+						<!-- targets -->
+						{@const handleId = makeHandleId({ title, id, name })}
+						<WrappedHandle
+							id={handleId}
+							type="target"
+							class={cn(
+								"mt-0.5 !border-none",
+								getHandleShape(connectorType),
+								edgeTargetHandleToEdgeColor[handleId] &&
+									`!bg-${edgeTargetHandleToEdgeColor[handleId]}-edge`
+							)}
+							position={Position.Left}
+							onconnect={onTargetConnect}
+						/>
+					{/if}
+				{/each}
 				{#each outputs as { name, connectorType }}
 					<!-- sources -->
 					{@const handleId = makeHandleId({ title, id, name })}

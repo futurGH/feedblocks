@@ -6,11 +6,10 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "posts",
 			description: "The posts from the provided feed",
 		},
 	];
-	export const newData = () => ({ uri: writable<string>() });
+	export const newData = () => ({ uri: writable<string>(), outputType: () => "post[]" });
 
 	export const title = "feed posts";
 	export const description = "Outputs all posts from a provided feed";

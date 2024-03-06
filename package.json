@@ -31,7 +31,7 @@
 	"dependencies": {
 		"@paralleldrive/cuid2": "^2.2.2",
 		"@sveltejs/kit": "^1.27.6",
-		"@xyflow/svelte": "^0.0.29",
+		"@xyflow/svelte": "^0.0.36",
 		"clsx": "^2.0.0",
 		"dragdroptouch-bug-fixed": "^1.0.8",
 		"lucide-svelte": "^0.293.0",

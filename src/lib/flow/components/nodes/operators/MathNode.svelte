@@ -27,13 +27,13 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "number",
 			description: "The number result of the equation",
 		},
 	];
 	export const newData = () => ({
 		inputs: writable<Array<InputOutput>>(inputs.slice(0, -1)),
 		equation: writable<string>(),
+		outputType: () => "number",
 	});
 	export const title = "math";
 	export const description = `Outputs the result of the specified equation<br>Supported operations: +, -, *, /, ^, ()`;

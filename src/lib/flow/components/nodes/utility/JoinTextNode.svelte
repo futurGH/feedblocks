@@ -18,10 +18,10 @@
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "string",
 			description: "The joined string",
 		},
 	];
+	export const newData = () => ({ outputType: () => "string" });
 	export const title = "join text";
 	export const description = "Joins two strings of text together";
 </script>
@@ -30,6 +30,8 @@
 	import type { NodeProps } from "@xyflow/svelte";
 
 	type $$Props = NodeProps;
+
+	export const data = newData();
 </script>
 
 <BaseNode {title} {description} color="indigo" {inputs} {outputs} {...$$props} />

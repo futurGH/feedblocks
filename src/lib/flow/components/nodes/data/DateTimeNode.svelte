@@ -1,29 +1,31 @@
 <script lang="ts" context="module">
 	import BaseNode, { ConnectorType } from "$lib/flow/components/nodes/BaseNode.svelte";
 	import { writable } from "svelte/store";
+	import type { ZonedDateTime } from "@internationalized/date";
+
 	export const inputs = [];
 	export const outputs = [
 		{
 			connectorType: ConnectorType.Data,
 			name: "output",
-			type: "datetime",
 			description: "The date and time entered",
 		},
 	];
-	export const newData = () => ({ dateTime: writable<ZonedDateTime>() });
+	export const newData = () => ({
+		dateTime: writable<ZonedDateTime>(),
+		outputType: () => "datetime",
+	});
 	export const title = "date and time";
 	export const description = "Outputs a provided date and time";
 </script>
 
 <script lang="ts">
 	import type { NodeProps } from "@xyflow/svelte";
-	import type { Writable } from "svelte/store";
-	import type { ZonedDateTime } from "@internationalized/date";
 	import DateTimeInput from "$lib/components/elements/DateTimeInput.svelte";
 
 	type $$Props = NodeProps;
 
-	export let data: ReturnType<typeof newData> = newData();
+	export let data = newData();
 	let { dateTime } = data;
 </script>
 
