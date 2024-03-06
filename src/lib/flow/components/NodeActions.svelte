@@ -99,7 +99,7 @@
 		createProps={{
 			onOpenChange: ({ next }) => (deletable ? next : false),
 		}}
-		on:click={() => id && deleteElements([{ id }])}
+		on:click={() => id && deleteElements({ nodes: [{ id }] })}
 	>
 		<Trash2Icon
 			class="h-3.5 w-3.5 group-hover:enabled:text-red-800 group-hover:enabled:dark:text-red-300"
